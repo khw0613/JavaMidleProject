@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.Highlight_Controller">
+   <children>
+      <Text layoutX="207.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="형광펜 관리">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Text>
+      <Text layoutX="111.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보유중인 형광펜 개수">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Label fx:id="h_qty" layoutX="315.0" layoutY="136.0" prefHeight="17.0" prefWidth="121.0" textAlignment="RIGHT" textFill="#1a3cff">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btn_pay" layoutX="111.0" layoutY="182.0" prefHeight="53.0" prefWidth="340.0" text="형광펜 충전하기">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_exchange" layoutX="111.0" layoutY="236.0" prefHeight="53.0" prefWidth="340.0" text="현금으로 환전하기">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_list" layoutX="105.0" layoutY="378.0" prefHeight="53.0" prefWidth="340.0" text="형광펜 이용내역확인">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="h_gift" layoutX="105.0" layoutY="325.0" prefHeight="53.0" prefWidth="340.0" text="형광펜 선물하기">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

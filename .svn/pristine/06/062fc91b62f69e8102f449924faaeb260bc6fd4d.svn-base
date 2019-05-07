@@ -1,0 +1,385 @@
+package kr.or.ddit.ibatis.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.ibatis.sqlmap.client.SqlMapClient;
+
+import kr.or.ddit.ibatis.DBUTIL1;
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+
+public class Pen_managementDaoImpl implements Pen_managementDao {
+	private SqlMapClient smc;
+	private static Pen_managementDaoImpl dao;
+
+	private Pen_managementDaoImpl() {
+		smc = DBUTIL1.getInstance();
+	}
+
+	public static Pen_managementDaoImpl getInstance() {
+		if (dao == null) {
+			dao = new Pen_managementDaoImpl();
+		}
+		return dao;
+	}
+
+	@Override
+	public int insert_UsetypePay(Pen_managementVO pen_managementVO) {
+		int cnt = 0;
+		try {
+			
+			pen_managementVO.setUse_name("충전");
+			pen_managementVO.setPen_name("형광펜");
+			Object obj = smc.insert("qr_pen_management.insert_UsetypePay", pen_managementVO);
+			
+			if(obj == null) {
+				cnt = 1;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int insert_UsetypeRefund(Pen_managementVO pen_managementVO) {
+		int cnt = 0;
+		try {
+			
+			pen_managementVO.setUse_name("환불");
+			pen_managementVO.setPen_name("형광펜");
+			Object obj = smc.insert("qr_pen_management.insert_UsetypeRefund", pen_managementVO);
+			
+			if(obj == null) {
+				cnt = 1;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int insert_UsetypeExchange(Pen_managementVO pen_managementVO) {
+		int cnt = 0;
+		try {
+			
+			pen_managementVO.setUse_name("환전");
+			pen_managementVO.setPen_name("형광펜");
+			Object obj = smc.insert("qr_pen_management.insert_UsetypeExchange", pen_managementVO);
+			
+			if(obj == null) {
+				cnt = 1;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public int insert_UsetypeSupport(Pen_managementVO pen_managementVO) {
+		int cnt = 0;
+		try {
+			
+			pen_managementVO.setUse_name("후원");
+			pen_managementVO.setPen_name("형광펜");
+			Object obj = smc.insert("qr_pen_management.insert_UsetypeSupport", pen_managementVO);
+			
+			if(obj == null) {
+				cnt = 1;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_UsePenList() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_UsePenList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+		
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberUsePenList(Pen_managementVO pen_managementVO) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberUsePenList", pen_managementVO);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberPayPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberPayPenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberRefundPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberRefundPenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberExchangePenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberExchangePenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberSupportPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberSupportPenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberReceivePenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberReceivePenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public int insert_UsetypeLunchPayment(Pen_managementVO pen_managementVO) {
+		int cnt = 0;
+		try {
+			
+			Object obj = smc.insert("qr_pen_management.insert_UsetypeLunchPayment", pen_managementVO);
+			
+			if(obj == null) {
+				cnt = 1;
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_MemberLunchPaymentPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_MemberLunchPaymentPenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_PayPenList() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_PayPenList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> search_PayPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.search_PayPenList", mem_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_ExchangePenList() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_ExchangePenList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> search_ExchangePenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.search_ExchangePenList", mem_id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_SupportPenList() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_SupportPenList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> search_SupportPenList(String mem_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.search_SupportPenList", mem_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> search_ReceivePenList(String receive_id) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.search_ReceivePenList", receive_id);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_ReceivePenList() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_ReceivePenList");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_Profit_Management() {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_Profit_Management");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Pen_managementVO> select_Profit_BarGrape(String use_date) {
+		List<Pen_managementVO> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_Profit_BarGrape", use_date);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	@Override
+	public List<Map> select_Profit_LineGrape() {
+		List<Map> list = new ArrayList<>();
+		
+		try {
+			list = smc.queryForList("qr_pen_management.select_Profit_LineGrape");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			
+		}
+		return list;
+	}
+
+	
+}

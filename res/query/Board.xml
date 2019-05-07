@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
+<sqlMap namespace="qr_board">
+
+	<!-- 공통 게시판별 정보 가져오기 -->
+	<select id="select_boardList" resultClass="boardVO" parameterClass="String">
+		select
+			board_no, 
+			board_type, 
+			mem_id, 
+			board_title, 
+			board_contents,
+			board_date,
+			board_image, 
+			board_view
+		from board
+		where board_type = #board_type#
+		order by board_no desc
+	</select>
+	
+<!-- 	공통게시판  게시글 가져오기 -->
+	<select id="select_common_post" resultClass="boardVO" parameterClass="boardVO">
+		select
+			board_no, 
+			board_type, 
+			mem_id, 
+			board_title, 
+			board_contents, 
+			board_date,
+			board_image, 
+			board_view
+		from board
+		where board_type = #board_type#
+		and board_no = #board_no#
+	
+	</select>
+
+	<!-- 기수별 게시판 정보 가져오기 -->
+	<select id="select_boardList_degree" resultClass="boardVO"  parameterClass="java.util.Map">
+		select 
+		    a.board_no,
+		    a.board_type,
+		    a.board_title,
+		    a.board_contents,
+		    a.board_date,
+		    a.board_view,
+		    a.mem_id,
+		    b.degree
+		from board a, member b
+        where a.board_type = #board_type# 
+        and   a.mem_id = b.mem_id
+        and   B.degree = #degree#
+        order by a.board_no desc
+	</select>
+	
+<!-- 	기수별 게시판 게시글 가져오기 -->
+	<select id="select_degree_post" resultClass="boardVO" parameterClass="boardVO">
+		select 
+			board_no, 
+			board_type, 
+			mem_id,
+			board_title, 
+			board_contents, 
+			board_date,
+			board_image, 
+			board_view
+		from board
+		where board_no = #board_no#
+	</select>
+
+<!-- 	작성자로 검색 -->
+	<select id="search_post_to_id" parameterClass="boardVO" resultClass="boardVO">
+		select board_no,
+			   mem_id,
+			   board_title,
+			   board_date,
+			   board_view
+		from board
+		where mem_id like '%'|| #mem_id# || '%'
+		and board_type like '%'|| #board_type# || '%'
+    </select>
+	
+<!-- 	글번호로 검색 -->
+	<select id="search_post_to_no" parameterClass="String" resultClass="boardVO">
+		select board_no,
+			   mem_id,
+			   board_title,
+			   board_date,
+			   board_view
+		from board
+		where board_no = #board_no#
+		
+    </select>
+
+<!-- 	제목으로 검색 -->
+	<select id="search_post_to_title" parameterClass="boardVO" resultClass="boardVO">
+		select board_no,
+			   mem_id,
+			   board_title,
+			   board_date,
+			   board_view
+		from board
+		where board_title like '%' || #board_title# || '%'
+		and board_type = #board_type#
+    </select>
+
+<!-- 	제목 + 내용으로 검색 -->
+	<select id="search_post_to_titleAndcontents" parameterClass="boardVO" resultClass="boardVO">
+		select board_no,
+			   mem_id,
+			   board_title,
+			   board_date,
+			   board_view
+		from board
+		where (board_title like '%' || #board_title# || '%' or board_contents like '%' || #board_contents# || '%')
+		and board_type = #board_type#
+    </select>
+		
+<!-- 	공통게시판 게시글 정보 데이터베이스에 삽입하기 -->
+	<insert id="insert_common_post" parameterClass="boardVO">
+		insert into board
+		values (board_no_seq.nextval, #board_type#, #mem_id#, #board_title#, #board_contents#, sysdate, #board_image#, 0)
+	</insert>
+
+<!-- 	게시판 게시글 정보 데이터베이스에 삽입하기     -->
+	<insert id="insert_post" parameterClass="boardVO">
+		insert into board
+		values (
+		board_no_seq.nextval, 
+		#board_type#, 
+		#mem_id#, 
+		#board_title#, 
+		#board_contents#, 
+		sysdate, 
+		#board_image#, 
+		0)
+	</insert>
+	
+<!-- 	게시물 정보 수정하기 -->
+	<update id="update_post" parameterClass="boardVO">
+		update board
+		set board_title = #board_title#,
+			board_contents = #board_contents#,
+			board_date = sysdate
+		where board_no = #board_no#
+	</update>
+	
+<!-- 	게시물 삭제하기 -->
+	<delete id="delete_post" parameterClass="String">
+		delete
+		from board
+		where board_no = #board_no#
+	</delete>
+	
+<!-- 	조회수 업데이트하기(클릭 이벤트 걸렸을때 혹은 게시물 상세페이지에 접속했을 때 카운팅 되도록 세팅해주세요.) -->
+	<update id="update_viewCount" parameterClass="String">
+		update board
+		set board_view = board_view + 1
+		where board_no = #board_no#
+	</update>
+	
+<!-- 	게시판 유형 조회하기	 -->
+	<select id="select_BoardType" resultClass="board_typeVO">
+		select
+			board_type, board_name, board_level
+		from board_type
+	</select>
+	
+	
+	<!-- 	게시판 유형 1개 가져오기	 -->
+	<select id="select_OneBoardType" resultClass="board_typeVO" parameterClass="String">
+		select
+			board_type, board_name, board_level
+		from board_type
+		where board_name = #board_name#
+	</select>
+	
+<!-- 	공지사항 출력 -->
+	<select id="select_notice_post" resultClass="BoardVO" parameterClass="String">
+		select 
+		    a.board_no,
+		    a.board_type,
+		    a.board_title,
+		    a.board_contents,
+		    a.board_date,
+		    a.board_view,
+		    a.mem_id,
+		    b.degree
+		from board a, member b
+		where a.board_type = '1'
+		and   a.mem_id = b.mem_id
+		and   (b.degree = #degree# or b.degree = '000000')
+		order by a.board_no desc
+	</select>
+	
+    
+</sqlMap>			
+
+
+
+
+

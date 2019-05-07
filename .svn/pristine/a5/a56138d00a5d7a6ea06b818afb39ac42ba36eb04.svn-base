@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="538.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.OrderManager_Controller">
+   <children>
+      <Pagination layoutX="21.0" layoutY="55.0" prefHeight="425.0" prefWidth="757.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Pagination>
+      <TableView fx:id="o_tableView" layoutX="22.0" layoutY="57.0" minHeight="200.0" prefHeight="360.0" prefWidth="755.0">
+        <columns>
+          <TableColumn fx:id="ot_no" prefWidth="111.0" text="주문번호" />
+          <TableColumn fx:id="ot_id" prefWidth="218.0" text="아이디" />
+            <TableColumn fx:id="ot_res" prefWidth="201.0" text="주문업체" />
+            <TableColumn fx:id="ot_date" prefWidth="218.0" text="주문날짜" />
+        </columns>
+      </TableView>
+      <JFXComboBox fx:id="o_degree" layoutX="78.0" layoutY="14.0" prefHeight="27.0" prefWidth="140.0" />
+      <JFXComboBox fx:id="o_class" layoutX="330.0" layoutY="14.0" prefHeight="27.0" prefWidth="140.0" />
+      <Label layoutX="48.0" layoutY="18.0" text="기수">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="18.0" text="호수">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="manager_view" layoutX="707.0" layoutY="14.0" mnemonicParsing="false" text="조회하기" />
+      <Label layoutX="574.0" layoutY="440.0" text="수량 : ">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="o_sum" layoutX="617.0" layoutY="440.0" prefHeight="19.0" prefWidth="43.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="505.0" layoutY="18.0" text="날짜">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="o_date" layoutX="538.0" layoutY="14.0" prefHeight="27.0" prefWidth="140.0" />
+      <Label fx:id="o_price" layoutX="721.0" layoutY="440.0" prefHeight="19.0" prefWidth="43.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="678.0" layoutY="440.0" text="금액 :">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

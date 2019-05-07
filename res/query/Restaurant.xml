@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_restaurant">
+
+<!-- 	도시락 업체 정보 삽입 -->
+	<insert id="insert_RestaurantInfo" parameterClass="restaurantVO">
+		insert into restaurant
+		values (#res_no#, #res_name#, #res_telno#)
+	</insert>
+	
+<!-- 	전체 도시락 업체정보 조회 -->
+	<select id="select_RestaurantList" resultClass="restaurantVO">
+		select res_no, res_name, res_telno
+		from restaurant
+		order by 1
+	</select>
+	
+<!-- 	특정 도시락 업체정보 조회 -->
+	<select id="select_RestaurantInfo" resultClass="restaurantVO" parameterClass="String">
+		select res_no, res_name, res_telno
+		from restaurant
+		where res_no = #res_no#
+		order by 1
+	</select>
+	
+<!-- 	도시락 업체 검색(이름 검색 >> res_name에 검색어를 셋팅) -->
+	<select id="search_Restaurant" resultClass="restaurantVO" parameterClass="String">
+		select res_no, res_name, res_telno
+		from restaurant
+		where res_name like '%' || #res_name# || '%'
+		order by 1
+	</select>
+	
+<!-- 	업체정보 수정 -->
+	<update id="update_RestaurantInfo" parameterClass="restaurantVO">
+		update restaurant
+		set res_name = #res_name#,
+			res_telno = #res_telno#
+		where res_no = #res_no#
+	</update>
+	
+<!-- 	업체정보 삭제 -->
+	<delete id="delete_RestaurantInfo" parameterClass="String">
+		delete from restaurant
+		where res_no = #res_no#
+	</delete>
+	
+</sqlMap>	
+
+
+

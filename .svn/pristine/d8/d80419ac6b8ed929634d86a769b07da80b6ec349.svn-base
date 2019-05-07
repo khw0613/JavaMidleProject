@@ -1,0 +1,179 @@
+package kr.or.ddit.basic.e_cash;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import kr.or.ddit.basic.a_layout.layout_Controller;
+import kr.or.ddit.ibatis.vo.hilightVO.PayVO;
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class BankTransfer_Controller implements Initializable{
+	@FXML JFXTextField txt_money;		//이체금액
+	@FXML JFXTextField txt_name;		//입금자
+	@FXML JFXTextField txt_in_no;		//입급계좌번호
+	@FXML JFXPasswordField txt_pwd;		//계좌비밀번호
+	@FXML JFXTextField txt_out_no;		//출금계좌번호
+	@FXML JFXButton btn_transfer;		//이체하기
+	@FXML JFXButton btn_can;			//취소하기
+	
+	List<MemberVO> id = new ArrayList<>();
+	Pen_managementVO manage = new Pen_managementVO();
+	List<PayVO> my_list;
+	List<PayVO> my_payinfo;
+	PayVO vo = new PayVO();
+	
+	Stage primaryStage = null;
+	Parent transfer;
+	private Stage buy_pen;
+
+	// 계좌이체
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		try {
+			id = Global.memberService.selectOne(ShinYS.query_id);
+			String mem_name = id.get(0).getMem_name();
+			String mem_acc = id.get(0).getAccount();
+			txt_name.setText(mem_name);
+			txt_out_no.setText(mem_acc);
+			txt_money.setText((Integer.parseInt(ShinYS.pay_vo.getPay_cnt()) * 100) + "");
+
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+
+		btn_transfer.setOnAction(e -> {
+			String member = id.get(0).getMem_id();
+
+			String check_pwd = id.get(0).getMem_pwd();
+//			if (check_pwd.equals(txt_pwd.getText())) {
+
+				try {
+					vo.setMem_id(member);
+					vo.setPay_cnt((Integer.parseInt(txt_money.getText()) / 100) + "");
+					vo.setPay_type_no("2");
+					vo.setPen_code("1");
+					
+					Global.payService.insert_PayInfo(vo);
+
+					my_list = Global.payService.select_myPayInfo(member);
+					int a = my_list.size() - 1;
+					String pay_no = my_list.get(a).getPay_no();
+
+					my_payinfo = Global.payService.select_PayDetailInfo(pay_no);
+
+					String pen_type = my_payinfo.get(0).getPen_code();
+					String pen_cnt = my_payinfo.get(0).getPay_cnt();
+					String use_date = my_payinfo.get(0).getPay_date();
+		            
+		            Pen_managementVO manage = new Pen_managementVO();
+		            manage.setMem_id(member);
+		            manage.setPen_type(pen_type);
+		            manage.setPen_cnt(pen_cnt);
+		            manage.setUse_date(use_date);
+				
+
+					Global.payService.addition_myPen_Quantity(member, pen_cnt);
+					Global.pen_managementService.insert_UsetypePay(manage);
+
+					ShinYS.infoMsg("성공", "구매가 완료 되었습니다.");
+					buy_pen.close();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+//			} else {
+//				ShinYS.errMsg("오류", "정보가 맞지 않습니다.");
+//				return;
+//			}
+		});
+
+		btn_can.setOnAction(e -> {
+
+			
+			try {
+				transfer = FXMLLoader.load(getClass().getResource("highlighter_paytype.fxml"));
+
+				Scene sc = new Scene(transfer);
+				primaryStage = (Stage) btn_can.getScene().getWindow();
+				primaryStage.setScene(sc);
+				txt_money.setText("");
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+	}// 초기화 종료
+
+
+	// 형광펜 구매
+//	void buy_pen() {
+//		String member = id.get(0).getMem_id();
+//
+//		String check_pwd = id.get(0).getMem_pwd();
+//		if (check_pwd.equals(txt_pwd.getText())) {
+//
+//			try {
+//				vo.setMem_id(member);
+//				vo.setPay_cnt((Integer.parseInt(txt_money.getText()) / 100) + "");
+//				vo.setPay_type_no("2");
+//				vo.setPen_code("1");
+//				
+//				Global.payService.insert_PayInfo(vo);
+//
+//				my_list = Global.payService.select_myPayInfo(member);
+//				int a = my_list.size() - 1;
+//				String pay_no = my_list.get(a).getPay_no();
+//
+//				my_payinfo = Global.payService.select_PayDetailInfo(pay_no);
+//
+//				String pen_type = my_payinfo.get(0).getPen_code();
+//				String pen_cnt = my_payinfo.get(0).getPay_cnt();
+//				String use_date = my_payinfo.get(0).getPay_date();
+//	            
+//	            Pen_managementVO manage = new Pen_managementVO();
+//	            manage.setMem_id(member);
+//	            manage.setPen_type(pen_type);
+//	            manage.setPen_cnt(pen_cnt);
+//	            manage.setUse_date(use_date);
+//			
+//
+//				Global.payService.addition_myPen_Quantity(member, pen_cnt);
+//				Global.pen_managementService.insert_UsetypePay(manage);
+//
+//				ShinYS.infoMsg("성공", "구매가 완료 되었습니다.");
+//
+//			} catch (RemoteException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//
+//		} else {
+//			ShinYS.errMsg("오류", "정보가 맞지 않습니다.");
+//			return;
+//		}
+//
+//	}
+
+}

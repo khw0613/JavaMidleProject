@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_persnal_board">
+
+<!-- 	 개인 방명록 목록 조회 (개인방명록 : 1) -->
+    <select id="select_GuestBookList" resultClass="persnal_boardVO" parameterClass="String">
+		select pb_no,
+		       pb_guestbook_no,
+		       mem_id,
+		       receive_id,
+		       pb_contents,
+		       pb_date
+		from persnal_board 
+		where receive_id = #receive_id#
+		and persnal_board_no = 1
+		order by 1 desc
+    </select>
+	 
+<!-- 	 개인게시판 목록 조회 (개인게시판 : 2) -->
+	<select id="select_PersnalBoardList" resultClass="persnal_boardVO" parameterClass="String">
+		select pb_no,
+		       pb_post_no,
+		       mem_id,
+		       receive_id,
+		       pb_title,
+		       pb_contents,
+		       pb_view,
+		       pb_date
+		from persnal_board 
+		where receive_id = #receive_id#
+		and persnal_board_no = 2
+		order by 1 desc
+    </select>
+    
+<!-- 	개인게시판 게시글 조회  -->
+    <select id="select_PersnalBoard_post" resultClass="persnal_boardVO" parameterClass="String">
+		select pb_no,
+		       pb_post_no,
+		       persnal_board_no,
+		       mem_id,
+		       receive_id,
+		       pb_title,
+		       pb_contents,
+		       pb_view,
+		       pb_date
+		from persnal_board
+		where pb_no = #pb_no#
+		order by 1 desc
+    </select>
+
+<!-- 	개인 게시판 글 작성시 데이터베이스에 데이터 삽입하기(persnal_board_no : 2) -->
+	<insert id="insert_PersnalBoard_post" parameterClass="java.util.Map">
+			insert into persnal_board a
+			values (
+					persnalboard_pb_no.nextval, 
+					'2', 
+					#mem_id#, 
+					#pb_title#, 
+					#pb_contents#, 
+					sysdate, 
+					#receive_id#, 
+					(select b.pb_post_no from member b where b.mem_id = #receive_id#),
+					'1',
+					0
+					)
+	</insert>
+
+<!-- 	방명록 글 작성시 데이터베이스에 데이터 삽입하기(persnal_board_no : 1) -->
+	<insert id="insert_GuestBook_post" parameterClass="java.util.Map">
+			insert into persnal_board a
+			values (persnalboard_pb_no.nextval, 
+					'1', 
+					#mem_id#, 
+					null, 
+					#pb_contents#, 
+					sysdate, 
+					#receive_id#, 
+					'1', 
+					(select b.pb_guestbook_no from member b where b.mem_id = #receive_id#),
+					0
+					)
+	</insert>
+	
+<!-- 	개인게시판 게시글 수정하기(persnal_board_no : 2) -->
+	<update id="update_PersnalBoard_post" parameterClass="persnal_boardVO">
+			update persnal_board 
+			set pb_title = #pb_title#,
+			    pb_contents = #pb_contents#,
+			    pb_date = sysdate
+			where pb_no = #pb_no#
+	</update>
+
+<!-- 	방명록 수정하기(persnal_board_no : 1) -->
+	<update id="update_GuestBook_post" parameterClass="persnal_boardVO">
+			update persnal_board 
+			set pb_contents = #pb_contents#,
+				pb_date = sysdate
+			where pb_no = #pb_no#
+	</update>
+	
+<!-- 	개인게시판 게시글 삭제하기 -->
+    <delete id="delete_PersnalBoard_post" parameterClass="String">
+    	delete from persnal_board
+    	where pb_no = #pb_no#
+    </delete>
+    
+<!-- 	개인게시판 유형 조회 -->
+    <select id="select_PBtype" resultClass="persnal_board_typeVO">
+    	select persnal_board_no, persnal_board_type
+    	from persnal_board_type
+    </select>
+
+<!-- 	개인게시판 유형명에 따른 개인게시판 유형 조회() -->
+    <select id="select_OnePBtype" resultClass="persnal_board_typeVO" parameterClass="String">
+    	select persnal_board_no, persnal_board_type
+    	from persnal_board_type
+    	where persnal_board_type = #persnal_board_type#
+    </select>
+    
+<!-- 	개인 게시판 게시글 조회수 업데이트(게시물 상세페이지에 접속했을 때 카운팅 되도록 세팅해주세요.) -->
+	<update id="update_PostViewCount" parameterClass="String">
+		update persnal_board
+		set pb_view = pb_view + 1
+		where pb_no = #pb_no#
+	</update>
+
+
+
+</sqlMap>
+
+
+
+
+

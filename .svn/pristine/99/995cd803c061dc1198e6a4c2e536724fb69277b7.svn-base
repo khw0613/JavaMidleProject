@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="538.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.f_lunchbox.OrderList_Controller">
+   <children>
+      <Pagination layoutX="21.0" layoutY="55.0" prefHeight="425.0" prefWidth="757.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Pagination>
+      <TableView fx:id="order_tableView" layoutX="22.0" layoutY="57.0" minHeight="200.0" prefHeight="360.0" prefWidth="755.0">
+        <columns>
+          <TableColumn fx:id="order_no" prefWidth="203.0" text="주문번호" />
+          <TableColumn fx:id="order_id" prefWidth="183.0" text="아이디" />
+            <TableColumn fx:id="order_date" prefWidth="185.0" text="주문날짜" />
+            <TableColumn fx:id="order_res" prefWidth="182.0" text="주문업체" />
+        </columns>
+      </TableView>
+      <JFXComboBox fx:id="select_date" layoutX="492.0" layoutY="22.0" prefHeight="27.0" prefWidth="172.0" />
+      <Button fx:id="btn_select" layoutX="681.0" layoutY="22.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="97.0" text="조회하기" />
+      <Button fx:id="btn_back" layoutX="22.0" layoutY="436.0" mnemonicParsing="false" text="돌아가기" />
+      <Text layoutX="623.0" layoutY="441.0" strokeType="OUTSIDE" strokeWidth="0.0" text="수량" wrappingWidth="39.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="623.0" layoutY="464.0" strokeType="OUTSIDE" strokeWidth="0.0" text="금액" wrappingWidth="39.0">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <JFXComboBox fx:id="select_res" layoutX="304.0" layoutY="22.0" prefHeight="27.0" prefWidth="172.0" />
+      <Label fx:id="text_qn" layoutX="660.0" layoutY="427.0" prefHeight="17.0" prefWidth="77.0" />
+      <Label fx:id="text_price" layoutX="660.0" layoutY="450.0" prefHeight="17.0" prefWidth="77.0" />
+   </children>
+</AnchorPane>

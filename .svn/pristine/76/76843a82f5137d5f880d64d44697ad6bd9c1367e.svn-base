@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" stylesheets="@../d_member/member.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.a_layout.layout_admin_Controller">
+   <children>
+      <AnchorPane fx:id="background" prefHeight="800.0" prefWidth="1140.0" style="-fx-background-color: #2a3037;" styleClass="test">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane fx:id="dashmain" layoutX="170.0" layoutY="100.0" styleClass="test">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+         <children>
+            <ScrollPane fx:id="con_scroll" hbarPolicy="NEVER" hmax="0.0" prefHeight="700.0" prefWidth="970.0" style="-fx-background-color: transparent;">
+              <content>
+                <AnchorPane fx:id="contents" minHeight="690.0" minWidth="0.0" prefWidth="956.0" style="-fx-background-color: transparent;;" />
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dash_cate" layoutX="170.0" layoutY="70.0" prefHeight="30.0" prefWidth="970.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <HBox fx:id="dash_cate_item" prefHeight="30.0" prefWidth="970.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="485.0" text="도시락 주문" />
+                  <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="485.0" text="취소 및 환불" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dash_title" layoutX="170.0" layoutY="50.0" prefHeight="50.0" prefWidth="970.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#3d3f46" height="50.0" stroke="#3d3f46" strokeType="INSIDE" width="970.0" />
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="970.0">
+               <children>
+                  <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="320.0">
+                     <children>
+                        <ImageView fx:id="btn_left_img" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../../../../../../lib/image/btn_left.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="330.0">
+                     <children>
+                        <Label fx:id="dash_title_txt" alignment="CENTER" contentDisplay="CENTER" text="대시보드" textAlignment="CENTER" textFill="WHITE" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="320.0" />
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="left_menu" prefHeight="800.0" prefWidth="170.0" style="-fx-background-color: #3D3F46;">
+         <children>
+            <VBox alignment="TOP_CENTER" layoutY="50.0" prefHeight="579.0" prefWidth="170.0">
+               <children>
+                  <JFXButton fx:id="btn_showMyinfo" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #30333a;" text="내 정보 보기" textFill="WHITE" />
+                  <AnchorPane prefHeight="220.0" prefWidth="170.0">
+                     <children>
+                        <AnchorPane fx:id="main_avator" layoutX="50.0" layoutY="42.0" prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: #8cacb8; -fx-background-radius: 50;">
+                           <children>
+                              <ImageView fx:id="avator_img" fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../../../lib/image/avator.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label fx:id="profile_id" alignment="CENTER" contentDisplay="CENTER" layoutY="125.0" prefHeight="20.0" prefWidth="170.0" text="sys0130" textFill="WHITE" />
+                        <Label fx:id="profile_name" alignment="CENTER" contentDisplay="CENTER" layoutY="145.0" prefHeight="20.0" prefWidth="170.0" text="신유수 (학생)" textFill="WHITE" />
+                        <Label fx:id="profile_num" alignment="CENTER" contentDisplay="CENTER" layoutY="165.0" prefHeight="20.0" prefWidth="170.0" text="201809 (206)" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+                  <JFXButton fx:id="btn_mem_admin" prefHeight="50.0" prefWidth="170.0" text="회원관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_board_admin" prefHeight="50.0" prefWidth="170.0" text="게시글 관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_faq_admin" prefHeight="50.0" prefWidth="170.0" text="FAQ 관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_lunch_admin" prefHeight="50.0" prefWidth="170.0" text="도시락 관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_Profit_admin" prefHeight="50.0" prefWidth="170.0" text="매출 관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_highligher_admin" prefHeight="50.0" prefWidth="170.0" text="형광펜 관리" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+            <JFXButton fx:id="btn_logout" layoutY="750.0" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #545661;" text="로그아웃" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="open_chatpane" layoutX="-40.0" layoutY="-30.0" prefHeight="750.0" prefWidth="310.0" translateX="1180.0" translateY="80.0">
+         <children>
+            <ComboBox fx:id="cmb_search" prefHeight="49.0" prefWidth="90.0" promptText="이름" styleClass="sys2_combo" />
+            <TextField fx:id="txt_searchField" layoutX="90.0" prefHeight="49.0" prefWidth="150.0" styleClass="sys2_text" />
+            <Button fx:id="btn_search" layoutX="240.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="70.0" styleClass="sys2_btn" text="검색" />
+            <ScrollPane fx:id="log_window" hbarPolicy="NEVER" layoutY="48.0" prefHeight="281.0" prefWidth="310.0">
+               <content>
+                  <AnchorPane fx:id="log_window_list" focusTraversable="true" minHeight="10.0" minWidth="0.0" prefWidth="285.0" />
+               </content>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </ScrollPane>
+            <Label alignment="CENTER" layoutY="329.0" prefHeight="50.0" prefWidth="310.0" text="오픈 채팅방" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="area_chat" layoutY="379.0" prefHeight="319.0" prefWidth="310.0" style="-fx-text-fill: #ffffff;" />
+            <TextField fx:id="txt_chat" layoutY="698.0" prefHeight="50.0" prefWidth="240.0" styleClass="sys3_text" />
+            <Button fx:id="btn_send" layoutX="240.0" layoutY="698.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="70.0" styleClass="sys3_btn" text="전송" />
+         </children>
+         <effect>
+            <DropShadow color="#333333" radius="12.25" width="30.0" />
+         </effect>
+      </AnchorPane>
+      <AnchorPane fx:id="top" prefHeight="50.0" prefWidth="1140.0" style="-fx-background-color: #f7e04b;">
+         <children>
+            <JFXButton fx:id="btn_logo" prefHeight="50.0" prefWidth="170.0" text="DD.PLACE" textFill="#381f1f">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_notice_w" layoutX="170.0" prefHeight="50.0" prefWidth="161.0" text="공지사항 관리" textFill="#381f1f">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_faqboard" layoutX="658.0" prefHeight="50.0" prefWidth="102.0" text="FAQ" textFill="#381f1f">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_openchat" layoutX="1037.0" prefHeight="50.0" prefWidth="102.0" text="메신저" textFill="#381f1f">
+               <graphic>
+                  <FontAwesomeIcon fill="#381f1f" iconName="USERS" size="2em">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </FontAwesomeIcon>
+               </graphic>
+            </JFXButton>
+            <Label alignment="CENTER" layoutX="988.0" prefHeight="50.0" prefWidth="40.0">
+               <graphic>
+                  <FontAwesomeIcon fx:id="btn_message" fill="#381f1f" iconName="ENVELOPE" size="2em">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </FontAwesomeIcon>
+               </graphic>
+            </Label>
+            <Label fx:id="btn_highligherTop" layoutX="936.0" prefHeight="50.0" prefWidth="30.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <image>
+                        <Image url="@../../../../../../lib/image/pen2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchor_message" layoutX="907.0" layoutY="855.0" prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="img_message" fitHeight="200.0" fitWidth="210.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@message.jpg" />
+               </image>
+            </ImageView>
+         </children>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </AnchorPane>
+   </children>
+</AnchorPane>

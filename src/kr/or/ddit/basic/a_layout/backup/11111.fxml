@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.a_layout.layout_admin_Controller">
+   <children>
+      <Button fx:id="membership" layoutX="721.0" layoutY="313.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="78.0" text="확인" />
+      <Label layoutX="220.0" layoutY="313.0" prefHeight="34.0" prefWidth="476.0" text="환영합니다 관리자님. 관리자모드를 실행하시겠습니까 ?">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

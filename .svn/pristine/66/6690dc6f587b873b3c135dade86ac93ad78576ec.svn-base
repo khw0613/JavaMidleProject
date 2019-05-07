@@ -1,0 +1,67 @@
+package kr.or.ddit.ibatis.vo.restaurantVO;
+
+import java.io.Serializable;
+
+/**
+ * 도시락 주문
+ * 
+ * @author sanghoyun
+ *
+ */
+public class OrderVO implements Serializable{
+	private String res_order_date;
+	private String order_code;
+	private String mem_id;
+	private String order_date;
+	private String res_no;
+	private String order_type;
+
+	public String getRes_no() {
+		return res_no;
+	}
+
+	public void setRes_no(String res_no) {
+		this.res_no = res_no;
+	}
+
+	public String getOrder_type() {
+		return order_type;
+	}
+
+	public void setOrder_type(String order_type) {
+		this.order_type = order_type;
+	}
+
+	public String getRes_order_date() {
+		return res_order_date;
+	}
+
+	public void setRes_order_date(String res_order_date) {
+		this.res_order_date = res_order_date;
+	}
+
+	public String getOrder_code() {
+		return order_code;
+	}
+
+	public void setOrder_code(String order_code) {
+		this.order_code = order_code;
+	}
+
+	public String getMem_id() {
+		return mem_id;
+	}
+
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+
+	public String getOrder_date() {
+		return order_date;
+	}
+
+	public void setOrder_date(String order_date) {
+		this.order_date = order_date;
+	}
+
+}

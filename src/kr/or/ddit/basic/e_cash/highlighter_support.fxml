@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="472.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.BankPayment_Controller">
+   <children>
+      <HBox alignment="CENTER" prefHeight="40.0" prefWidth="372.0" style="-fx-background-color: #515663;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="형광펜 후원하기">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <Text layoutX="104.0" editable="false" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="받는사람 :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_pen_member" editable="false" layoutX="168.0" layoutY="75.0" prefHeight="23.0" prefWidth="180.0" />
+      <Text layoutX="53.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보유 형광펜 개수 :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_check" layoutX="306.0" layoutY="116.0" mnemonicParsing="false" style="-fx-background-color: #000000;" text="확인" textFill="WHITE" />
+      <JFXTextField fx:id="txt_pen_list" editable="false" layoutX="170.0" layoutY="115.0" prefHeight="27.0" prefWidth="131.0" />
+      <Text layoutX="79.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="선물 할 개수 :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_pen_gift" editable="false" layoutX="168.0" layoutY="153.0" prefHeight="23.0" prefWidth="180.0" />
+      <Text layoutX="49.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용후 잔여 개수 :">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_pen_after" editable="false" layoutX="168.0" layoutY="197.0" prefHeight="23.0" prefWidth="180.0" />
+      <Text layoutX="49.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보낼 메세지">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextArea fx:id="txt_pen_message" layoutX="49.0" layoutY="280.0" prefHeight="124.0" prefWidth="295.0" />
+      <JFXButton fx:id="btn_gift" layoutX="47.0" layoutY="418.0" prefHeight="40.0" prefWidth="295.0" style="-fx-background-color: #000000; -fx-background-radius: 7;" text="형광펜 후원하기" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

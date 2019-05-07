@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="108.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="주문하기">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Line endX="100.0" layoutX="199.0" layoutY="56.0" startX="-100.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <Text layoutX="120.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메뉴4">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="133.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="국" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="120.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메뉴2">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="120.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메뉴1">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="120.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메뉴3">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="120.0" layoutY="307.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메뉴5">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField layoutX="185.0" layoutY="85.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXTextField layoutX="185.0" layoutY="125.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXTextField layoutX="185.0" layoutY="165.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXTextField layoutX="185.0" layoutY="205.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXTextField layoutX="185.0" layoutY="245.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXTextField layoutX="185.0" layoutY="285.0" prefHeight="25.0" prefWidth="230.0" />
+      <JFXButton layoutX="151.0" layoutY="340.0" prefHeight="30.0" prefWidth="90.0" text="주문하기" />
+      <JFXButton layoutX="342.0" layoutY="340.0" prefHeight="30.0" prefWidth="90.0" text="취   소" />
+   </children>
+</AnchorPane>

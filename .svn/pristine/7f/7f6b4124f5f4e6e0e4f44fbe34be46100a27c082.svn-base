@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="915.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlighterExchange_Controller">
+   <children>
+      <Text layoutX="20.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="환불 하기">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TableView layoutY="51.0" prefHeight="348.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="120.0" text="분류" />
+          <TableColumn prefWidth="120.0" text="상세내역" />
+            <TableColumn prefWidth="120.0" text="변환 개수" />
+            <TableColumn prefWidth="120.0" text="변화 후 개수" />
+            <TableColumn prefWidth="120.0" text="처리 일시" />
+        </columns>
+      </TableView>
+      <Button layoutX="422.0" layoutY="413.0" mnemonicParsing="false" text="환 전" />
+      <Button layoutX="509.0" layoutY="413.0" mnemonicParsing="false" text="취 소" />
+      <Line endX="100.0" layoutX="115.0" layoutY="30.0" startX="-100.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+   </children>
+</AnchorPane>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="start" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.login.Login_Controller">
+   <children>
+      <AnchorPane fx:id="layout_module" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" style="-fx-background-color: #3D3F46;" />
+      <AnchorPane fx:id="login_module" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" style="-fx-background-color: transparent;">
+         <children>
+            <Text fill="WHITE" layoutX="403.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sys_login_title" text="D.D Place" textAlignment="CENTER" wrappingWidth="334.6513671875">
+               <font>
+                  <Font name="System Bold" size="37.0" />
+               </font>
+            </Text>
+            <HBox alignment="CENTER_RIGHT" layoutX="210.0" layoutY="263.0" prefHeight="55.0" prefWidth="505.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="ID">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="txt_id" prefHeight="48.0" prefWidth="290.0" style="-fx-text-inner-color: #ffffff; -fx-background-color: #757982;">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" layoutX="210.0" layoutY="325.0" prefHeight="44.0" prefWidth="505.0">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="PW">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <PasswordField fx:id="txt_password" prefHeight="48.0" prefWidth="290.0" style="-fx-background-color: #757982; -fx-text-inner-color: #ffffff;">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </HBox>
+            <Button fx:id="btn_login" layoutX="425.0" layoutY="430.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="290.0" style="-fx-background-color: #52958D;" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_findid" layoutX="439.0" layoutY="385.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: transparent;" text="아이디  찾기" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="signup" layoutX="425.0" layoutY="488.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="290.0" style="-fx-background-color: #5f4e85;" text="JOIN" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_findpwd" layoutX="576.0" layoutY="385.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: transparent;" text=" 패스워드 찾기" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="566.0" layoutY="392.0" text="/" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

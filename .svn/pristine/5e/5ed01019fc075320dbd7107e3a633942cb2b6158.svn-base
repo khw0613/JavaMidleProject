@@ -1,0 +1,209 @@
+package kr.or.ddit.basic.c_dashboard;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.DecimalFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.geometry.Side;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+import kr.or.ddit.ibatis.vo.hilightVO.RefundVO;
+import kr.or.ddit.ibatis.vo.memberVO.AttendanceVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class admin_homepage_Controller implements Initializable{
+
+
+	@FXML LineChart<String, Number> fx_line;
+	@FXML CategoryAxis x_side;
+	@FXML NumberAxis y_side;
+//	
+	@FXML PieChart piechart;
+	
+	@FXML JFXTextField txt_totalrevenue;	// 총매출 나오는 텍스트필드		 		  	
+	@FXML JFXTextField txt_totalrefund;		// 총환전 나오는 텍스트 필드		
+	
+	@FXML VBox join_ready_memList;			// 가입승인 대기회원 리스트 나오는곳
+	@FXML Button btn_join_readyGo;			// 가입승인 버튼
+	VBox vbox;
+	Label label;
+	
+	
+	
+	//방문자 담을 list
+//	List<E> visit_data;
+	
+	List<RefundVO> refund_data;
+	List<Pen_managementVO> pay_Data; 
+	List<Pen_managementVO> exchange_Data;
+	List<MemberVO> list;
+	ObservableList<PieChart.Data> pie_data;
+	List<AttendanceVO> at_data;
+	List<Map> list1;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		// 텍스트필트 변경불가
+		txt_totalrevenue.setDisable(true);
+		txt_totalrefund.setDisable(true);
+		
+		
+		
+		//회원가입 승인버튼
+		btn_join_readyGo.setOnMouseClicked(e->{
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "h_management/membership.fxml", "#contents");
+			
+		});
+		
+		
+		
+		//runLater..
+		Platform.runLater(new Runnable(){
+            @Override                                
+            public void run() {
+            	
+            	//가입승인 대기중인 회원목록 출력
+            	try {
+        			list = Global.memberService.search_member_to_rightcode("5");
+        		} catch (RemoteException e) {
+        			// TODO Auto-generated catch block
+        			e.printStackTrace();
+        		}
+        		
+        		for(int i=0; i<list.size(); i++) {
+        			Label join_ready = new Label();
+        			join_ready.setText(list.get(i).getMem_name() + "(" + list.get(i).getMem_id() + ")");
+        			join_ready_memList.getChildren().add(join_ready);
+        		}
+            }               
+    	});
+		
+		
+		// 총매출현황 나오는 곳 시작
+		
+		DecimalFormat format = new DecimalFormat("###,###");
+		
+		try {
+			pay_Data = Global.pen_managementService.select_PayPenList();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+			int sum = 0;
+		for(int i =0; i < pay_Data.size(); i++) {
+			sum += Integer.parseInt(pay_Data.get(i).getPen_cnt())*100;
+		}
+		
+		txt_totalrevenue.setText(format.format(sum) + "원");
+		
+		
+		// 총 환전 현황
+		
+		try {
+			exchange_Data = Global.pen_managementService.select_ExchangePenList();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		int sum1 = 0;
+		for(int i=0 ; i< exchange_Data.size(); i++) {
+			sum1 += Integer.parseInt(exchange_Data.get(i).getPen_cnt())*100;
+		}
+		
+		txt_totalrefund.setText(format.format(sum1) + "원");
+		
+		
+		// pie차트
+		
+		// 수료생과 수강생의 비율을 나타나게 해줘야한다
+		// vo에 수료생과 수강생 담을꺼
+		piechart.setTitle("비율현황");
+		//piechart.setMaxSize(800, 800);
+		try {
+			list1 = Global.attendanceService.select_AttendanceRateGrapeInfo();
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+			
+		if(list1.size() != 0) {
+			
+		pie_data = FXCollections.observableArrayList(
+				new PieChart.Data("수료생", Integer.parseInt(list1.get(0).get("ATTENDANCE_COUNT").toString())),	
+				new PieChart.Data("수강생", Integer.parseInt(list1.get(1).get("ATTENDANCE_COUNT").toString()))	
+				);
+		
+		piechart.setLabelLineLength(50);
+		piechart.setLegendSide(Side.BOTTOM);
+		piechart.setData(pie_data);
+		
+		}
+		
+		
+		// line 차트
+		
+		// 7일치 ㅎ하루하루 접속자수를 나타낼꺼임
+		
+		try {
+			at_data = Global.attendanceService.select_AttendanceGrapeInfo();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		x_side = new CategoryAxis();
+		y_side = new NumberAxis();
+		
+		XYChart.Series<String, Number> series = new XYChart.Series<>();
+		
+		series.setName("Daily Attendance");
+		for(int i=0; i < at_data.size(); i++) {
+			
+			series.getData().add(new XYChart.Data<>(at_data.get(i).getAttendance_date(),at_data.get(i).getAttendance_count()));
+		}
+
+		fx_line.getData().addAll(series);
+		
+		for(final XYChart.Data<String, Number> data : series.getData()) {
+			data.getNode().addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+
+				@Override
+				public void handle(MouseEvent event) {
+					Tooltip.install(data.getNode(), new Tooltip("날짜 :"+ data.getXValue() + "\n총 출석수 :" +String.valueOf(data.getYValue()+"번")));
+				}
+			});
+		}
+		
+		
+		
+		
+		
+	}
+	
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="471.0" prefWidth="484.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.login.Find_id_Controller">
+   <children>
+      <Label alignment="CENTER" layoutX="146.0" layoutY="88.0" prefHeight="36.0" prefWidth="253.0" text="아이디 찾기">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Text layoutX="69.0" layoutY="169.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이   름">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_name" alignment="CENTER_RIGHT" layoutX="147.0" layoutY="142.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="35.0" prefWidth="253.0" />
+      <Text layoutX="69.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이메일">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_mail" alignment="CENTER_RIGHT" layoutX="147.0" layoutY="204.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="35.0" prefWidth="253.0" />
+      <Button fx:id="btn_find" layoutX="97.0" layoutY="276.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="135.0" text="아이디 찾기" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btn_cancle" layoutX="253.0" layoutY="276.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="135.0" text="취소하기" textAlignment="CENTER">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

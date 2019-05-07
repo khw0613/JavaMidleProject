@@ -1,0 +1,54 @@
+package kr.or.ddit.ibatis.dao;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+
+public interface Pen_managementDao {
+	
+	public int insert_UsetypePay(Pen_managementVO pen_managementVO); // 결제정보 삽입
+	
+	public int insert_UsetypeRefund(Pen_managementVO pen_managementVO); // 결제정보 삽입
+	
+	public int insert_UsetypeExchange(Pen_managementVO pen_managementVO); // 결제정보 삽입
+	
+	public int insert_UsetypeSupport(Pen_managementVO pen_managementVO); // 결제정보 삽입
+
+	
+	public List<Pen_managementVO> select_UsePenList(); // 전체 회원의 형광펜 활용 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberUsePenList(Pen_managementVO pen_managementVO); // 회원별 형광펜 활용 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberPayPenList(String mem_id); // 회원별 형광펜 결제정보 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberRefundPenList(String mem_id); // 회원별 형광펜 환불정보 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberExchangePenList(String mem_id); // 회원별 형광펜 환전정보 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberSupportPenList(String mem_id); // 회원별 형광펜 후원 한 정보 리스트 출력
+	
+	public List<Pen_managementVO> select_MemberReceivePenList(String mem_id); // 회원별 형광펜 후원 받은 정보 리스트 출력
+
+	public int insert_UsetypeLunchPayment(Pen_managementVO pen_managementVO); // 도시락 결제정보 삽입
+	
+	public List<Pen_managementVO> select_MemberLunchPaymentPenList(String mem_id); // 회원별 도시락 결제한 형광펜 정보 리스트 출력
+	
+	public List<Pen_managementVO> select_PayPenList(); // 전체회원의 형광펜 결제(충전)정보 리스트
+	
+	public List<Pen_managementVO> search_PayPenList(String mem_id); // 특정 회원의 형광펜 결제(충전)정보 리스트
+
+	public List<Pen_managementVO> select_ExchangePenList(); // 전체회원의 형광펜 환전정보 리스트
+	
+	public List<Pen_managementVO> search_ExchangePenList(String mem_id); // 특정 회원의 형광펜 환전정보 리스트
+
+	public List<Pen_managementVO> select_SupportPenList(); // 전체회원의 형광펜 후원(선물)정보 리스트
+
+	public List<Pen_managementVO> search_SupportPenList(String mem_id); // 특정 회원의 형광펜 후원(선물) 한 정보 리스트
+
+	public List<Pen_managementVO> select_ReceivePenList(); // 전체회원의 형광펜 후원(선물) 받은정보 리스트
+
+	public List<Pen_managementVO> search_ReceivePenList(String receive_id); // 특정 회원의 후원(후원) 받은 정보 리스트
+
+}

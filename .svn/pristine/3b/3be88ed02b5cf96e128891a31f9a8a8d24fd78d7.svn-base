@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlighterExchange_Controller">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="266.0" layoutY="36.0" prefHeight="275.0" prefWidth="424.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="환전 ( 형광펜 -&gt; 현금 입금)" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="환전할 형광펜 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_ex_pen_cnt" prefHeight="23.0" prefWidth="109.0" />
+                  <JFXButton fx:id="qty_check" style="-fx-background-color: #000;" text="확인하기" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보유중인 형광펜 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_total_pen_cnt" editable="false" prefHeight="23.0" prefWidth="109.0" />
+               </children>
+               <padding>
+                  <Insets right="120.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="사용 후 잔여 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_after_total" prefHeight="23.0" prefWidth="109.0" />
+               </children>
+               <padding>
+                  <Insets right="120.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="환전 금액 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_ex_money" prefHeight="23.0" prefWidth="109.0" />
+               </children>
+               <padding>
+                  <Insets right="120.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox alignment="TOP_CENTER" layoutX="266.0" layoutY="329.0" prefHeight="243.0" prefWidth="424.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="계좌 정보" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="예금주 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_acnt_owner" prefHeight="23.0" prefWidth="230.0" />
+               </children>
+               <padding>
+                  <Insets right="60.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌은행 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_bank" prefHeight="23.0" prefWidth="230.0" />
+               </children>
+               <padding>
+                  <Insets right="60.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌번호 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_account" prefHeight="23.0" prefWidth="230.0" />
+               </children>
+               <padding>
+                  <Insets right="60.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" layoutX="266.0" layoutY="596.0" prefHeight="40.0" prefWidth="424.0">
+         <children>
+            <JFXButton fx:id="btn_exchange" prefHeight="23.0" prefWidth="313.0" styleClass="sys_btn" text="현금으로 환전하기">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

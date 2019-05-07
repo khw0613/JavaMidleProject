@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="src" path="jres"/>
+	<classpathentry kind="src" path="lib"/>
+	<classpathentry kind="lib" path="jres/ibatis-2.3.4.726.jar"/>
+	<classpathentry kind="lib" path="jres/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="jres/fontawesomefx-8.1.jar"/>
+	<classpathentry kind="lib" path="jres/jfoenix-8.0.2.jar"/>
+	<classpathentry kind="lib" path="jres/javax.mail.jar"/>
+	<classpathentry kind="lib" path="jres/javafx-web-11.0.1-linux.jar"/>
+	<classpathentry kind="lib" path="jres/javafx-web-11.0.1.jar"/>
+	<classpathentry kind="lib" path="jres/commons-codec-1.11.jar"/>
+	<classpathentry kind="lib" path="jres/poi-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="jres/poi-excelant-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="jres/poi-ooxml-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="jres/poi-ooxml-schemas-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="jres/poi-scratchpad-3.13-20150929.jar"/>
+	<classpathentry kind="lib" path="jres/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

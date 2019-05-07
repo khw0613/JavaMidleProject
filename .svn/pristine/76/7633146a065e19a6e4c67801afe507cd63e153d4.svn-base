@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="551.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlightGift_Controller">
+   <children>
+      <Pane prefHeight="41.0" prefWidth="555.0" style="-fx-background-color: #19558A;">
+         <children>
+            <Text fill="WHITE" layoutX="172.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="형광펜 선물하기">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="21.0" layoutY="41.0" prefHeight="498.0" prefWidth="509.0" style="-fx-background-color: #C2C2C2;" />
+      <Text layoutX="101.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="받는사람 :" wrappingWidth="93.78125">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="102.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보유중인 형광펜 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text layoutX="102.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="선물로 보내는 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <TextField fx:id="gift_send_qt" layoutX="307.0" layoutY="207.0" prefHeight="23.0" prefWidth="109.0" />
+      <Text layoutX="102.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용 후 잔여 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Button fx:id="ok_gift" layoutX="101.0" layoutY="490.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="324.0" style="-fx-background-color: #E5001D;" text="형광펜 선물하기">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <JFXComboBox fx:id="gift_degree" layoutX="233.0" layoutY="121.0" prefHeight="24.0" prefWidth="183.0" />
+      <Label fx:id="mine_pen" layoutX="310.0" layoutY="168.0" prefHeight="17.0" prefWidth="103.0" textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="mine_result" layoutX="310.0" layoutY="248.0" prefHeight="17.0" prefWidth="103.0" textAlignment="RIGHT">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="gift_check" layoutX="420.0" layoutY="207.0" mnemonicParsing="false" text="확인" />
+      <Label layoutX="121.0" layoutY="316.0" text="!선물한 형광펜은 취소하거나 되돌려받을 수 없습니다. " />
+      <Label layoutX="121.0" layoutY="341.0" text="신중히 결정 후 선물해주세요." />
+      <TextField fx:id="txt_message" layoutX="101.0" layoutY="428.0" prefHeight="41.0" prefWidth="324.0" promptText="상대방에게 메시지를 전달하세요." />
+   </children>
+</AnchorPane>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_attendance">
+
+<!-- 	전체 출석정보 조회 -->
+	<select id="select_AttendanceList" resultClass="attendanceVO">
+		select mem_id,
+			   days_check,
+			   days_date
+		from attendance
+		order by days_date
+	</select>
+	
+<!-- 	로그인한 회원의 출석정보 조회 -->
+	<select id="select_AttendanceInfo" resultClass="attendanceVO" parameterClass="String">
+		select mem_id,
+			   days_check,
+			   days_date
+		from attendance
+		where mem_id = #mem_id#
+	</select>
+	
+<!-- 	일별 전체 회원의 출석 현황 조회 -->
+	<select id="select_TodayAttendanceList" resultClass="attendanceVO" parameterClass="String">
+		select mem_id, days_check, days_date
+		from attendance
+		where to_char(days_date, 'YYYYMMDD') = #days_date#
+		order by days_check desc
+	</select>
+	
+<!-- 	회원의 월별 출석 현황 조회 -->
+	<select id="select_MonthAttendanceInfo" resultClass="attendanceVO" parameterClass="attendanceVO">
+		select mem_id, days_check, days_date
+		from attendance
+		where to_char(days_date, 'YYYYMM') = #days_date#
+		and mem_id = #mem_id#
+	</select>
+	
+<!-- 	출석정보를 데이터베이스에 삽입 -->
+	<insert id="insert_AttendanceInfo" parameterClass="attendanceVO">
+		insert into attendance
+		values (#mem_id#, days_check_seq.nextval, sysdate)
+	</insert>
+	
+<!-- 	전체 회원의 최근 7일 출석 횟수 -->
+	<select id="select_AttendanceGrapeInfo" resultClass="attendanceVO">
+		select attendance_date, attendance_count
+		from (select to_char(days_date,'YY-MM-DD') as attendance_date,
+               		 count(to_char(days_date,'YYMMDD')) as attendance_count
+	          from attendance
+	          where days_date like '19/' || '%'
+	          group by  to_char(days_date,'YY-MM-DD')
+	          order by to_char(days_date,'YY-MM-DD') asc)
+		where rownum &lt;= 7
+	</select>
+	
+<!-- 	오늘 날짜의 수강생/수료생 접속 비율(관리자용) -->
+	<select id="select_AttendanceRateGrapeInfo" resultClass="java.util.HashMap">
+		select to_char(a.days_date,'YY-MM-DD') as attendance_date,
+       		   count(b.right_name) as attendance_count
+		from attendance a, member b
+		where (a.mem_id = b.mem_id and a.days_date like sysdate || '%' and b.right_name = '수료생')
+		group by to_char(a.days_date,'YY-MM-DD')
+		
+		union all
+		 
+		select to_char(a.days_date,'YY-MM-DD') as attendance_date,
+		       count(b.right_name) as attendance_count
+		from attendance a, member b
+		where (a.mem_id = b.mem_id and a.days_date like sysdate || '%' and b.right_name != '수료생')
+		group by to_char(a.days_date,'YY-MM-DD')
+	</select>
+</sqlMap>
+
+
+
+
+

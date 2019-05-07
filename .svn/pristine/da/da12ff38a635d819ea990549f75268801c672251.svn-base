@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.ManagerFaq_insertController">
+
+   <children>
+      <VBox layoutX="97.0" layoutY="70.0" prefHeight="293.0" prefWidth="763.0" style="-fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="등록하기" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="131.0">
+                     <children>
+                        <Label fx:id="insert_page_back" text="뒤로가기" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <JFXButton fx:id="insert_page_insert_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="등록하기" textAlignment="CENTER" textFill="WHITE">
+                     <effect>
+                        <DropShadow blurType="TWO_PASS_BOX" color="#404040" height="33.39" radius="31.3125" spread="0.11" width="93.86" />
+                     </effect>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="insert_page_update_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="수정하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="insert_page_delete_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="삭제하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets right="60.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="793.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="질문 :">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <JFXTextArea fx:id="insert_page_writeQuestion" prefHeight="0.0" prefWidth="347.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextArea>
+               </children>
+               <VBox.margin>
+                  <Insets left="70.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="42.0" prefWidth="763.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="답변 :">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <JFXTextField fx:id="insert_page_writeAnswer" prefColumnCount="40" prefHeight="111.0" prefWidth="348.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="70.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER_RIGHT" prefHeight="30.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="insert_page_okbtn" mnemonicParsing="false" style="-fx-background-color: #515663;" text="등록하기" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets right="50.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

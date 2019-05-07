@@ -1,0 +1,580 @@
+package kr.or.ddit.basic.b_board.job;
+
+import java.awt.Insets;
+import java.lang.reflect.Field;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.Set;
+
+import javax.swing.SwingUtilities;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
+import com.sun.webkit.WebPage;
+
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.concurrent.Worker.State;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.basic.d_member.mypage.showMyinfo_Controller;
+import kr.or.ddit.ibatis.vo.boarderVO.BoardVO;
+import kr.or.ddit.ibatis.vo.boarderVO.Board_commentVO;
+import kr.or.ddit.ibatis.vo.boarderVO.Board_typeVO;
+import kr.or.ddit.ibatis.vo.communityVO.MessageBoxVO;
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+import kr.or.ddit.ibatis.vo.hilightVO.Surpport_penVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class Job_DetailController implements Initializable {
+
+	@FXML
+	Label title_lb;
+	@FXML
+	Label date_lb;
+	@FXML
+	Label writer_lb;
+	@FXML
+	Label view_lb;
+	@FXML
+	Label no_lb;
+	@FXML
+	Button list_btn;
+	@FXML
+	Button del_btn;
+	@FXML
+	Button edit_btn;
+	@FXML
+	WebView contents2;
+
+	WebEngine webEngine;
+	//List<BoardVO> list = null;
+	//List<Board_typeVO> board_type = null;
+	@FXML
+	ImageView imageview;
+
+	// 댓글전역변수
+	@FXML
+	VBox coment_vbox;
+	VBox repl_vbox;
+	TextField txt_repl;
+	HBox hBox_repl;
+	List<Board_commentVO> repl_list = null;
+	Button btn_ok;
+	List<BoardVO> list_solo = null;
+	@FXML Button btn_spon;
+	List<Surpport_penVO> gift = null;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		//System.out.println(ShinYS.select_Board + "zzzzz");
+		//System.out.println(ShinYS.mem.getBoard_no() + "zzzzz");
+
+		// 댓글시작!============================================================================댓글시작!
+
+		repl_List();
+		
+		
+		
+
+		
+
+		// ===============================================================================리플종료
+		
+		
+		
+		
+		
+		//=================================================
+		try {
+			BoardVO vo = new BoardVO();
+			vo.setBoard_no(ShinYS.mem.getBoard_no());
+			System.out.println(ShinYS.mem.getBoard_no() + "zzzzzz");
+			 list_solo = Global.boarderService.select_degree_post(vo);
+			System.out.println(list_solo.get(0).getBoard_title() + "@@@@@@");
+			
+			/*board_type = Global.boarderService.select_OneBoardType(ShinYS.select_Board);
+			list = Global.boarderService.select_boardList_degree(board_type.get(0).getBoard_type(),
+					ShinYS.query_Degree);*/
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		title_lb.setText(list_solo.get(0).getBoard_title());
+		date_lb.setText(list_solo.get(0).getBoard_date());
+		writer_lb.setText(list_solo.get(0).getMem_id());
+		no_lb.setText(list_solo.get(0).getBoard_no());
+		view_lb.setText(list_solo.get(0).getBoard_view());
+
+		if (list_solo.get(0).getBoard_image() != null) {
+			Image value = new Image(list_solo.get(0).getBoard_image());
+			imageview.setImage(value);
+		}
+
+		
+		//========================================================================
+		//게시판 형광펜 후원하기========================================================================
+		
+		
+		if(!ShinYS.query_id.equals(list_solo.get(0).getMem_id()) && list_solo.get(0).getBoard_type().equals("6") ) {
+			btn_spon.setVisible(true);
+		}else {
+			btn_spon.setVisible(false);
+		}
+		
+		btn_spon.setOnMouseClicked(e ->{
+			MemberVO vo = new MemberVO();
+			// 수정버튼누르고 팝업창 띄우기
+			Stage edit = new Stage(StageStyle.DECORATED);
+			edit.initModality(Modality.APPLICATION_MODAL);
+			edit.initOwner(Main.StageHome);
+			Parent parent = null;
+			try {
+				parent = FXMLLoader.load(getClass().getResource("../Board_support.fxml"));
+					
+				
+				JFXButton btn_gift = (JFXButton) parent.lookup("#btn_gift");
+				JFXTextField txt_pen_list = (JFXTextField) parent.lookup("#txt_pen_list");
+				JFXTextField txt_pen_gift = (JFXTextField) parent.lookup("#txt_pen_gift");
+				JFXTextField txt_pen_after = (JFXTextField) parent.lookup("#txt_pen_after");
+				JFXTextField txt_pen_member = (JFXTextField) parent.lookup("#txt_pen_member");
+				TextArea txt_pen_message = (TextArea) parent.lookup("#txt_pen_message");
+				Button btn_check = (Button) parent.lookup("#btn_check");
+				
+				
+			List<MemberVO> list_gift = Global.memberService.selectOne(ShinYS.query_id);
+				
+				
+				txt_pen_list.setText(list_gift.get(0).getPen_quantity());
+				txt_pen_member.setText(list_solo.get(0).getMem_id());
+				txt_pen_gift.setText("");
+				txt_pen_message.setText("");
+				btn_check.setOnMouseClicked(ee ->{
+				txt_pen_after.setText((Integer.parseInt(txt_pen_list.getText()) - Integer.parseInt(txt_pen_gift.getText()))+"");
+					
+				});
+				
+				
+				btn_gift.setOnMouseClicked(eee ->{
+					
+					
+					Surpport_penVO vo1 = new Surpport_penVO();
+					
+					vo1.setMem_id(ShinYS.query_id);
+					vo1.setSupport_cnt(txt_pen_gift.getText());
+					vo1.setReceive_id(list_solo.get(0).getMem_id());
+					vo1.setPen_code("1");
+					try {
+						Global.supportPenService.insert_SupportInfo(vo1);
+						gift = Global.supportPenService.select_GiveInfo(ShinYS.query_id);
+						int index = gift.size() - 1;
+						String gift_no = gift.get(index).getSupport_no();
+						gift = Global.supportPenService.select_SupportDetailInfo(gift_no);
+						
+						
+						String pen_type = gift.get(0).getPen_code();
+						String pen_cnt = gift.get(0).getSupport_cnt();
+						String mem_id = gift.get(0).getMem_id();
+						String receive_id = gift.get(0).getReceive_id();
+						String date = gift.get(0).getSupport_date();
+						
+						Pen_managementVO manageVO = new Pen_managementVO();
+						
+						manageVO.setMem_id(mem_id);
+						manageVO.setPen_cnt(pen_cnt);
+						manageVO.setPen_type(pen_type);
+						manageVO.setReceive_id(receive_id);
+						manageVO.setUse_date(date);
+						
+						Global.pen_managementService.insert_UsetypeSupport(manageVO);
+						Global.supportPenService.subtration_myPen_Quantity2(mem_id, txt_pen_gift.getText());
+						Global.supportPenService.addition_myPen_Quantity2(receive_id, pen_cnt);
+						
+						MessageBoxVO message = new MessageBoxVO();
+						message.setMem_id(ShinYS.query_id);
+						message.setMsg_contents(ShinYS.query_id.toString() + "님께서 형광펜" +"["+pen_cnt+"]"+ "개를 후하셨습니다" + "\n보낸쪽지:" + txt_pen_message.getText());
+						message.setReceive_id(receive_id);
+						Global.messageBoxService.insert_MessageInfo(message);
+						ShinYS.infoMsg("형광펜 후원하", "형광펜 후원이 완료되었습니다.");
+						edit.close();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				});
+				
+			
+			
+			}catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+			Scene scene = new Scene(parent);
+			edit.setTitle("형광펜 후원");
+			edit.setScene(scene);
+			edit.show();
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//========================================================================
+		contents2.setOnScroll(e -> {
+			ScrollPane cs = (ScrollPane) Main.StageHome.getScene().getRoot().lookup("#con_scroll");
+
+			cs.setVvalue(cs.getVvalue() - (e.getDeltaY() * 0.01));
+			cs.setHvalue(cs.getHvalue() - (e.getDeltaX() * 0.01));
+
+			// gg.setTranslateX(gg.getTranslateX() + e.getDeltaX());
+			// gg.setTranslateY(gg.getTranslateY() + e.getDeltaY());
+
+		});
+
+		contents2.getEngine().getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
+			@Override
+			public void changed(ObservableValue<? extends State> arg0, State oldState, State newState) {
+				if (newState == State.SUCCEEDED) {
+					setupHeight();
+				}
+			}
+		});
+
+		contents2.getChildrenUnmodifiable().addListener(new ListChangeListener<Node>() {
+			@Override
+			public void onChanged(Change<? extends Node> change) {
+				Set<Node> scrolls = contents2.lookupAll(".scroll-bar");
+
+				for (Node scroll : scrolls) {
+					scroll.setVisible(false);
+
+				}
+			}
+		});
+
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+
+				double get_width = contents2.getPrefWidth() - 10;
+
+				String st = list_solo.get(0).getBoard_contents();
+				if (st.contains("contenteditable=\"true\"")) {
+					st = st.replace("contenteditable=\"true\"", "contenteditable=\"false\"");
+					st = st.replace("contenteditable=\"false\">",
+							"false\"><div style=\"width:" + get_width + "px; word-wrap: break-word;\">");
+					st = st.replace("</body>", "</div></body>");
+				} else if (st.contains("contenteditable=\"false\"")) {
+					st = st.replace("contenteditable=\"false\">",
+							"false\"><div style=\"width:" + get_width + "px; word-wrap: break-word;\">");
+					st = st.replace("</body>", "</div></body>");
+				}
+
+				webEngine = contents2.getEngine();
+				webEngine.loadContent(st);
+
+				try {
+					Field field = webEngine.getClass().getDeclaredField("page");
+					field.setAccessible(true);
+					com.sun.webkit.WebPage page = (WebPage) field.get(webEngine);
+					SwingUtilities.invokeLater(() -> {
+						// page.setBackgroundColor((new java.awt.Color(0, 0, 0, 0)).getRGB());
+						page.setBackgroundColor((new java.awt.Color(213, 216, 223, 100)).getRGB());
+
+					});
+
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				Platform.runLater(new Runnable() {
+					@Override
+					public void run() {
+						setupHeight();
+					}
+				});
+			}
+		});
+
+		
+		
+		// 버튼
+
+		if (ShinYS.login_memVO.getMem_id().equals(writer_lb.getText())
+				|| ShinYS.login_memVO.getRight_code().equals("1")) {
+			edit_btn.setDisable(false);
+			del_btn.setDisable(false);
+
+		} else {
+			edit_btn.setDisable(true);
+			del_btn.setDisable(true);
+		}
+
+		list_btn.setOnMouseClicked(e -> {
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "b_board/Board.fxml", "#contents");
+		});
+
+		del_btn.setOnMouseClicked(e -> {
+			try {
+				Global.boarderService.delete_post(ShinYS.mem.getBoard_no());
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+			ShinYS.infoMsg("게시글 삭제", "해당 게시글이 삭제되었습니다");
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "b_board/Board.fxml", "#contents");
+
+		});
+
+		edit_btn.setOnMouseClicked(e -> {
+
+			ShinYS.query_Number = no_lb.getText();
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "b_board/Modify.fxml", "#contents");
+		});
+	}// 초기화완료
+
+	// 댓글기능!!!!
+	private void repl_List() {
+		
+		btn_ok = new Button("댓글입력");
+		txt_repl = new TextField();
+		txt_repl.setPrefSize(650, 30);
+		hBox_repl = new HBox(txt_repl, btn_ok);
+		VBox v = new VBox();
+		v.setPrefHeight(100);
+		coment_vbox.getChildren().addAll(hBox_repl, v);
+		
+		try {
+			repl_list = Global.boardCommentService.select_listCommentInboardNo(ShinYS.mem.getBoard_no());
+		} catch (RemoteException e2) {
+			e2.printStackTrace();
+		}
+		Button[] btn_delete= new Button[repl_list.size()];
+		Button[] btn_edit = new Button[repl_list.size()];
+		
+		coment_vbox.setSpacing(10);
+
+		
+
+		for (int i = 0; i < repl_list.size(); i++) {
+			Label repl_label1 = new Label(); // 아이디
+			Label repl_label2 = new Label(); // 내용
+			Label repl_label3 = new Label(); // 날짜
+			// Label repl_label4 = new Label(); //날짜
+
+			btn_delete[i] = new Button("삭제"); // 댓글삭제
+			btn_edit[i] = new Button("수정"); // 댓글수정
+			
+			
+			if(repl_list.get(i).getMem_id().equals(ShinYS.query_id)) {
+				btn_delete[i].setDisable(false);
+				btn_edit[i].setDisable(false);
+				
+			}
+			else if(!repl_list.get(i).getMem_id().equals(ShinYS.query_id)) {
+				btn_delete[i].setDisable(true);
+				btn_edit[i].setDisable(true);
+				
+			}
+
+
+			repl_label1.setStyle(
+					"-fx-background-color:transparent; -fx-text-fill:black;-fx-padding:7; -fx-background-radius:0 0 8 8; -fx-border-width:3 3 3 3; -fx-border-color:#000000; ");
+			repl_label2.setStyle(
+					"-fx-background-color:transparent; -fx-text-fill:black; -fx-padding:7; -fx-background-radius:0 0 8 8; -fx-border-width:3 3 3 3; -fx-border-color:#000000; ");
+			repl_label3.setStyle(
+					"-fx-background-color:transparent; -fx-text-fill:black; -fx-padding:7; -fx-background-radius:0 0 8 8; -fx-border-width:3 3 3 3; -fx-border-color:#000000; ");
+
+			repl_label2.setAlignment(Pos.CENTER_RIGHT);
+			//hbox_list2.setAlignment(Pos.CENTER_RIGHT);
+
+			repl_label1.setText(repl_list.get(i).getMem_id());
+			repl_label2.setText(repl_list.get(i).getComment_contents());
+			repl_label3.setText(repl_list.get(i).getComment_time());
+			// repl_label4.setText(repl_list.get(i).getComment_no());
+			btn_edit[i].setAccessibleText(repl_list.get(i).getComment_no().toString());
+			btn_delete[i].setAccessibleText(repl_list.get(i).getComment_no().toString());
+			
+			HBox hbox_list1 = new HBox(repl_label1);
+			HBox hbox_list2 = new HBox(repl_label2);
+			HBox hbox_list3 = new HBox(repl_label3, btn_edit[i], btn_delete[i]);
+			
+			
+			//hbox_list2.setAlignment(Pos.CENTER);
+			hbox_list2.setPrefWidth(250);
+			
+			HBox hbox_list_all = new HBox(hbox_list1,hbox_list2,hbox_list3);
+			hbox_list_all.setAlignment(Pos.CENTER);
+			hbox_list1.setMargin(repl_label1, new javafx.geometry.Insets(0, 30, 0, 0));
+			hbox_list2.setMargin(repl_label2, new javafx.geometry.Insets(0, 60, 0, 0));
+			hbox_list3.setMargin(repl_label3, new javafx.geometry.Insets(0, 30, 0, 0));
+			
+			
+			
+			
+			
+			
+			
+			/*
+			 * repl_label.addEventHandler(MouseEvent.MOUSE_ENTERED, g->{
+			 * repl_label.setStyle(repl_label.getStyle().replace(
+			 * "background-color:transparent;", "background-color:#ddd3d3;")); });
+			 * 
+			 * repl_label.addEventHandler(MouseEvent.MOUSE_EXITED, g->{
+			 * repl_label.setStyle(repl_label.getStyle().replace(
+			 * "background-color:#ddd3d3;", "background-color:transparent;")); });
+			 */
+
+			coment_vbox.getChildren().addAll(hbox_list_all);
+		}
+
+		
+
+		// 댓글작성하기===================================================================================
+
+		btn_ok.setOnMouseClicked(e -> {
+
+			Board_commentVO vo = new Board_commentVO();
+			vo.setBoard_no(ShinYS.mem.getBoard_no());
+			vo.setMem_id(ShinYS.query_id);
+			vo.setComment_contents(txt_repl.getText());
+			try {
+				int cnt = Global.boardCommentService.insert_comment(vo);
+				System.out.println(cnt);
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+			coment_vbox.getChildren().clear();
+			repl_List();
+
+		});
+		// 댓글수정하기===================================================================================
+
+		
+		System.out.println("asdasdasdd" + btn_edit.length);
+		
+		for (int i = 0; i < btn_edit.length; i++) {
+
+			// 수정 할 새창띄우기
+			btn_edit[i].setOnMouseClicked(e -> {
+				Button bbtn = (Button) e.getSource();
+				
+
+				// 수정버튼누르고 팝업창 띄우기
+				Stage edit = new Stage(StageStyle.DECORATED);
+				edit.initModality(Modality.APPLICATION_MODAL);
+				edit.initOwner(Main.StageHome);
+				Parent parent = null;
+				try {
+					parent = FXMLLoader.load(getClass().getResource("../Repl_edit.fxml"));
+						
+					
+					Button btn_repl = (Button) parent.lookup("#btn_repl");
+					TextField txt_edit_repl = (TextField) parent.lookup("#txt_edit_repl");
+				
+					btn_repl.setOnMouseClicked(e1 -> {
+						
+			
+						Board_commentVO vo = new Board_commentVO();
+						vo.setComment_contents(txt_edit_repl.getText());
+						vo.setComment_no(bbtn.getAccessibleText());
+						try {
+							int cnt = Global.boardCommentService.update_comment(vo);
+						} catch (RemoteException e11) {
+							// TODO Auto-generated catch block
+							e11.printStackTrace();
+						}
+
+						edit.close();
+						coment_vbox.getChildren().clear();
+						repl_List();
+					});
+				
+				
+				
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				Scene scene = new Scene(parent);
+				edit.setTitle("댓글 수정");
+				edit.setScene(scene);
+				edit.show();
+			});
+		
+		
+			// 댓글삭제하기===================================================================================
+		
+				btn_delete[i].setOnMouseClicked(e ->{
+					Button bbtn = (Button) e.getSource();
+					
+			try {
+				 Global.boardCommentService.delete_comment(bbtn.getAccessibleText());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			coment_vbox.getChildren().clear();
+			repl_List();
+				});
+		
+		
+		
+		
+		
+		
+			
+			
+		}
+		
+	}
+
+	void setupHeight() {
+
+		// webEngine.executeScript("document.body.style.width = '300px';");
+
+		Object result = webEngine.executeScript("document.body.offsetHeight");
+		if (result instanceof Integer) {
+			Integer i = (Integer) result;
+			double height = new Double(i);
+			height = height + 60;
+			contents2.setPrefHeight(height);
+			// contents2.getPrefHeight();
+		}
+	}
+}

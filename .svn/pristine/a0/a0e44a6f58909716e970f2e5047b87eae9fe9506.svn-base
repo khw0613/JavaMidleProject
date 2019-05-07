@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.ManagerFaq_deleteController">
+
+   <children>
+      <JFXButton fx:id="delete_page_insert_faq" layoutX="109.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="등록하기" textAlignment="CENTER" textFill="#727272" />
+      <JFXButton fx:id="delete_page_update_faq" layoutX="236.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="수정하기" textAlignment="CENTER" textFill="#727272">
+         <effect>
+            <Shadow />
+         </effect></JFXButton>
+      <JFXButton fx:id="delete_page_delete_faq" layoutX="364.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="삭제하기" textAlignment="CENTER" />
+      <Label fx:id="delete_page_back" layoutX="14.0" layoutY="14.0" text="뒤로가기" />
+      <Text layoutX="95.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="질문 :" />
+      <Button fx:id="delete_page_ok_btn" layoutX="393.0" layoutY="329.0" mnemonicParsing="false" text="삭제하기" />
+      <JFXComboBox fx:id="delete_page_writeQuestion" layoutX="137.0" layoutY="142.0" prefHeight="27.0" prefWidth="347.0" />
+   </children>
+</AnchorPane>

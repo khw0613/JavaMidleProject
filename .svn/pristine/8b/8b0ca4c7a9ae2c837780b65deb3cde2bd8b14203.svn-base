@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="450.0" style="-fx-background-image: url('@../../../../../../lib/image/back.png');" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.BankTransfer_Controller">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="48.0" prefWidth="450.0" style="-fx-background-color: #3A5BD5;" />
+      <Text fill="WHITE" layoutX="173.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="계좌 이체">
+         <font>
+            <Font name="Arial Black" size="24.0" />
+         </font></Text>
+      <Pane layoutX="18.0" layoutY="60.0" prefHeight="382.0" prefWidth="414.0" />
+      <HBox layoutX="17.0" layoutY="60.0" prefHeight="235.0" prefWidth="150.0" style="-fx-background-color: #C2C2C2;">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children>
+      </HBox>
+      <Text layoutX="51.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="출금계좌번호" />
+      <Text layoutX="51.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="계좌비밀번호" />
+      <Text layoutX="51.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="입금계좌번호" />
+      <Text layoutX="51.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="이체금액" textAlignment="CENTER" wrappingWidth="72.0" />
+      <Text layoutX="359.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="원" />
+      <Text layoutX="59.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="입금자 명 " textAlignment="CENTER" />
+      <JFXTextField fx:id="txt_out_no" editable="false" layoutX="178.0" layoutY="110.0" prefHeight="23.0" prefWidth="164.0" />
+      <JFXPasswordField fx:id="txt_pwd" layoutX="178.0" layoutY="139.0" prefHeight="23.0" prefWidth="164.0" />
+      <JFXTextField fx:id="txt_in_no" editable="false" layoutX="178.0" layoutY="173.0" prefHeight="23.0" prefWidth="164.0" text="213-123-1233" />
+      <JFXTextField fx:id="txt_name" editable="false" layoutX="178.0" layoutY="207.0" prefHeight="23.0" prefWidth="164.0" />
+      <JFXTextField fx:id="txt_money" editable="false" layoutX="178.0" layoutY="241.0" prefHeight="23.0" prefWidth="164.0" />
+      <JFXButton fx:id="btn_transfer" layoutX="86.0" layoutY="373.0" style="-fx-background-color: #DA2E32;" text="이체 하기" />
+      <JFXButton fx:id="btn_can" layoutX="277.0" layoutY="373.0" style="-fx-background-color: #3A5BD5;" text="취소하기" textFill="WHITE" />
+   </children>
+</AnchorPane>

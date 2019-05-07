@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
+<sqlMap namespace="qr_pbboardComment">
+
+	<!-- 댓글 전체 가져오기 -->
+	<select id="select_pblistComment" resultClass="boardpbcommentVO">
+		SELECT
+		pb_no,
+		mem_id,
+		pb_comment_contents,
+		pb_comment_date,
+		pb_comment_no
+		from pb_comment
+		order by 1
+	</select>
+	
+
+	<!-- 게시글 번호 별 댓글 가져오기 -->
+	<select id="select_pblistCommentInboardNo" resultClass="boardpbcommentVO" parameterClass="String">
+		SELECT
+		pb_no,
+		mem_id,
+		pb_comment_contents,
+		pb_comment_date,
+		pb_comment_no
+		FROM PB_COMMENT
+		WHERE pb_no = #pb_no#
+		order by 1
+	</select>
+	
+	
+	
+	<!-- 댓글 작성하기 -->
+	<insert id="insert_pbcomment" parameterClass="boardpbcommentVO">
+		insert into
+		pb_comment
+		values
+		(
+		#pb_no#,
+		#mem_id#,
+		#pb_comment_contents#,
+		sysdate,
+		pb_comment_no_seq.nextval
+		)
+	</insert>
+	
+	
+
+	<!-- 댓글 수정하기 -->
+	<update id="update_pbcomment" parameterClass="boardpbcommentVO">
+		update pb_comment
+		set
+		pb_comment_contents = #pb_comment_contents#,
+		pb_comment_date = sysdate
+		where
+		pb_comment_no = #pb_no#
+	</update>
+
+
+
+	<!-- 댓글 삭제하기 -->
+	 <delete id="delete_pbcomment" parameterClass="String">
+		delete 
+		from pb_comment
+		where pb_comment_no = #pb_comment_no#	 			
+	 </delete>
+
+
+
+</sqlMap>			
+
+
+
+
+

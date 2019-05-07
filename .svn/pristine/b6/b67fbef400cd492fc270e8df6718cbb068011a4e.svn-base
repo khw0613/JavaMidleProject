@@ -1,0 +1,197 @@
+package kr.or.ddit.basic.g_messenger;
+
+import java.awt.Window;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.sun.mail.imap.Rights.Right;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import kr.or.ddit.basic.a_layout.layout_Controller;
+import kr.or.ddit.basic.a_layout.layout_admin_Controller;
+import kr.or.ddit.ibatis.vo.boarderVO.BoardVO;
+import kr.or.ddit.ibatis.vo.communityVO.MessageBoxVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class Message_Controller implements Initializable{
+	
+	public static String m_id;
+	
+	public static String detail_id;
+	public static String detail_contents;
+	public static String detail_date;
+	public static String detail_no;
+
+	@FXML Button btn_Mreceive;		// 받은 쪽지함
+	@FXML Button btn_Msend;			// 쪽지 보내기
+	@FXML Button btn_send_save;		// 보낸 쪽지함
+	
+	
+	@FXML TableView m_view;									// 테이블 뷰
+	@FXML TableColumn<MessageBoxVO, String> m_sel;			// 선택 컬럼
+	@FXML TableColumn<MessageBoxVO, String> m_contents;		// 내용 컬럼
+	@FXML TableColumn<MessageBoxVO, String> m_author;		// 작성자 컬럼
+	@FXML TableColumn<MessageBoxVO, String> m_time;			// 작성 시간 컬럼
+	@FXML Button m_close;
+	
+	
+	ObservableList<MessageBoxVO> data ;
+
+
+
+
+	
+
+
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		m_id = ShinYS.query_id;
+		
+// ========================================== 데이터 셋팅 =============================================
+		List<MessageBoxVO> list = new ArrayList<>();
+		try {
+			list = Global.messageBoxService.select_allUnreadMessage(m_id);
+			System.out.println(list.size());
+		} catch (RemoteException e2) {
+			e2.printStackTrace();
+		}
+		
+		
+		
+		data = FXCollections.observableArrayList(list);
+
+		m_contents.	setCellValueFactory	(new PropertyValueFactory<>("msg_contents"));
+		m_author.	setCellValueFactory	(new PropertyValueFactory<>("mem_id"));
+		m_time.		setCellValueFactory	(new PropertyValueFactory<>("msg_date"));
+		
+		
+		m_view.setItems(data);
+// ========================================== 데이터 셋팅 =============================================
+		
+		
+		
+		// 받은 쪽지함 버튼
+		btn_Mreceive.setOnAction(e-> {
+			
+			System.out.println("Receive Button Test  :  " + m_id);
+			
+			try {
+				Parent mReceive = FXMLLoader.load(getClass().getResource("receive_message.fxml"));
+				Scene sc = new Scene(mReceive);
+				Stage primaryStage = (Stage) btn_Mreceive.getScene().getWindow();
+				primaryStage.setScene(sc);
+			
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("Err!! Fail to changed Scene");
+			}
+		
+		});
+		
+		
+		
+		// 쪽지 보내기 버튼
+		btn_Msend.setOnAction(e-> {
+			m_id = ShinYS.query_id;
+			System.out.println("Send Button Test  :  " + m_id);
+			
+			
+			try {
+				Parent mReceive = FXMLLoader.load(getClass().getResource("send_message.fxml"));
+				Scene sc = new Scene(mReceive);
+				Stage primaryStage = (Stage) btn_Msend.getScene().getWindow();
+				primaryStage.setScene(sc);
+			
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("Err!! Fail to changed Scene");
+			}
+		});
+		
+		
+		// 보낸 쪽지함
+		btn_send_save.setOnAction(e-> {
+			m_id = ShinYS.query_id;
+			System.out.println("Send Button Test  :  " + m_id);
+			
+			
+			try {
+				Parent mReceive = FXMLLoader.load(getClass().getResource("sendSave_message.fxml"));
+				Scene sc = new Scene(mReceive);
+				Stage primaryStage = (Stage) btn_send_save.getScene().getWindow();
+				primaryStage.setScene(sc);
+			
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("Err!! Fail to changed Scene");
+			}
+		});
+		
+		
+		// 더블클릭해서 디테일로 넘어가기
+		m_view.setOnMouseClicked(e -> {
+			if (e.getClickCount() == 2) {
+
+				System.out.println("Test Double Click with Mouse");
+				try {
+					MessageBoxVO mVO = (MessageBoxVO) m_view.getSelectionModel().getSelectedItem();
+					
+					detail_id 		= mVO.getMem_id();
+					detail_contents = mVO.getMsg_contents();
+					detail_date		= mVO.getMsg_date();
+					detail_no		= mVO.getMsg_no();
+					ShinYS.recive_id = mVO.getMem_id();
+					
+					Global.messageBoxService.updae_ReadMessage(detail_no);
+					
+					Parent mReceive = FXMLLoader.load(getClass().getResource("detail_message.fxml"));
+					Scene sc = new Scene(mReceive);
+					Stage primaryStage = (Stage) m_view.getScene().getWindow();
+					primaryStage.setScene(sc);
+
+				} catch (Exception e2) {
+					System.out.println("Err!");
+					e2.printStackTrace();
+				}
+			}
+		});
+		
+		// 닫기
+		m_close.setOnAction(e-> {
+			List<MemberVO> right;
+			try {
+				right = Global.memberService.selectOne(ShinYS.query_id);
+				if(right.get(0).getRight_code().equals("1")) {
+					layout_admin_Controller.message.close();
+				}else {
+					layout_Controller.message.close();
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+		
+	}
+
+}

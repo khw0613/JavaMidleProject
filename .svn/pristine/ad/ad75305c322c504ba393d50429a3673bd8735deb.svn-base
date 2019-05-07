@@ -1,0 +1,44 @@
+package kr.or.ddit.ibatis.service;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import kr.or.ddit.ibatis.vo.boarderVO.BoardVO;
+import kr.or.ddit.ibatis.vo.boarderVO.Board_typeVO;
+
+public interface BoarderService extends Remote{
+
+	public List<BoardVO> select_boardList(String board_type) throws RemoteException;//공통 게시판별 정보 가져오기
+	
+	public List<BoardVO> select_boardList_degree(String board_type, String degree) throws RemoteException;
+	
+	public List<BoardVO> select_common_post(BoardVO boardVO) throws RemoteException; // 공통 게시글 가져오기
+
+	public List<BoardVO> select_degree_post(BoardVO boardVO) throws RemoteException; // 기수별 게시판 게시글 가져오기
+
+	public int insert_common_post(BoardVO boardVO) throws RemoteException; //공통게시판 게시글 정보 데이터베이스에 삽입하기
+	
+	public int insert_post(BoardVO boardVO) throws RemoteException; //게시판 게시글 정보 데이터베이스에 삽입하기
+
+	public int update_post(BoardVO boardno) throws RemoteException; //게시물 정보 수정하기
+	
+	public int delete_post(String boardno) throws RemoteException; //게시물 삭제하기
+	
+	public int update_viewCount(String boardno) throws RemoteException; //조회수 업데이트 하기
+	
+	public List<BoardVO> search_post_to_id(BoardVO boardVO) throws RemoteException; // 작성자(search_id + board_type)로 검색
+	
+	public List<BoardVO> search_post_to_no(String search_no) throws RemoteException; // 글번호(search_no)로 검색
+	
+	public List<BoardVO> search_post_to_title(BoardVO boardVO) throws RemoteException; // 제목(search_title + board_type)로 검색
+	
+	public List<BoardVO> search_post_to_titleAndcontents(BoardVO boardVO) throws RemoteException; // 제목 + 내용(search_txt + board_type)로 검색
+
+	public List<Board_typeVO> select_BoardType() throws RemoteException;
+	
+	public List<Board_typeVO> select_OneBoardType(String board_name) throws RemoteException;
+	
+	public List<BoardVO> select_notice_post(String degree) throws RemoteException; //공지사항 출력 메서드
+	
+}

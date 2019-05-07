@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <FontAwesomeIcon fill="#0a15eb" iconName="SEND" layoutX="7.0" layoutY="22.0" size="20" />
+      <Text layoutX="42.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="메세지가 도착 했습니다." />
+   </children>
+</Pane>

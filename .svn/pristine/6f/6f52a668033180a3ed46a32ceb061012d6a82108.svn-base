@@ -1,0 +1,325 @@
+
+ /* 폰트 불러오기 안됨
+@font-face {
+  font-family: DoHyeon;
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/dohyeon/v8/TwMN-I8CRRU2zM86HFEyZwCH_qWn1D1aD-iarMAYM6JZjg_GA1OtNH6MzgdxVjQYKOgazaM9x794.115.woff2);
+}
+*/
+
+/*Font Setting */
+.root *{
+ 	-fx-font-family: 'NanumSquare', '나눔바른고딕', sans-serif;
+ 	-fx-font-weight: 600;
+ 	-fx-font-size: 14;
+ 	
+ }
+ 
+ .sys_login_title{
+ 	-fx-font-size: 40;
+ }
+ 
+
+/*Layout */
+#dashmain{
+	-fx-background-image: url("/image/back1.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-position: right bottom;
+	
+}
+
+#con_scroll .viewport {
+	/*-fx-background-color: #f4f9fd;*/
+	-fx-background-color: transparent;
+}
+
+.button{
+	-fx-cursor: HAND;
+}
+
+.sys_opa{
+	-fx-opacity:0.8;
+}
+.sys_opa:hover{
+	-fx-opacity:1;
+}
+
+
+.sys_btn{
+	-fx-background-color:#30333a;
+	-fx-text-fill: #fff;
+	-fx-padding: 10 20 10 20;
+
+}
+
+.sys_btn:hover{
+	-fx-background-color:#000000;
+
+}
+
+.sys_combo{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+	-fx-border-radius:5;
+}
+.sys_text{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+	-fx-border-radius:5;
+	
+}
+
+.sys_btn:disabled{
+	-fx-opacity:0.2;
+}
+
+
+
+.sys2_btn{
+	-fx-background-color:#30333a;
+	-fx-text-fill: #fff;
+	-fx-padding: 10 20 10 20;
+}
+
+.sys2_btn:hover{
+	-fx-background-color:#000000;
+}
+
+.sys2_combo{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+}
+.sys2_text{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+	
+}
+
+
+
+
+.sys3_btn{
+	-fx-background-color:#30333a;
+	-fx-text-fill: #fff;
+	-fx-padding: 10 20 10 20;
+}
+
+.sys3_btn:hover{
+	-fx-background-color:#000000;
+}
+
+.sys3_combo{
+	-fx-background-color: #ffffff;
+}
+.sys3_text{
+	-fx-background-color: #ffffff;
+}
+
+
+
+
+/*pagination */
+.tableview_tt .pagination-control{
+	-fx-padding:30 0 0 0;
+}
+
+.tableview_tt .pagination-control .toggle-button:selected{
+	
+	-fx-background-color: #30333a;
+}
+.tableview_tt .pagination-control .toggle-button:selected:hover{
+	-fx-text-fill: #ffffff;
+	
+}
+
+.tableview_tt .pagination-control .toggle-button{
+	-fx-cursor: HAND;
+}
+
+
+.table1 .page{
+	-fx-padding:0 0 20 0;
+}
+
+
+
+/*관리자 대시보드 */
+.admin_main_text:disabled{
+	-fx-text-fill:#000000;
+	-fx-opacity:1;
+	
+}
+
+
+/*
+ * 출석부 
+  */
+
+.attenDay{
+	-fx-background-color:transparent;
+	-fx-border-color:#ffffff;
+	-fx-border-weight:1;
+	-fx-text-fill:#ffffff;
+}
+
+.attenDay_hover:hover{
+	-fx-background-color:yellow;
+	-fx-opacity:0.2;
+}
+
+/*
+ * 도시락
+  */
+  
+.lunchDay_btn{
+	-fx-background-color:transparent;
+	-fx-border-color:#5d210d;
+	-fx-border-weight:1;
+}
+
+
+/*
+ * 메신저
+  */
+  
+  
+/* open_chatpane */
+#open_chatpane {
+	-fx-background-color:#3e3f46;
+	-fx-dropshadow : 20.0, 10.0, 5.0, #000000;
+}
+
+#open_chatpane #log_window .viewport, #log_window_list, #log_window{
+	-fx-background-color:#545661;
+	-fx-border-weight:0;
+}
+
+#open_chatpane *:focused {
+	-fx-focus-color: transparent; 
+	-fx-border-weight:0;
+}
+
+#log_window_list > Label{
+	-fx-text-fill: #fff;
+}
+
+#area_chat *{
+	-fx-background-color:#787a8c;
+}
+
+/*
+ * 게시판 목록
+  */
+
+/* Button, Text, ComboBox */
+.board_list .sys_combo, .sys_text{
+	-fx-pref-height:40;
+}
+
+.board_list .sys_combo{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+	-fx-border-radius:5;
+}
+.board_list .sys_text{
+	-fx-background-color: #ffffff;
+	-fx-border-color:#30333a;
+	-fx-border-weight:1;
+	-fx-border-radius:5;
+	
+}
+
+.board_list .sys_btn{
+	-fx-background-color:#30333a;
+	-fx-text-fill: #fff;
+	-fx-padding: 10 20 10 20;
+}
+
+.board_list .sys_btn:hover{
+	-fx-background-color:#000000;
+}
+
+
+
+
+/* Board-TableView */
+.board_list .table-view{
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-border-color: transparent transparent #30333a transparent;
+}
+
+.board_list .table-view .table-row-cell{
+-fx-table-cell-border-color:transparent;
+}
+
+
+/*Ragion */
+.board_list .table-view .filler{
+	-fx-background-color: transparent;
+}
+
+
+/* Header */
+.board_list .table-view .column-header-background{
+	-fx-background-color: transparent;
+}
+
+.board_list .table-view .column-header{
+	-fx-pref-height: 40;
+	-fx-table-cell-border-color:transparent;
+	-fx-border-color: transparent;
+	-fx-background-color: #30333a;
+	
+}
+
+.board_list .table-view .column-header .label{
+	-fx-text-fill: #ffffff;
+}
+
+
+/*pagination */
+.board_list .pagination-control{
+	-fx-padding:30 0 0 0;
+}
+
+.board_list .pagination-control .toggle-button:selected{
+	
+	-fx-background-color: #30333a;
+}
+.board_list .pagination-control .toggle-button:selected:hover{
+	-fx-text-fill: #ffffff;
+	
+}
+
+.board_list .pagination-control .toggle-button{
+	-fx-cursor: HAND;
+}
+
+
+/* Table-Cell */
+
+.board_list .table-view .table-row-cell .table-cell{
+	-fx-text-fill: #30333a;
+	 -fx-pref-height: 40;
+	-fx-alignment: CENTER_LEFT;
+}
+.board_list .table-view .table-row-cell:odd{ -fx-background-color: transparent;}
+.board_list .table-view .table-row-cell:even{ -fx-background-color: transparent;}
+.board_list .table-view .table-row-cell:filled:hover .indexed-cell{ 
+    -fx-background-color: #9699a6;
+    -fx-text-fill: #ffffff;
+}
+
+
+.board_list .table-view .table-row-cell:filled:selected:focused, .list-cell:filled:selected {
+    /*-fx-background-color: linear-gradient(#333 0%, #777 25%, #aaa 75%, #eee 100%);
+    -fx-text-fill: white;*/
+}
+

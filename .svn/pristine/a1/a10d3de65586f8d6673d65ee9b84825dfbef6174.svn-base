@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
+<sqlMap namespace="qr_boardComment">
+
+	<!-- 댓글 전체 가져오기 -->
+	<select id="select_listComment" resultClass="board_commentVO">
+		select
+			board_no,
+			mem_id,
+			comment_contents,
+			comment_time,
+			comment_no
+		from board_comment
+		order by 1
+	</select>
+
+	<!-- 게시글 번호 별 댓글 가져오기 -->
+	<select id="select_listCommentInboardNo" resultClass="board_commentVO" parameterClass="String">
+		select
+			board_no,
+			mem_id,
+			comment_contents,
+			comment_time,
+			comment_no
+		from board_comment
+		where board_no = #board_no#
+		order by comment_time desc
+	</select>
+	
+	 <insert id="insert_comment" parameterClass="board_commentVO">
+		insert into board_comment
+			values
+			(
+				#board_no#,
+				#mem_id#,
+				#comment_contents#,
+				sysdate,
+				COMMENT_NO_SEQ.nextval
+			)
+	 </insert>
+	 
+	 <!-- 댓글 삭제하기 -->
+	 <delete id="delete_comment" parameterClass="String">
+		delete 
+		from board_comment
+		where comment_no = #comment_no#	 			
+	 </delete>
+	
+	
+	<!-- 댓글 수정하기 -->
+	 <update id="update_comment" parameterClass="board_commentVO">
+		update BOARD_COMMENT
+		set 
+			COMMENT_CONTENTS = #comment_contents#,
+			COMMENT_TIME = sysdate
+		where comment_no = #comment_no#
+	 </update>
+	
+</sqlMap>			
+
+
+
+
+

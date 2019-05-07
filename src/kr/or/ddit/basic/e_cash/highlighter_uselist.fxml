@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlighterUselist_Controller">
+   <children>
+      <Label layoutX="42.0" layoutY="30.0" text="형광펜 이용내역">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="list_tableview" layoutX="34.0" layoutY="107.0" prefHeight="360.0" prefWidth="779.0">
+        <columns>
+          <TableColumn fx:id="col_no" prefWidth="73.0" text="번호" />
+            <TableColumn fx:id="col_usename" minWidth="1.0" prefWidth="138.0" text="활용분류" />
+            <TableColumn fx:id="col_penname" prefWidth="88.0" text="형광팬분류" />
+            <TableColumn fx:id="col_cnt" prefWidth="113.0" text="형광팬 갯수" />
+            <TableColumn fx:id="col_receive" prefWidth="124.0" text="받은 아이디" />
+            <TableColumn fx:id="col_date" prefWidth="241.0" text="처리일시" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="paging" layoutX="34.0" layoutY="107.0" pageCount="1" prefHeight="480.0" prefWidth="779.0" />
+      <Label layoutX="42.0" layoutY="68.0" text="보유 형광펜 개수 :">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="txt_myPencnt" layoutX="249.0" layoutY="64.0" prefHeight="29.0" prefWidth="248.0" promptText="예)  450개(45,000원)">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXTextField>
+      <JFXComboBox fx:id="cmb_usetype" layoutX="42.0" layoutY="592.0" prefHeight="29.0" prefWidth="145.0" />
+      <JFXButton fx:id="btn_search" layoutX="194.0" layoutY="593.0" prefHeight="30.0" prefWidth="85.0" text="검색" />
+   </children>
+</AnchorPane>

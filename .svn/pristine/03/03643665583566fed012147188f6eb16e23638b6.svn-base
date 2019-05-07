@@ -1,0 +1,9 @@
+.anchorview{
+   -fx-background-color: #545562;
+}
+.login_btn{
+   -fx-background-color: #59AEA2;
+}
+.btn{
+   -fx-background-color: #545562;
+}

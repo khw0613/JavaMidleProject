@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_pen_management">
+	
+<!-- 	결제정보 삽입 -->
+	<insert id="insert_UsetypePay" parameterClass="pen_managementVO">
+		insert into pen_management
+		values (management_no_seq.nextval,
+		        '1',
+		        #pen_type#,
+		        #pen_cnt#,
+		        #mem_id#,
+		        #receive_id#,
+		        #use_date#,
+		        #use_name#,
+		        #pen_name#
+		       )
+	</insert>
+	
+<!-- 	환불정보 삽입 -->
+	<insert id="insert_UsetypeRefund" parameterClass="pen_managementVO">
+		insert into pen_management
+		values (management_no_seq.nextval, 
+		        '2',
+		        #pen_type#,
+		        #pen_cnt#,
+		        #mem_id#,
+		        #receive_id#,
+		        #use_date#,
+		        #use_name#,
+		        #pen_name#
+		       )
+	</insert>
+	
+	<!-- 	환전정보 삽입 -->
+	<insert id="insert_UsetypeExchange" parameterClass="pen_managementVO">
+		insert into pen_management
+		values (management_no_seq.nextval, 
+		        '3',
+		        #pen_type#,
+		        #pen_cnt#,
+		        #mem_id#,
+		        #receive_id#,
+		        #use_date#,
+		        #use_name#,
+		        #pen_name#
+		       )
+	</insert>
+	
+	<!-- 	후원정보 삽입 -->
+	<insert id="insert_UsetypeSupport" parameterClass="pen_managementVO">
+		insert into pen_management
+		values (management_no_seq.nextval, 
+		        '4',
+		        #pen_type#,
+		        #pen_cnt#,
+		        #mem_id#,
+		        #receive_id#,
+		        #use_date#,
+		        #use_name#,
+		        #pen_name#
+		       )
+	</insert>
+	
+<!-- 	도시락 결제정보 삽입 -->
+
+	<insert id="insert_UsetypeLunchPayment" parameterClass="pen_managementVO">
+		insert into pen_management
+		values (management_no_seq.nextval, 
+		        '5',
+		        #pen_type#,
+		        #pen_cnt#,
+		        #mem_id#,
+		        #receive_id#,
+		        #use_date#,
+		        #use_name#,
+		        #pen_name#
+		       )
+	</insert>
+	
+	
+<!-- 	회원별 형광펜 활용 리스트 출력 -->
+	<select id="select_MemberUsePenList" resultClass="pen_managementVO" parameterClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		or receive_id = #mem_id#
+		order by 1 desc
+	</select>
+	
+<!-- 	회원별 형광펜 결제정보 리스트 출력 -->
+	<select id="select_MemberPayPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		and use_type = '1'
+		order by 1 desc
+	</select>
+	
+<!-- 	회원별 형광펜 환불정보 리스트 출력 -->
+	<select id="select_MemberRefundPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		and use_type = '2'		
+		order by 1 desc
+	</select>
+	
+<!-- 	회원별 형광펜 환전정보 리스트 출력 -->
+	<select id="select_MemberExchangePenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		and use_type = '3'
+		order by 1 desc
+	</select>
+
+<!-- 	회원별 형광펜 후원 한 정보 리스트 출력 -->
+	<select id="select_MemberSupportPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		and use_type = '4'
+		order by 1 desc
+	</select>
+	
+<!-- 	회원별 형광펜 후원 받은 정보 리스트 출력 -->
+	<select id="select_MemberReceivePenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where receive_id = #mem_id#
+		and use_type = '4'
+		order by 1 desc
+	</select>
+	
+<!-- 	회원별 도시락 결제 정보 리스트 출력 -->
+	<select id="select_MemberLunchPaymentPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id = #mem_id#
+		and use_type = '5'
+		order by 1 desc
+	</select>	
+	
+	
+	
+	
+<!-- 	전체 회원의 형광펜 활용 리스트 출력 -->
+	<select id="select_UsePenList" resultClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		order by 1 desc
+	</select>
+	
+	
+	
+	
+	
+<!-- 	전체 회원 형광펜 결제(충전)정보 리스트 출력 -->
+	<select id="select_PayPenList" resultClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where use_type = '1'
+		order by 1 desc
+	</select>
+
+<!-- 	특정 회원의 형광펜 결제(충전)정보 리스트 출력 -->
+	<select id="search_PayPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id like '%' || #mem_id# || '%' 
+		and use_type = '1'
+		order by 1 desc
+	</select>
+
+<!-- 	전체 회원 형광펜 환전정보 리스트 출력 -->
+	<select id="select_ExchangePenList" resultClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where use_type = '3'
+		order by 1 desc
+	</select>
+
+<!-- 	특정 회원의 형광펜 환전정보 리스트 출력 -->
+	<select id="search_ExchangePenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id like '%' || #mem_id# || '%' 
+		and use_type = '3'
+		order by 1 desc
+	</select>
+
+<!-- 	전체 회원 형광펜 후원(선물)정보 리스트 출력 -->
+	<select id="select_SupportPenList" resultClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where use_type = '4'
+		order by 1 desc
+	</select>
+
+<!-- 	특정 회원의 후원(선물) 한 정보 리스트 출력 -->
+	<select id="search_SupportPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id like '%' || #mem_id# || '%' 
+		and use_type = '4'
+		order by 1 desc
+	</select>
+	
+<!-- 	전체 회원 형광펜 후원(선물) 받은 정보 리스트 출력 -->
+	<select id="select_ReceivePenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where use_type = '4'
+		order by 1 desc
+	</select>
+	
+<!-- 	특정 회원의 후원(선물) 받은 정보 리스트 출력 -->
+	<select id="search_ReceivePenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where receive_id like '%' || #receive_id# || '%' 
+		and use_type = '4'
+		order by 1 desc
+	</select>
+
+	<!-- 	전체 회원 도시락 결제정보 리스트 출력 -->
+	<select id="select_LunchPaymentPenList" resultClass="pen_managementVO">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where use_type = '5'
+		order by 1 desc
+	</select>
+
+	<!-- 	특정 회원의 후원(선물) 한 정보 리스트 출력 -->
+	<select id="search_LunchPaymentPenList" resultClass="pen_managementVO" parameterClass="String">
+		select management_no, use_type, pen_type, pen_cnt, mem_id, receive_id, use_date, use_name, pen_name
+		from pen_management
+		where mem_id like '%' || #mem_id# || '%' 
+		and use_type = '5'
+		order by 1 desc
+	</select>
+	
+<!-- 	매출관리(순이익) 리스트 -->
+	<select id="select_Profit_Management" resultClass="pen_managementVO">
+		select substr(use_date, 1, 10) as use_date,
+		       to_char(((pen_cnt * 0.1) * 100), '99,999,999,990') as profit,
+		       to_char((pen_cnt * 100),'99,999,999,990') as exchange_amount
+		from pen_management
+		where use_type = '3'
+		order by use_date desc
+	</select>
+	
+<!-- 	매출관리 바 차트용 데이터 -->
+	<select id="select_Profit_BarGrape" resultClass="pen_managementVO" parameterClass="String">
+		select substr(use_date,1, 7) as use_date,
+		       ((pen_cnt * 0.1) * 100) as profit,
+		       (pen_cnt * 100) as exchange_amount
+		from pen_management
+		where use_type = '3'
+		and use_date like #use_date# || '%'
+		order by use_date desc
+	</select>
+	
+<!-- 	매출관리 라인차트용 데이터(최근 7일의 순이익) -->
+	<select id="select_Profit_LineGrape" resultClass="java.util.HashMap">
+		select *
+		from (select sum((pen_cnt * 0.1) * 100) as profit,
+		             substr(use_date, 1, 10) as profit_date
+		     from pen_management
+		     where use_type = '3'
+		     group by substr(use_date, 1, 10)
+		     order by profit_date desc)
+		where rownum &lt;= 7
+		order by profit_date asc
+	</select>
+	
+</sqlMap>	
+

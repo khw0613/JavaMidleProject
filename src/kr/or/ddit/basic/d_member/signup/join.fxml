@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" style="-fx-background-color: #3D3F46;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.signup.join_Controller">
+   <children>
+      <HBox alignment="CENTER" layoutX="354.0" layoutY="718.0" prefHeight="40.0" prefWidth="415.0" spacing="10.0">
+         <children>
+            <Button fx:id="btn_joincomplete" mnemonicParsing="false" prefHeight="40.0" prefWidth="183.0" style="-fx-background-color: #52958D;" text="회원 가입 완료" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_joincancle" mnemonicParsing="false" prefHeight="40.0" prefWidth="178.0" style="-fx-background-color: #5f4e85;" text="회원 가입 취소" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <VBox layoutX="188.0" layoutY="43.0" prefHeight="432.0" prefWidth="747.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="409.0" prefWidth="747.0">
+               <children>
+                  <VBox prefHeight="409.0" prefWidth="540.0" style="-fx-background-color: #fff; -fx-background-radius: 7 7 7 7;">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="208.0" style="-fx-background-color: #52958D; -fx-background-radius: 7 7 0 0;">
+                           <children>
+                              <Label text="회원가입" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="아이디">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_id" prefHeight="23.0" prefWidth="210.0" promptText="영어 및 숫자만 5자이상 12자까지" style="-fx-prompt-text-fill: white;" />
+                              <Button fx:id="btn_id_check" mnemonicParsing="false" style="-fx-background-color: #000000;" text="중복체크" textFill="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets right="70.0" top="30.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이   름">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_name" prefHeight="23.0" prefWidth="210.0" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXPasswordField fx:id="txt_pwd" prefHeight="27.0" prefWidth="210.0" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="비밀번호 확인" textAlignment="RIGHT" wrappingWidth="123.328125">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXPasswordField fx:id="txt_pwd2" prefHeight="27.0" prefWidth="210.0" />
+                              <Button fx:id="btn_pw_check" mnemonicParsing="false" style="-fx-background-color: #000000;" text="비밀번호 체크" textFill="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets right="40.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이메일">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_email" prefHeight="23.0" prefWidth="210.0" promptText="예)abc123@naver.com" style="-fx-prompt-text-fill: white;" />
+                              <Button fx:id="btn_mail_check" mnemonicParsing="false" style="-fx-background-color: #000000;" text="중복체크" textFill="WHITE" />
+                           </children>
+                           <padding>
+                              <Insets right="70.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="전화번호" textAlignment="RIGHT" wrappingWidth="117.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_tel" prefHeight="23.0" prefWidth="210.0" promptText="'-' 없이 입력해주세요" style="-fx-prompt-text-fill: white;" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="대덕인재개발원 기수" textAlignment="RIGHT" wrappingWidth="147.328125">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_degree" prefHeight="23.0" prefWidth="210.0" promptText="예) 2018년 9월달 입학 -&gt; 201809" style="-fx-prompt-text-fill: white;" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="방번호">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_mem_class" prefHeight="23.0" prefWidth="210.0" promptText="예) 206호 -&gt; 206" style="-fx-prompt-text-fill: white;" />
+                           </children>
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="188.0" layoutY="469.0" prefHeight="213.0" prefWidth="747.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="209.0" prefWidth="747.0">
+               <children>
+                  <VBox prefHeight="202.0" prefWidth="540.0" style="-fx-background-color: #fff; -fx-background-radius: 7 7 7 7;">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="35.0" prefWidth="208.0" style="-fx-background-color: #5f4e85; -fx-background-radius: 7 7 0 0;">
+                           <children>
+                              <Label text="계좌정보 입력" textFill="WHITE">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <padding>
+                              <Insets right="150.0" top="30.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌은행">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_bank" prefHeight="23.0" prefWidth="210.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="예금주">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_acnt_owner" prefHeight="23.0" prefWidth="210.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="38.0" prefWidth="540.0" spacing="10.0">
+                           <padding>
+                              <Insets right="150.0" />
+                           </padding>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌번호">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <JFXTextField fx:id="txt_account" prefHeight="23.0" prefWidth="210.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

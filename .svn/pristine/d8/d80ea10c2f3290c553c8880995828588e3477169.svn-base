@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.b_board.job.Job_ModifyController">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="900.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="800.0">
+               <children>
+                  <Label alignment="TOP_LEFT" text="글 수정">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="450.0" prefWidth="800.0">
+               <children>
+                  <AnchorPane prefHeight="359.0" prefWidth="742.0">
+                     <children>
+                        <TextField fx:id="title_txt" layoutX="40.0" layoutY="14.0" prefHeight="27.0" prefWidth="460.0" />
+                        <TextField fx:id="writer_txt" layoutX="585.0" layoutY="14.0" prefHeight="29.0" prefWidth="166.0" />
+                        <Label layoutY="19.0" text="제목 : " />
+                        <Label layoutX="528.0" layoutY="19.0" text="작성자 : " />
+                        <HTMLEditor fx:id="content_txt" layoutY="53.0" prefHeight="395.0" prefWidth="753.0" AnchorPane.leftAnchor="-7.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HTMLEditor>
+                        <StackPane layoutX="-1.0" layoutY="298.0" prefHeight="150.0" prefWidth="743.0">
+                           <children>
+                              <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="285.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="56.0" spacing="10.0">
+               <children>
+               	  <Button fx:id="fileup_btn" mnemonicParsing="false" text="첨부파일" />	
+               	  <Button fx:id="imageview_btn" mnemonicParsing="false" text="이미지파일" />
+                  <Button fx:id="cancel_btn" mnemonicParsing="false" text="취소" />
+                  <Button fx:id="sub_btn" mnemonicParsing="false" text="수정완료">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="20.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

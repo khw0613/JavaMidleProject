@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.highlighterPaytype_Controller">
+   <children>
+      <Label focusTraversable="false" layoutX="153.0" layoutY="29.0" text="결제 수단">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btn_transfer" focusTraversable="false" layoutX="31.0" layoutY="195.0" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #99b7d0;" text="실시간 계좌이체">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_bank_payment" focusTraversable="false" layoutX="230.0" layoutY="195.0" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #99b7d0;" text="무통장 입금">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_mobilepay" focusTraversable="false" layoutX="230.0" layoutY="291.0" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #99b7d0;" text="휴대폰 결제">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_cardpay" focusTraversable="false" layoutX="31.0" layoutY="291.0" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #99b7d0;" text="카드 결제">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

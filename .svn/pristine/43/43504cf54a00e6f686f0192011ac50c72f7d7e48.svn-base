@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.ManagerFaq_Controller">
+
+   <children>
+      <Label layoutX="190.0" layoutY="171.0" prefHeight="29.0" prefWidth="220.0" text="[관리자] FAQ 관리 페이지" textFill="#545454">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <SVGPath content="M40,60 C42,48 44,30 25,32" layoutX="148.0" layoutY="139.0" />
+      <JFXButton fx:id="insert_faq" layoutX="109.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="등록하기" textAlignment="CENTER" textFill="#727272" />
+      <JFXButton fx:id="update_faq" layoutX="236.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="수정하기" textAlignment="CENTER" textFill="#727272" />
+      <JFXButton fx:id="delete_faq" layoutX="364.0" layoutY="45.0" prefHeight="28.0" prefWidth="128.0" text="삭제하기" textAlignment="CENTER" textFill="#727272" />
+   </children>
+</AnchorPane>

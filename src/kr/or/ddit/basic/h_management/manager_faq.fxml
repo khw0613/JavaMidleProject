@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.ManagerFaq_Controller">
+
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="97.0" layoutY="36.0" prefHeight="148.0" prefWidth="763.0" style="-fx-background-radius: 7; -fx-background-color: #fff;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label prefHeight="29.0" prefWidth="117.0" text="FAQ 관리 페이지" textAlignment="RIGHT" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="insert_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="등록하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="update_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="수정하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="delete_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="삭제하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </JFXButton>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+      <VBox layoutX="97.0" layoutY="221.0" prefHeight="395.0" prefWidth="763.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="FAQ" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="326.0" prefWidth="763.0">
+               <children>
+                  <VBox prefHeight="313.0" prefWidth="428.0">
+                     <children>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="회원관리" />
+                              <JFXComboBox fx:id="sel_member" prefHeight="28.0" prefWidth="200.0" />
+                              <Button fx:id="faq_ok1" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" styleClass="sys_btn" text="선택" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" right="40.0" top="10.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="게시판이용" />
+                              <JFXComboBox fx:id="sel_board" prefHeight="28.0" prefWidth="200.0" />
+                              <Button fx:id="faq_ok2" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" styleClass="sys_btn" text="선택" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="결제 관련" />
+                              <JFXComboBox fx:id="sel_pay" prefHeight="28.0" prefWidth="200.0" />
+                              <Button fx:id="faq_ok3" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" styleClass="sys_btn" text="선택" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Label text="형광펜 관련" />
+                              <JFXComboBox fx:id="sel_pen" prefHeight="28.0" prefWidth="200.0" />
+                              <Button fx:id="faq_ok4" mnemonicParsing="false" prefHeight="28.0" prefWidth="80.0" styleClass="sys_btn" text="선택" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" right="40.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="332.0" prefWidth="241.0">
+                     <children>
+                        <TextArea fx:id="faq_text" editable="false" maxWidth="240.0" prefHeight="141.0" prefWidth="240.0" />
+                        <TextArea fx:id="faq_text2" editable="false" maxWidth="240.0" prefHeight="141.0" prefWidth="240.0" />
+                        <TextArea editable="false" prefHeight="33.0" prefWidth="251.0" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

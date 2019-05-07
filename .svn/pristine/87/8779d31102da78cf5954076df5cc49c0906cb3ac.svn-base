@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlightBuy_Controller">
+   <children>
+      <Text layoutX="154.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="구매하실 형광펜 개수를 선택하세요." textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="btn_h_pay" layoutX="186.0" layoutY="301.0" mnemonicParsing="false" text="결제하기" />
+      <Button fx:id="btn_h_can" layoutX="336.0" layoutY="301.0" mnemonicParsing="false" text="취  소" />
+      <JFXRadioButton fx:id="radio_btn30" layoutX="190.0" layoutY="59.0" text="30개    - &gt;   3,000원" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_btn50" layoutX="190.0" layoutY="99.0" text="50개    - &gt;   5,000원">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_btn100" layoutX="190.0" layoutY="139.0" text="100개  - &gt;   10,000원">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_btn150" layoutX="190.0" layoutY="179.0" text="150개  - &gt;   15,000원">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_btn200" layoutX="190.0" layoutY="219.0" text="200개  - &gt;   20,000원">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXRadioButton>
+      <JFXTextField fx:id="txt_etc" layoutX="201.0" layoutY="251.0" prefHeight="27.0" prefWidth="195.0" promptText="충전하실 갯수를 입력해주세요." />
+   </children>
+</AnchorPane>

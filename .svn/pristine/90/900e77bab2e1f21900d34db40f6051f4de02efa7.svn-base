@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.c_dashboard.admin_homepage_Controller">
+   <children>
+      <VBox layoutX="19.0" layoutY="21.0" prefHeight="324.0" prefWidth="250.0">
+         <children>
+            <Label text="* 가입승인대기 회원목록 출력" />
+            <ScrollPane hbarPolicy="NEVER" prefHeight="269.0" prefWidth="250.0">
+               <content>
+                <AnchorPane minHeight="160.0" minWidth="0.0" prefWidth="244.0">
+                     <children>
+                        <VBox fx:id="join_ready_memList" minHeight="200.0" prefWidth="244.0" />
+                     </children></AnchorPane>
+               </content>
+            </ScrollPane>
+            <Button fx:id="btn_join_readyGo" mnemonicParsing="false" prefHeight="38.0" prefWidth="257.0" text="가입승인 페이지로 이동" />
+         </children>
+      </VBox>
+      <AnchorPane layoutX="693.0" layoutY="14.0" prefHeight="324.0" prefWidth="257.0">
+         <children>
+            <Label layoutY="123.0" text="총 충전 금액">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txt_totalrevenue" layoutX="103.0" layoutY="119.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="138.0" />
+            <Label layoutY="199.0" text="총 환전 금액">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="txt_totalrefund" layoutX="103.0" layoutY="195.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="23.0" prefWidth="138.0" />
+            <Text layoutX="43.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="형광펜 현황">
+               <font>
+                  <Font size="32.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <LineChart fx:id="fx_line" layoutX="47.0" layoutY="401.0" prefHeight="269.0" prefWidth="862.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" fx:id="x_side" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="y_side" minorTickCount="10" side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <PieChart fx:id="piechart" layoutX="286.0" layoutY="45.0" prefHeight="300.0" prefWidth="400.0" />
+   </children>
+</AnchorPane>

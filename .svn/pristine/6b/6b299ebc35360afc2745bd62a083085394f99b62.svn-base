@@ -1,0 +1,64 @@
+package kr.or.ddit.basic;
+
+import java.rmi.RemoteException;
+
+import org.scenicview.ScenicView;
+import org.scenicview.view.tabs.EventLogTab.ScenicViewEvent;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import library.Global;
+import library.ShinYS;
+
+public class Main extends Application {
+
+	public static Stage StageHome;
+
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		StageHome = primaryStage;
+
+		Parent root = FXMLLoader.load(getClass().getResource("d_member/login/login.fxml"));
+		Scene scene = new Scene(root);
+		StageHome.setScene(scene);
+		StageHome.setTitle("DD.Place - 대덕인재개발원 커뮤니티");
+		StageHome.setResizable(false);
+		
+//		scene.getStylesheets().add("/css/HanSH.css");
+//		scene.getStylesheets().add("/css/KangHW.css");
+		scene.getStylesheets().add("/css/ShinYS.css");
+		
+		StageHome.show();
+		
+		AnchorPane getMain = (AnchorPane) root.lookup("#start");
+		double start_Height = StageHome.getHeight() - getMain.getHeight();
+		double start_Width = StageHome.getWidth() - getMain.getWidth();
+		
+		Main.StageHome.setWidth(StageHome.getWidth()-start_Width-4);  //윈도우 -7    맥 -4
+		Main.StageHome.setHeight(StageHome.getHeight()-start_Height+20);
+		
+	
+		StageHome.setOnCloseRequest(e -> {
+			try {
+				Global.logWindowService.delete_LogInfo(ShinYS.query_id);
+			} catch (RemoteException e1) {
+				System.out.println("로그아웃 시 로그인데이터 삭제 에러");
+			}
+			System.exit(0);
+		});
+
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		Global.DbConnect();	// db연결
+		ShinYS.init();		// 베이직 static변수 초기화
+		
+		launch(args);
+	}
+
+}

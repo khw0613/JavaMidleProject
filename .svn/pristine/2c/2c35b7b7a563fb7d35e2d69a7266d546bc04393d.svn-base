@@ -1,0 +1,17 @@
+ SqlMapConfig.properties
+#driver=oracle.jdbc.driver.OracleDriver
+#url=jdbc:oracle:thin:@192.168.206.28:1521:XE
+#username=goo8455
+#password=java
+
+
+
+
+
+
+#운용서버
+driver=oracle.jdbc.driver.OracleDriver
+url=jdbc:oracle:thin:@112.220.114.130:1521:XE
+username=team4_201809
+password=java
+

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.j_chatbot.Faq_Controller">
+   <children>
+      <Text layoutX="24.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAQ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Label layoutX="422.0" layoutY="61.0" prefHeight="17.0" prefWidth="154.0" />
+      <ToolBar layoutX="321.0" layoutY="17.0" prefHeight="60.0" prefWidth="240.0">
+         <items>
+            <Label text="DD place">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </items>
+      </ToolBar>
+      <TextArea editable="false" layoutX="321.0" layoutY="77.0" prefHeight="318.0" prefWidth="240.0" />
+      <JFXComboBox fx:id="sel_member" layoutX="48.0" layoutY="97.0" prefHeight="28.0" prefWidth="138.0" />
+      <JFXComboBox fx:id="sel_board" layoutX="48.0" layoutY="166.0" prefHeight="28.0" prefWidth="138.0" />
+      <JFXComboBox fx:id="sel_pay" layoutX="48.0" layoutY="240.0" prefHeight="28.0" prefWidth="138.0" />
+      <Label layoutX="48.0" layoutY="78.0" text="회원관리" />
+      <Label layoutX="48.0" layoutY="149.0" text="게시판이용" />
+      <Label layoutX="48.0" layoutY="223.0" text="결제 관련" />
+      <Label layoutX="48.0" layoutY="293.0" text="형광펜 관련" />
+      <JFXComboBox fx:id="sel_pen" layoutX="48.0" layoutY="310.0" prefHeight="28.0" prefWidth="138.0" />
+      <Button fx:id="faq_ok1" layoutX="186.0" layoutY="97.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" text="선택" />
+      <Button fx:id="faq_ok2" layoutX="186.0" layoutY="166.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" text="선택" />
+      <Button fx:id="faq_ok3" layoutX="186.0" layoutY="240.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" text="선택" />
+      <Button fx:id="faq_ok4" layoutX="186.0" layoutY="310.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="52.0" text="선택" />
+      <TextArea fx:id="faq_text" editable="false" layoutX="321.0" layoutY="79.0" maxWidth="240.0" prefHeight="141.0" prefWidth="240.0" />
+      <TextArea fx:id="faq_text2" editable="false" layoutX="321.0" layoutY="220.0" maxWidth="240.0" prefHeight="141.0" prefWidth="240.0" />
+   </children>
+</AnchorPane>

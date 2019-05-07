@@ -1,0 +1,199 @@
+package kr.or.ddit.basic.d_member.mypage;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXToggleButton;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.layout.AnchorPane;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.basic.a_layout.layout_Controller;
+import kr.or.ddit.basic.a_layout.layout_admin_Controller;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+
+public class showMyinfo_Controller implements Initializable{
+	layout_Controller a = new layout_Controller();
+	
+	// 내정보 화면 보이는 fxml id값들
+	@FXML Label txt_id;
+	@FXML Label txt_name;
+	@FXML Label txt_telno;
+	@FXML Label txt_mail;
+	@FXML Label txt_degree;
+	@FXML Label txt_class;
+	@FXML Label txt_bank;
+	@FXML Label txt_acnt_owner;
+	@FXML Label txt_account;
+	@FXML Label txt_havehighlighter;
+	
+	@FXML Button btn_updateinfo;
+	@FXML JFXButton btn_goback;
+	@FXML Button btn_changepassword;
+	
+	
+	
+	
+	ObservableList<MemberVO> data ;
+	@FXML ImageView photo_view;
+	@FXML Button btn_outjoin;
+	List<MemberVO> list = null;
+
+	@FXML Label txt_profile_contents;
+
+	@FXML StackPane avator_color;
+	
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		//다른방법
+		//TextField get_ids = (TextField) Main.StageHome.getScene().getRoot().lookup("#txt_id");
+		//get_ids.getText();
+		
+		//List<MemberVO> list =null;
+		
+		
+		
+		// 아바타 배경색 지정
+				avator_color.setStyle(avator_color.getStyle());
+				avator_color.setStyle("-fx-background-color:" + ShinYS.avator_map.get(ShinYS.login_memVO.getAvatar())
+							+ "; -fx-background-radius:50;");
+		
+		
+		
+		
+		
+		
+		
+		try {
+			 list = Global.memberService.selectOne(ShinYS.query_id);
+			 
+		  if(ShinYS.query_id.equals(list.get(0).getMem_id())) {
+			
+			txt_id.setText(list.get(0).getMem_id());
+			txt_name.setText(list.get(0).getMem_name());
+			txt_telno.setText(list.get(0).getTelno());
+			txt_mail.setText(list.get(0).getEmail());
+			txt_degree.setText(list.get(0).getDegree());
+			txt_class.setText(list.get(0).getMem_class());
+			txt_bank.setText(list.get(0).getBank());
+			txt_acnt_owner.setText(list.get(0).getAcnt_owner());
+			txt_account.setText(list.get(0).getAccount());
+			txt_havehighlighter.setText(list.get(0).getPen_quantity());
+			txt_profile_contents.setText(list.get(0).getProfile_contents());
+		
+				
+			if(list.get(0).getMem_image() != null) {
+				
+			Image value = new Image(list.get(0).getMem_image());
+				photo_view.setImage(value);
+			
+
+				/*// 아바타 배경색 지정
+				photo_view.setStyle(photo_view.getStyle());
+				photo_view.setStyle("-fx-background-color:" + ShinYS.avator_map.get(ShinYS.login_memVO.getAvatar())
+							+ "; -fx-background-radius:50;");*/
+					
+			
+			
+			}
+		  
+		  
+		  
+		  
+		  }
+		
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		// 정보수정 클릭시 정보 수정 화면으로
+		btn_updateinfo.setOnAction(e->{
+			
+			ShinYS.<AnchorPane>ChangePage(getClass(), "updateMyinfo.fxml", "#contents");
+			
+
+		});
+		
+//		// 비밀번호 변경하기버튼을 누르면 비밀번호 변경 창이 뜬다.
+		btn_changepassword.setOnAction(e->{
+			ShinYS.<AnchorPane>ChangePage(getClass(), "change_pwd.fxml", "#contents");
+		});
+		
+		
+		// 탈퇴하기
+		btn_outjoin.setOnMouseClicked(e->{
+			MemberVO vo2 = new MemberVO();
+			try {
+				list = Global.memberService.selectOne(ShinYS.query_id);
+			} catch (RemoteException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			Alert alertConfirm = new Alert(AlertType.CONFIRMATION);
+			alertConfirm.setTitle("탈퇴하기");
+			alertConfirm.setContentText("탈퇴를 하시면 복구가 어렵습니다 정말로 탈퇴하시겠습니까?");
+			
+			ButtonType confirmResult = alertConfirm.showAndWait().get();
+			
+			if(confirmResult == ButtonType.OK) {
+				
+				System.out.println(ShinYS.query_id);
+				
+				
+				try {
+				List<MemberVO> list =	Global.memberService.selectOne(ShinYS.query_id);
+				} catch (RemoteException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				
+				vo2.setMem_id(ShinYS.query_id);
+				vo2.setRight_code("6");
+				vo2.setRight_name("탈퇴회원");
+				vo2.setDegree(list.get(0).getDegree());
+				vo2.setMem_class(list.get(0).getMem_class());
+				
+				try {
+					 Global.memberService.update_member_right(vo2);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				ShinYS.infoMsg("회원 탈퇴", "성공");
+				
+				btn_outjoin.setText("탈퇴완료");
+				
+			
+			}else if (confirmResult == ButtonType.CANCEL) {
+				return;
+			}
+			
+			btn_outjoin.setText("탈퇴완료");
+			
+		});
+		
+	}
+
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.ManagerFaq_deleteController">
+
+   <children>
+      <VBox layoutX="97.0" layoutY="70.0" prefHeight="293.0" prefWidth="763.0" style="-fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label style="-fx-background-color: #515663;" text="삭제하기" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="131.0">
+                     <children>
+                        <Label fx:id="delete_page_back" alignment="TOP_CENTER" text="뒤로가기" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </HBox>
+                  <JFXButton fx:id="delete_page_insert_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="등록하기" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="delete_page_update_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="수정하기" textAlignment="CENTER" textFill="WHITE">
+                     <effect>
+                        <Shadow />
+                     </effect>
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="delete_page_delete_faq" prefHeight="28.0" prefWidth="128.0" style="-fx-background-color: #515663;" text="삭제하기" textAlignment="CENTER" textFill="WHITE" />
+               </children>
+               <VBox.margin>
+                  <Insets right="60.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="질문 :">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </Text>
+                  <JFXComboBox fx:id="delete_page_writeQuestion" prefHeight="27.0" prefWidth="347.0">
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="70.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="delete_page_ok_btn" mnemonicParsing="false" style="-fx-background-color: #515663;" text="삭제하기" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets right="50.0" top="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

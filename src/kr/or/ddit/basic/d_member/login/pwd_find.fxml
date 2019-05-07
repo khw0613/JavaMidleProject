@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1140.0" style="-fx-background-color: #3D3F46;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.login.Find_pw_Controller">
+   <children>
+      <VBox layoutX="349.0" layoutY="245.0" prefHeight="311.0" prefWidth="442.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="47.0" prefWidth="319.0" style="-fx-background-color: #5f4e85; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="36.0" prefWidth="253.0" text="비밀번호 찾기" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="319.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="아이디">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_id" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="257.0" />
+               </children>
+               <padding>
+                  <Insets right="70.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="319.0" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이메일">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXTextField fx:id="txt_mail" nodeOrientation="LEFT_TO_RIGHT" prefHeight="35.0" prefWidth="257.0" />
+               </children>
+               <padding>
+                  <Insets right="70.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="TOP_CENTER" prefHeight="81.0" prefWidth="319.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btn_pwfind" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="sys_btn" text="비밀번호 찾기" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btn_cancel" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" styleClass="sys_btn" text="취소하기" textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

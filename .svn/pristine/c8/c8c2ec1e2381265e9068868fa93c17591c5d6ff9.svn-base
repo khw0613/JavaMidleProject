@@ -1,0 +1,127 @@
+package kr.or.ddit.basic.g_messenger;
+
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+import kr.or.ddit.basic.a_layout.layout_Controller;
+import kr.or.ddit.basic.a_layout.layout_admin_Controller;
+import kr.or.ddit.ibatis.vo.communityVO.MessageBoxVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+import javafx.scene.control.TextField;
+
+public class Send_Controller implements Initializable {
+	public static String r_id;
+
+	@FXML
+	Button send_back; // 쪽지함으로
+	@FXML
+	ComboBox send_id_list; // 아이디 선택 콤보 박스
+	@FXML
+	TextArea send_contents; // 내용
+	@FXML
+	Button send_send; // 보내기 버튼
+	@FXML
+	Button send_close; // 닫기버튼
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		r_id = ShinYS.query_id;
+
+		List<String> comboList = new ArrayList<>();
+		
+		
+		try {
+			List<MemberVO> list = Global.memberService.select_MemberList();
+			System.out.println(list.size());
+			for (int i = 0; i < list.size(); i++) {
+				comboList.add(list.get(i).getMem_id());
+			}
+		} catch (RemoteException e2) {
+			e2.printStackTrace();
+		}
+
+		System.out.println(comboList);
+		String temp = ShinYS.recive_id;
+		ObservableList<String> idList = FXCollections.observableArrayList(comboList);
+		send_id_list.setValue(temp);
+		send_id_list.setItems(idList);
+		
+		
+
+		send_back.setOnAction(e -> {
+			try {
+				Parent mReceive = FXMLLoader.load(getClass().getResource("locker_message.fxml"));
+				Scene sc = new Scene(mReceive);
+				Stage primaryStage = (Stage) send_back.getScene().getWindow();
+				primaryStage.setScene(sc);
+
+			} catch (IOException e1) {
+				e1.printStackTrace();
+				System.out.println("Err!! Fail to changed Scene");
+			}
+		});
+
+		send_send.setOnAction(e -> {
+
+			
+			String sendId = send_id_list.getValue().toString();
+			String sendContents = send_contents.getText();
+
+			
+			MessageBoxVO vo = new MessageBoxVO();
+			vo.setMem_id(r_id);
+			vo.setMsg_contents(sendContents);
+			vo.setReceive_id(sendId);
+
+			try {
+				int cnt = Global.messageBoxService.insert_MessageInfo(vo);
+				if (cnt >= 1) {
+					ShinYS.infoMsg("매세지 전송", "매세지 전송을 성공하였습니다.");
+
+					Parent mReceive = FXMLLoader.load(getClass().getResource("locker_message.fxml"));
+					Scene sc = new Scene(mReceive);
+					Stage primaryStage = (Stage) send_send.getScene().getWindow();
+					primaryStage.setScene(sc);
+
+				}
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+
+		});
+
+		send_close.setOnAction(e -> {
+			List<MemberVO> right;
+			try {
+				right = Global.memberService.selectOne(ShinYS.query_id);
+				if(right.get(0).getRight_code().equals("1")) {
+					layout_admin_Controller.message.close();
+				}else {
+					layout_Controller.message.close();
+				}
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
+
+	}
+
+}

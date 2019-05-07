@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
+<sqlMap namespace="qr_order">
+
+	<!-- 주문+환불 전체 조회하기 -->
+	<select id="select_order" resultClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		order by res_order_date asc
+		
+	</select>
+	
+	<select id="select_order2" resultClass="java.util.HashMap" parameterClass="java.util.HashMap">
+	select
+		A.order_code,
+		A.mem_id,
+		A.res_order_date,
+		A.res_no,
+		c.res_name
+	from lunchbox_order A, member b, restaurant c
+	WHERE A.mem_id = B.mem_id
+		and a.res_no = c.res_no
+		AND B.degree = #degree#
+		AND B.mem_class = #memClass#
+		AND A.res_order_date = #res_order_date#
+	order by res_order_date desc
+	</select>
+	
+	
+	
+	
+	
+	
+<!-- 	주문/환불 전체조회 -->
+	<select id="select_OrdertypeList" resultClass="orderVO" parameterClass="String">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where order_type = #order_type#
+		order by 1
+	</select>
+	
+<!-- 	 주문/환불 년 or 년월 or 년월일 전체조회 -->
+	<select id="select_OrdertypeListDate" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where order_type = #order_type#
+		and res_order_date like #res_order_date# || '%'
+		order by 1
+	</select>
+	
+<!-- 	회원의 주문+환불 전체 조회 -->
+	<select id="select_MemberOrderInfo" resultClass="orderVO" parameterClass="String">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		order by 1
+	</select>
+	
+<!-- 	회원의 주문/환불 전체조회 -->
+	<select id="select_MemberOrdertypeInfo" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and order_type = #order_type#
+		order by 1
+	</select>
+	
+<!-- 	회원의 주문/환불 년 or 년월 or 년월일 전체 조회 -->
+	<select id="select_MemberOrdertypeInfoDate" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and order_type = #order_type#
+		and res_order_date like #res_order_date# || '%'
+		order by 1
+	</select>
+	
+<!-- 	회원의 업체별 주문+환불 전체 조회 -->
+	<select id="select_ResMemberOrderInfo" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and res_no = #res_no#
+		order by 1
+	</select>
+
+<!-- 	회원의 업체별 주문/환불 전체 조회 -->
+	<select id="select_ResMemberOrdertypeInfo" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and res_no = #res_no#
+		and order_type = #order_type#
+		order by 1
+	</select>
+	
+<!-- 	회원의 업체별 주문/환불 년 or 년월 or 년월일 전체 조회 -->
+	<select id="select_ResMemberOrdertypeInfoDate" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and order_type = #order_type#
+		and res_no = #res_no#
+		and res_order_date like #res_order_date# || '%'
+		order by 1		
+	</select>
+
+
+
+
+
+	<!-- 주문/환불 회원별 조회하기 (월별)  -->
+	<select id="select_memOrder" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and res_order_date like #res_order_date# || '%'
+		order by 1
+	</select>
+	
+	<!-- 날짜별 주문 조회하기 -->
+	<select id="select_orderday" resultClass="orderVO" parameterClass="orderVO">
+		select order_code, res_order_date, mem_id, order_date, res_no, order_type
+		from lunchbox_order
+		where mem_id = #mem_id#
+		and res_order_date = #res_order_date#
+		order by 1
+	</select>
+	
+	<!-- 기수/호수별 조회하기 -->
+	<select id="select_adminlist" resultClass="java.util.Map" parameterClass="java.util.Map">
+		select 
+		    A.order_code,
+		    A.mem_id,
+		    A.res_order_date,
+		    A.res_no,
+		    c.res_name
+		from lunchbox_order A, member b, restaurant c
+		WHERE A.mem_id = B.mem_id
+			and a.res_no = c.res_no
+		    AND B.degree = #memDegree#
+		    AND B.mem_class = #memClass#
+		    AND A.res_order_date = #res_order_date#
+		order by res_order_date desc
+	</select>
+	
+	
+	<!-- 기수/호수별 조회하기 -->
+	<select id="select_adminlist2" resultClass="orderVO" parameterClass="java.util.Map">
+		select 
+		    A.order_code,
+		    A.mem_id,
+		    A.res_order_date,
+		    A.res_no
+		from lunchbox_order A, member B
+		WHERE A.mem_id = B.mem_id
+		    AND B.degree = #memDegree#
+		    AND B.mem_class = #memClass#
+		    AND A.res_order_date = #res_order_date#
+		    AND A.res_no = #res_no#
+		order by res_order_date desc
+	</select>
+	
+	
+	
+	<!-- 주문하기 -->
+	<insert id="insert_order" parameterClass="orderVO">
+		insert into lunchbox_order
+		values (#res_order_date#, order_code_seq.nextval, #mem_id#, sysdate, #res_no#, #order_type#)
+	</insert>
+	
+<!-- 	환불하기 -->
+	<update id="update_Ordertype" parameterClass="String">
+		update lunchbox_order
+		set order_type = '2'
+		where order_code = #order_code#
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="delete_order"  parameterClass="String">
+		delete from lunchbox_order
+		where order_code = #order_code#
+	</delete>
+
+</sqlMap>			
+
+
+
+
+

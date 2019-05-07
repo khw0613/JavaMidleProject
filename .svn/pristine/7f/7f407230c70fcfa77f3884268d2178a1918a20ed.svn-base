@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	<properties resource="SqlMapConfig.properties" />
+
+	<settings cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" maxRequests="32" maxSessions="10"
+		maxTransactions="5" useStatementNamespaces="true" />
+
+	<typeAlias alias="memberVO" 				type="kr.or.ddit.ibatis.vo.memberVO.MemberVO" />
+	<typeAlias alias="persnal_boardVO" 			type="kr.or.ddit.ibatis.vo.boarderVO.Persnal_boardVO" />
+	<typeAlias alias="boardVO"					type="kr.or.ddit.ibatis.vo.boarderVO.BoardVO" />
+	<typeAlias alias="faqVO"					type="kr.or.ddit.ibatis.vo.boarderVO.FaqVO" />
+	<typeAlias alias="resmenu_daysVO"			type="kr.or.ddit.ibatis.vo.restaurantVO.Resmenu_daysVO" />
+	<typeAlias alias="payVO"					type="kr.or.ddit.ibatis.vo.hilightVO.PayVO" />
+	<typeAlias alias="support_penVO"			type="kr.or.ddit.ibatis.vo.hilightVO.Surpport_penVO" />
+	<typeAlias alias="log_windowVO" 			type="kr.or.ddit.ibatis.vo.memberVO.Log_WindowVO" />
+	<typeAlias alias="refundVO"		 			type="kr.or.ddit.ibatis.vo.hilightVO.RefundVO" />
+	<typeAlias alias="board_commentVO"		 	type="kr.or.ddit.ibatis.vo.boarderVO.Board_commentVO" />
+	<typeAlias alias="attendanceVO"			 	type="kr.or.ddit.ibatis.vo.memberVO.AttendanceVO" />
+	<typeAlias alias="boardpbcommentVO"		 	type="kr.or.ddit.ibatis.vo.boarderVO.Board_pb_commentVO" />
+	<typeAlias alias="board_typeVO"             type="kr.or.ddit.ibatis.vo.boarderVO.Board_typeVO" />
+	<typeAlias alias="exchangeVO"             	type="kr.or.ddit.ibatis.vo.hilightVO.ExchangeVO" />
+	<typeAlias alias="messageboxVO"             type="kr.or.ddit.ibatis.vo.communityVO.MessageBoxVO" />
+	<typeAlias alias="orderVO"         		    type="kr.or.ddit.ibatis.vo.restaurantVO.OrderVO" />
+	<typeAlias alias="rightVO" 					type="kr.or.ddit.ibatis.vo.memberVO.RightVO" />
+	<typeAlias alias="persnal_board_typeVO"     type="kr.or.ddit.ibatis.vo.boarderVO.Persnal_board_typeVO" />
+	<typeAlias alias="restaurantVO"				type="kr.or.ddit.ibatis.vo.restaurantVO.RestaurantVO" />
+	<typeAlias alias="pen_managementVO"		 	type="kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO" />
+
+
+	<transactionManager type="JDBC">
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver"		value="${driver}" />
+			<property name="JDBC.ConnectionURL" value="${url}" />
+			<property name="JDBC.Username" 		value="${username}" />
+			<property name="JDBC.Password" 		value="${password}" />
+		</dataSource>
+	</transactionManager>
+
+
+	<sqlMap resource="query/Member.xml" />
+ 	<sqlMap resource="query/Persnal_board.xml" />
+ 	<sqlMap resource="query/Board.xml" />
+ 	<sqlMap resource="query/FAQ.xml" />
+ 	<sqlMap resource="query/ResMenu_days.xml" />
+	<sqlMap resource="query/Pay.xml" />
+	<sqlMap resource="query/Support_pen.xml" />
+	<sqlMap resource="query/Log_window.xml" />
+	<sqlMap resource="query/Refund.xml" />
+	<sqlMap resource="query/Board_comment.xml" />
+	<sqlMap resource="query/Attendance.xml" />
+	<sqlMap resource="query/Board_pb_comment.xml" />
+	<sqlMap resource="query/Exchange.xml" />
+	<sqlMap resource="query/MessageBox.xml" />
+	<sqlMap resource="query/LunchOrder.xml" />
+	<sqlMap resource="query/Restaurant.xml" />
+	<sqlMap resource="query/Pen_management.xml" />
+ 	
+</sqlMapConfig>
+
+
+
+
+

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_log_window">
+	 
+<!-- 	 로그인한 회원의 아이디를 데이터베이스에 삽입 -->
+	<insert id="insert_LogInfo" parameterClass="String">
+		insert into log_window 
+		values (
+			#mem_id#
+		)
+	</insert>
+	 
+<!-- 	 접속중인 회원의 아이디 조회 -->
+	<select id="select_LogInfo" resultClass="memberVO">
+		select b.mem_id, b.right_code, b.mem_name, b.mem_pwd, b.email, b.telno, b.degree,
+				b.mem_class, b.bank, b.acnt_owner, b.account, b.pen_quantity, b.mem_join_date, b.pb_post_no, b.pb_guestbook_no, b.avatar, b.mem_image
+		from log_window a, member b
+		where a.mem_id = b.mem_id
+		order by 1
+	</select>
+	 
+<!-- 	 로그아웃한 회원의 아이디를 데이터베이스에서 삭제 -->
+	<delete id="delete_LogInfo" parameterClass="String">
+		delete from log_window
+		where mem_id = #mem_id#
+	</delete>	
+	 
+
+</sqlMap>			
+
+
+
+
+

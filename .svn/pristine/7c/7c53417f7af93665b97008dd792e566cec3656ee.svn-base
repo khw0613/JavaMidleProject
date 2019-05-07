@@ -1,0 +1,623 @@
+package kr.or.ddit.basic.f_lunchbox;
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+
+import com.jfoenix.controls.JFXComboBox;
+
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.basic.f_lunchbox.calendar.LunchCalendar;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import kr.or.ddit.ibatis.vo.restaurantVO.OrderVO;
+import kr.or.ddit.ibatis.vo.restaurantVO.Resmenu_daysVO;
+import kr.or.ddit.ibatis.vo.restaurantVO.RestaurantVO;
+import library.Global;
+import library.ShinYS;
+
+public class Lunchbox_date_Controller implements Initializable {
+
+	@FXML
+	HBox cal_top;
+	@FXML
+	HBox cal_middle;
+	@FXML
+	HBox cal_bottom;
+	@FXML
+	Button c_btn_left;
+	@FXML
+	Label c_date_view;
+	@FXML
+	Button c_btn_right;
+
+	LunchCalendar lc = new LunchCalendar();
+	@FXML
+	JFXComboBox<RestaurantVO> lunch_list; // 업체리스트 콤보박스
+	@FXML
+	Label res_name;
+	@FXML
+	Label res_tel;
+	@FXML
+	Label res_price;
+	@FXML Button btn_commit;
+	@FXML JFXComboBox member_list;
+	@FXML Label lunchOrder;
+	@FXML Button btn_viewlist;
+	@FXML Button insert_menu;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		// 업체리스트 콤보박스 데이터 넣기
+		List<RestaurantVO> list = null;
+		try {
+			list = Global.restaurantService.select_RestaurantList();
+
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+
+		ObservableList<RestaurantVO> lunch_list2 = FXCollections.observableArrayList(list);
+		lunch_list.setItems(lunch_list2);
+
+		lunch_list.valueProperty().addListener((obserbable, oldV, newV) -> {
+			res_name.setText(newV.getRes_name());
+			res_tel.setText(newV.getRes_telno());
+			res_price.setText("3500");
+
+			LunchCalendar.res_code = newV.getRes_no();
+			lc.displayDate();
+		});
+
+		c_btn_left.setFocusTraversable(false);
+		c_btn_right.setFocusTraversable(false);
+
+		AnchorPane ll = lc.start();
+		cal_middle.getChildren().add(ll);
+		dateview();
+		// 도시락업체 초기화 (첫번째 업체 보여주기)
+		lunch_list.setValue(lunch_list2.get(0));
+		
+		
+		// 왼쪽버튼
+		c_btn_left.setOnMouseClicked(e -> {
+			lc.month--;
+			lc.displayDate();
+			dateview();
+		});
+
+		// 오른쪽버튼
+		c_btn_right.setOnMouseClicked(e -> {
+			lc.month++;
+			lc.displayDate();
+			dateview();
+		});
+
+		// 카테고리 가져오기 (주문하기 버튼)
+		Platform.runLater(new Runnable() {
+			@Override
+			public void run() {
+
+				HBox getCateMenus = (HBox) Main.StageHome.getScene().getRoot().lookup("#dash_cate_item");
+
+				OrderVO vo = new OrderVO();
+
+				// 주문하기 버튼
+				getCateMenus.getChildren().get(0).setOnMouseClicked(e -> {
+
+					int buy_quan = LunchCalendar.hs.size() * 35;
+
+					
+					String orderMonth = c_date_view.getText().substring(c_date_view.getText().length() - 3,
+							c_date_view.getText().length() - 1);
+
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("도시락");
+					alert.setHeaderText("도시락 주문 : " + LunchCalendar.hs.size() + "개 \n총 사용할 형광펜 : " + buy_quan + "개");
+					alert.setContentText("선택한 날짜의 도시락을 주문 하시겠습니까?");
+
+					Optional<ButtonType> result = alert.showAndWait();
+					ButtonType button = result.orElse(ButtonType.CANCEL);
+					List<MemberVO> memList = new ArrayList<>();
+					try {
+						memList = Global.memberService.selectOne(ShinYS.query_id);
+					} catch (RemoteException e2) {
+						e2.printStackTrace();
+					}
+
+					int quan = Integer.parseInt(memList.get(0).getPen_quantity());
+
+					List<String> orderList = new ArrayList<>();
+
+					if (button == ButtonType.OK) {
+
+						if (quan >= buy_quan) {
+
+							for (int i = 0; i < LunchCalendar.hs.size(); i++) {
+
+								String insertDa = LunchCalendar.hs.get(i).toString();
+								if (insertDa.length() == 1) {
+									insertDa = "0" + insertDa;
+								}
+								orderList.add(lc.year + orderMonth + insertDa);
+								
+								SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyyMMdd", Locale.KOREA );
+								Date currentTime = new Date ();
+								String mTime = mSimpleDateFormat.format ( currentTime );
+								
+								int compare = Integer.parseInt(orderList.get(i).toString());
+								int Time = Integer.parseInt(mTime);
+								if(Time > compare) {
+									ShinYS.errMsg("주문 불가", "이미 지난 날은 할 수 없습니다.");
+									return;
+								}
+								
+								
+
+								vo.setRes_order_date(orderList.get(i).toString());
+								vo.setMem_id(ShinYS.query_id);
+								vo.setRes_no(LunchCalendar.res_code);
+								vo.setOrder_type("1");
+
+								try {
+									List<OrderVO> chList = Global.orderService.select_ResMemberOrdertypeInfoDate(vo);
+									if (chList.size() != 0) {
+										ShinYS.errMsg("도시락 주문", "이미 주문한 날짜가 있습니다. 확인 후 주문 해주세요.");
+										return;
+									} else {
+										int cnt = Global.orderService.insert_order(vo);
+									}
+
+								} catch (RemoteException e1) {
+									e1.printStackTrace();
+								}
+
+							}
+
+							String usePen = buy_quan + "";
+
+							try {
+								Global.supportPenService.subtration_myPen_Quantity2(ShinYS.query_id, usePen);
+								ShinYS.infoMsg("형광펜 사용", "형광펜을 " + usePen + "개 사용하였습니다.");
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
+
+						} else {
+							ShinYS.errMsg("도시락 구매", "형광펜 수량이 부족합니다.");
+						}
+
+						//
+						orderList = new ArrayList<>();
+						LunchCalendar.hs = new ArrayList<>();
+						lc.displayDate();
+
+					} else {
+						System.out.println("canceled");
+					}
+
+				});
+
+				// 환불하기 버튼
+				getCateMenus.getChildren().get(1).setOnMouseClicked(e -> {
+					
+					if( LunchCalendar.hs.size() > 1) {
+						ShinYS.errMsg("환불, 취소는 1개씩 만 가능합니다.", "날짜를 1개만 선택 후 진행해주세요.");
+						return;
+					}
+					
+					int can_quan = LunchCalendar.hs.size() * 35;
+					String orderMonth = c_date_view.getText().substring(c_date_view.getText().length() - 3,
+							c_date_view.getText().length() - 1);
+
+					Alert alert2 = new Alert(AlertType.CONFIRMATION);
+					alert2.setTitle("도시락");
+					alert2.setHeaderText("도시락 취소 : " + LunchCalendar.hs.size() + "개 \n총 취소할 형광펜 : " + can_quan + "개");
+					alert2.setContentText("선택한 날짜의 도시락을 취소 하시겠습니까?");
+
+					Optional<ButtonType> result = alert2.showAndWait();
+					ButtonType button = result.orElse(ButtonType.CANCEL);
+
+					if (button == ButtonType.OK) {
+						List<String> orderList = new ArrayList<>();
+						for (int i = 0; i < LunchCalendar.hs.size(); i++) {
+							
+							System.out.println("선택값 사이즈 : " +  LunchCalendar.hs.size());
+
+							String insertDa = LunchCalendar.hs.get(i).toString();
+							if (insertDa.length() == 1) {
+								insertDa = "0" + insertDa;
+								
+							}
+							
+							SimpleDateFormat mSimpleDateFormat = new SimpleDateFormat ( "yyyyMMdd", Locale.KOREA );
+							Date currentTime = new Date ();
+							String mTime = mSimpleDateFormat.format ( currentTime );
+							
+							orderList.add(lc.year + orderMonth + insertDa);
+							
+							
+							int compare = Integer.parseInt(orderList.get(0).toString());
+							int Time = Integer.parseInt(mTime);
+							if(Time > compare) {
+								ShinYS.errMsg("결제취소(환불) 불가", "이미 지난 날은 할 수 없습니다.");
+								return;
+							}
+						}
+
+						OrderVO vo2 = new OrderVO();
+						int cnt = 0;
+						for (int i = 0; i < LunchCalendar.hs.size(); i++) {
+							vo2.setMem_id(ShinYS.query_id);
+							vo2.setRes_order_date(orderList.get(i).toString());
+							try {
+								List<OrderVO> canList = Global.orderService.select_orderday(vo2);
+								
+								
+								System.out.println("[[[사이즈확인]] : " + canList.size());
+								
+								if(canList.size() == 0) {
+									ShinYS.errMsg("주문취소가 불가능합니다.", "주문하지 않은 날짜가 있습니다. 확인해주세요.");
+									return;
+								}
+								
+								String order_code = canList.get(i).getOrder_code();
+								cnt = Global.orderService.delete_order(order_code);
+								System.out.println("삭제데이터 : " + cnt);
+								vo2 = new OrderVO();
+								
+							} catch (RemoteException e1) {
+								e1.printStackTrace();
+							}
+
+						} // end for
+						
+							if(cnt != 0) {
+								ShinYS.infoMsg("정상적으로 취소 되었습니다.", LunchCalendar.hs.size() + "개 주문이 취소되었습니다.");
+								String canQ = can_quan+"";
+								
+								try {
+									Global.payService.addition_myPen_Quantity(ShinYS.query_id, canQ);
+									ShinYS.infoMsg("주문취소(환불) 완료", "형광펜 35개 증가");
+								} catch (RemoteException e1) {
+									e1.printStackTrace();
+								}
+								
+							}
+							orderList = new ArrayList<>();
+							LunchCalendar.hs = new ArrayList<>();
+							lc.displayDate();
+							
+							
+							
+							
+							
+							
+				
+						
+					}   else {
+						return; // 취소버튼
+					}
+					
+
+				});
+
+			}
+		});
+		
+		List<String> membersInfo = new ArrayList<>();
+		
+		try {
+			List<MemberVO> classPre = Global.memberService.selectOne(ShinYS.query_id);
+			String get_degree = classPre.get(0).getDegree();
+			
+			List<MemberVO> degreeMember = Global.memberService.search_member_to_degree(get_degree); 
+			for(int i=0; i<degreeMember.size(); i++) {
+				//콤보박스에 같은 기수 회원을 세팅
+				membersInfo.add(degreeMember.get(i).getDegree() + "_" + degreeMember.get(i).getMem_name() + "(" + degreeMember.get(i).getMem_id() + ")");
+			}
+			
+			
+		} catch (RemoteException e1) {
+			e1.printStackTrace();
+		}
+		
+		ObservableList<String> id_list = FXCollections.observableArrayList(membersInfo);
+		member_list.setItems(id_list);
+		
+		
+		if(!ShinYS.login_memVO.getRight_code().equals("2")) {
+			btn_commit.setVisible(false);
+			member_list.setVisible(false);
+		}
+		
+		
+		// 주문버튼 보이기
+		if(ShinYS.login_memVO.getRight_code().equals("2")) {
+			btn_viewlist.setVisible(true);
+		} else if(ShinYS.login_memVO.getRight_code().equals("7")) {
+			btn_viewlist.setVisible(true);
+		} else {
+			btn_viewlist.setVisible(false);
+		}
+		
+		
+		// 메뉴 등록하기 보이기
+		if (ShinYS.login_memVO.getRight_code().equals("2")) {
+			insert_menu.setVisible(true);
+		} else if (ShinYS.login_memVO.getRight_code().equals("7")) {
+			insert_menu.setVisible(true);
+		} else {
+			insert_menu.setVisible(false);
+		}
+		
+		
+		
+		
+		
+		
+		
+	//메뉴등록시작!!!!!!!!!!!!!!========================================================================	
+		
+		// 메뉴 등록 파일 등록하기
+		insert_menu.setOnAction(e-> {
+			
+		
+		
+			FileChooser fileChooser = new FileChooser();
+			
+			//확장자별로 파일 구분하는 필터 등록하기
+			fileChooser.getExtensionFilters().addAll(
+					new ExtensionFilter("Text Files","*.txt"),
+					new ExtensionFilter("Image Files", "*.png","*.jpg","*.gif"),
+					new ExtensionFilter("Audio Files", "*.wave","*.mp3"),
+					new ExtensionFilter("All Files", "*.*")
+					);
+			
+			
+			
+			File selectFile = fileChooser.showOpenDialog(Main.StageHome);
+			
+			
+			// 반환할 객체를 생성
+	        List<Resmenu_daysVO> list123 = new ArrayList<Resmenu_daysVO>();
+	        
+	        FileInputStream fis = null;
+	        HSSFWorkbook workbook = null;
+	        
+	        try {
+	            
+	            fis= new FileInputStream(selectFile);
+	            // HSSFWorkbook은 엑셀파일 전체 내용을 담고 있는 객체
+	            workbook = new HSSFWorkbook(fis);
+	            
+	            // 탐색에 사용할 Sheet, Row, Cell 객체
+	            HSSFSheet curSheet;
+	            HSSFRow   curRow;
+	            HSSFCell  curCell;
+	            Resmenu_daysVO vo;
+	            
+	            // Sheet 탐색 for문
+	            for(int sheetIndex = 0 ; sheetIndex < workbook.getNumberOfSheets(); sheetIndex++) {
+	                // 현재 Sheet 반환
+	                curSheet = workbook.getSheetAt(sheetIndex);
+	                // row 탐색 for문
+	                for(int rowIndex=1; rowIndex < curSheet.getPhysicalNumberOfRows(); rowIndex++) {
+	                    // row 0은 헤더정보이기 때문에 무시
+	                    if(rowIndex != 1) {
+	                        // 현재 row 반환
+	                        curRow = curSheet.getRow(rowIndex);
+	                        vo = new Resmenu_daysVO();
+	                        String value;
+	                        
+	                        // row의 첫번째 cell값이 비어있지 않은 경우 만 cell탐색
+	                        if(!"".equals(curRow.getCell(0).getStringCellValue())) {
+	                            
+	                            // cell 탐색 for 문
+	                            for(int cellIndex=0;cellIndex<curRow.getPhysicalNumberOfCells(); cellIndex++) {
+	                                curCell = curRow.getCell(cellIndex);
+	                                
+	                                if(true) {
+	                                    value = "";
+	                                    // cell 스타일이 다르더라도 String으로 반환 받음
+	                                    switch (curCell.getCellType()){
+	                                    
+	                                    case XSSFCell.CELL_TYPE_FORMULA:
+	                                		value = curCell.getCellFormula();
+	                                		break;
+	                                	case XSSFCell.CELL_TYPE_NUMERIC:
+	                                		// 숫자일 경우, String형으로 변경하여 값을 읽는다.
+	                                		curCell.setCellType( HSSFCell.CELL_TYPE_STRING );
+	                                		value = curCell.getStringCellValue();
+	                                		break;
+	                                	case XSSFCell.CELL_TYPE_STRING:
+	                                		value = curCell.getStringCellValue();
+	                                		break;
+	                                	case XSSFCell.CELL_TYPE_BLANK:
+	                                		//value = cell.getBooleanCellValue()+"";
+	                                		value = " ";
+	                                		break;
+	                                	case XSSFCell.CELL_TYPE_ERROR:
+	                                		value = curCell.getErrorCellValue()+"";
+	                                		break;
+	                                    }
+	                                    
+	                                    // 현재 column index에 따라서 vo에 입력
+	                                    switch (cellIndex) {
+	                                    case 0: // 업체
+	                                    	vo.setRes_no(value);
+	                                    	break;
+	                                    case 1: // 날짜
+	                                        vo.setRes_order_date(value);
+	                                        break;
+	                                    case 2: // 국
+	                                    	vo.setMenu_soup(value);
+	                                    	break;
+	                                    case 3: // 반찬1
+	                                    	vo.setMenu_1(value);
+	                                        break;
+	                                    case 4: // 반찬2
+	                                    	vo.setMenu_2(value);
+	                                    	break;
+	                                    case 5: // 반찬3
+	                                    	vo.setMenu_3(value);
+	                                    	break;
+	                                    case 6: // 반찬4
+	                                    	vo.setMenu_4(value);
+	                                    	break;
+	                                    case 7: // 반찬5
+	                                    	vo.setMenu_5(value);
+	                                    	break;
+	                                    case 8: // 체크
+	                                    	vo.setOrder_check(value);
+	                                    	break;
+	                                    case 9: // 가격
+	                                    	vo.setRes_price(value);
+	                                    	break;
+	        
+	                                    default:
+	                                        break;
+	                                    }
+	                                }
+	                            }
+	                            // cell 탐색 이후 vo 추가
+	                            list123.add(vo);
+	                        }
+	                    }
+	                }
+	            }
+	        } catch (FileNotFoundException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	        } catch (IOException e1) {
+	            // TODO Auto-generated catch block
+	            e1.printStackTrace();
+	            
+	        } finally {
+	            try {
+	                // 사용한 자원은 finally에서 해제
+	                if( workbook!= null) workbook.close();
+	                if( fis!= null) fis.close();
+	                
+	            } catch (IOException e1) {
+	                // TODO Auto-generated catch block
+	                e1.printStackTrace();
+	            }
+	        }
+			
+			
+	        printList(list123);
+	        
+	        ShinYS.infoMsg("식단표 등록", "식단표 등록이 완료되었습니다");
+		
+		});
+		
+		//메뉴등록끝!!!!!!!!!!!!!!========================================================================	
+		
+		btn_viewlist.setOnAction(e-> {
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "f_lunchbox/order_list.fxml", "#contents");
+			
+		});
+
+		btn_commit.setOnAction(e->{
+			
+			String rightID = member_list.getSelectionModel().getSelectedItem().toString();
+			
+			rightID = rightID.substring(11 , rightID.length()-1);
+			System.out.println(rightID);
+			
+			try {
+				Global.memberService.update_LunchOrderDegree(rightID);
+				ShinYS.infoMsg("도시락 반장 지정 완료", "["+rightID+"] 님은 도시락반장으로 지정하셨습니다.");
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+		});
+	}// 초기화 완료
+	
+
+	void dateview() {
+		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy년 MM월");
+		java.util.Calendar cal = java.util.Calendar.getInstance();
+		cal.set(lc.year, lc.month, 1);
+
+		c_date_view.setText(sdf.format(cal.getTime()));
+	}
+	
+	
+	
+	
+	
+	//다음달 메뉴 등록하기 (DB인서트)
+	public static void printList(List<Resmenu_daysVO> list) {
+    	Resmenu_daysVO vo = new Resmenu_daysVO();
+        
+        for (int i = 0; i < list.size(); i++) {
+            /*vo = list.get(i);
+            System.out.println(vo.toString());*/
+      
+       
+        	vo.setRes_order_date(list.get(i).getRes_order_date());
+        	vo.setRes_no(list.get(i).getRes_no());
+        	vo.setMenu_soup(list.get(i).getMenu_soup());
+        	vo.setMenu_1(list.get(i).getMenu_1());
+        	vo.setMenu_2(list.get(i).getMenu_2());
+        	vo.setMenu_3(list.get(i).getMenu_3());
+        	vo.setMenu_4(list.get(i).getMenu_4());
+        	vo.setMenu_5(list.get(i).getMenu_5());
+        	vo.setOrder_check(list.get(i).getOrder_check());
+        	vo.setRes_price(list.get(i).getRes_price());
+       
+        
+        try {
+			Global.resMenuService.insert_menu(vo);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+        }
+   
+	
+	
+	}
+	
+	
+	
+	
+
+}

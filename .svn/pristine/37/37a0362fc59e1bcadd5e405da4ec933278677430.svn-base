@@ -1,0 +1,229 @@
+package kr.or.ddit.basic.g_messenger;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Scanner;
+
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
+import kr.or.ddit.basic.Main;
+import library.ShinYS;
+
+public class ChatSystemClient {
+private String userName;
+public boolean stopping = false;
+public int tmp5 = 0;
+TextArea listsss = (TextArea) Main.StageHome.getScene().getRoot().lookup("#refresh_chat");
+
+
+
+Button in_btn	= (Button) Main.StageHome.getScene().getRoot().lookup("#btn_send");
+	
+
+ClientSender sender;
+ClientReceiver receiver;
+Socket socket = null;
+
+
+	// 비지니스 로직 처리
+	public void clientStart() {
+		userName = ShinYS.query_id;
+		System.out.println("접속한 아이디 : " + userName);
+		
+		TextArea chat_area2 = (TextArea) Main.StageHome.getScene().getRoot().lookup("#area_chat");
+		chat_area2.setText(chat_area2.getText() + "\n접속한 아이디 : " + userName + "\n");
+		
+		
+		
+		
+		try {
+			String serverIp = "localhost";
+			socket = new Socket(serverIp, 7777);
+			
+			
+			
+			// 송신용 쓰레드 생성
+			sender = new ClientSender(socket, userName);
+			
+			// 수신용 쓰레드 생성
+			receiver = new ClientReceiver(socket);
+			
+			
+			sender.setDaemon(true);
+			receiver.setDaemon(true);
+			// 쓰레드 실행
+			sender.start();
+			receiver.start();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void clientStop() {
+		stopping = true;
+		receiver.stop();
+		sender.stop();
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+//	public static void main(String[] args) {
+//		new ChatSystemClient().clientStart();
+//	}
+	
+	// 메시지를 전송하는 Thread
+	class ClientSender extends Thread{
+		Socket socket;
+		DataOutputStream dout;
+		String name;
+		Scanner scan = new Scanner(System.in);
+		
+		
+		
+		public ClientSender(Socket socket, String name) {
+			this.name = name;
+			this.socket = socket;
+			try {
+				dout = new DataOutputStream(socket.getOutputStream());
+			} catch (IOException e) {
+				// TODO: handle exception
+			}
+		}
+		
+		@Override
+		public void run() {
+			
+			
+			try {
+				// 시작하자 마자 자신의 대화명을 서버로 전송
+				if(dout!=null) {
+					dout.writeUTF(name);
+				}
+				while( dout != null) {
+					if(stopping) {
+						break;
+					}
+					//System.out.println("aaaaaa");
+					// 키보드로 입력받은 메시지를 서버로 전송
+					in_btn.setOnMouseClicked(e->{
+						try {
+							TextField in_txt = (TextField) Main.StageHome.getScene().getRoot().lookup("#txt_chat");
+							dout.writeUTF("[" + name + "] " +  in_txt.getText()  + "\n");
+							
+							in_txt.setText("");
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+					});
+					TextField in_txt = (TextField) Main.StageHome.getScene().getRoot().lookup("#txt_chat");
+					in_txt.setOnKeyPressed(e->{
+						if(e.getCode().equals(KeyCode.ENTER)) {
+							try {
+								TextField in_txt2 = (TextField) Main.StageHome.getScene().getRoot().lookup("#txt_chat");
+								dout.writeUTF("[" + name + "] " +  in_txt2.getText() + "\n");
+								in_txt2.setText("");
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+					});
+					
+					
+					try {
+						Thread.sleep(300);	//컴터 과부화 방지 - 유수추가
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}catch(IOException e) {
+				
+			}
+			
+			
+			
+			
+			
+		}
+	}  // 송신용 쓰레드 끝...,
+	
+	// 수신용 Thread 클래스 정의
+	class ClientReceiver extends Thread{
+		Socket socket;
+		DataInputStream din;
+		
+		// 생성자
+		public ClientReceiver(Socket socket) {
+			this.socket = socket;
+			try {
+				din = new DataInputStream(socket.getInputStream());
+			} catch (IOException e) {
+				// TODO: handle exception
+			}
+		}
+		
+		@Override
+		public void run() {
+			while(din!=null) {
+				if(stopping) {
+					break;
+				}
+				try {
+					
+				
+					System.out.println("bbbbb");
+					// 서버로부터 수신한 메시지 출력하기
+					TextArea chat_area2 = (TextArea) Main.StageHome.getScene().getRoot().lookup("#area_chat");
+					String tmp_readText = din.readUTF();
+					
+					chat_area2.setText(chat_area2.getText() + tmp_readText);
+					chat_area2.setScrollTop(Double.MAX_VALUE + 100);
+					
+					
+				
+					
+					if(tmp_readText.indexOf("입장했습니다.") > 0 || tmp_readText.indexOf("나가셨습니다.") > 0) {
+						System.out.println("입장 퇴장 체크");
+						
+						//TextArea listsss = (TextArea) Main.StageHome.getScene().getRoot().lookup("#refresh_chat");
+						
+						Platform.runLater(() -> {
+							tmp5++;
+							listsss.setText(tmp5+"");
+						});
+						
+					}
+
+				} catch (IOException e) {
+					// TODO: handle exception
+				}
+				
+				try {
+					Thread.sleep(300);	//컴터 과부화 방지 - 유수 추가
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				
+			}
+		}
+		
+	}
+
+}

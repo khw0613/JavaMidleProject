@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlightGift_Controller">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="217.0" layoutY="58.0" prefHeight="535.0" prefWidth="522.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="형광펜 선물하기" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="받는사람 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <JFXComboBox fx:id="gift_degree" prefHeight="40.0" prefWidth="180.0" styleClass="sys_combo" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="보유중인 형광펜 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="mine_pen" prefHeight="17.0" prefWidth="180.0" textAlignment="RIGHT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="선물로 보내는 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="gift_send_qt" prefHeight="23.0" prefWidth="100.0" styleClass="sys_text" />
+                  <Button fx:id="gift_check" mnemonicParsing="false" styleClass="sys_btn" text="확인" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <padding>
+                  <Insets right="100.0" />
+               </padding>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="사용 후 잔여 개수 :">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <Label fx:id="mine_result" prefHeight="17.0" prefWidth="180.0" textAlignment="RIGHT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <TextField fx:id="txt_message" prefHeight="40.0" prefWidth="340.0" promptText="상대방에게 메시지를 전달하세요." />
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="36.0" prefWidth="347.0" text="선물한 형광펜은 취소하거나 되돌려받을 수 없습니다. &#10;신중히 결정 후 선물해주세요." textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="40.0" top="40.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button fx:id="ok_gift" mnemonicParsing="false" prefHeight="41.0" prefWidth="340.0" style="-fx-background-color: #E5001D;" text="형광펜 선물하기">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <styleClass>
+                        <String fx:value="sys_btn" />
+                        <String fx:value="sys_opa" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.BankPayment_Controller">
+   <children>
+      <Pane layoutX="20.0" prefHeight="446.0" prefWidth="412.0" style="-fx-background-color: #C2C2C2;">
+         <children>
+            <Pane prefHeight="40.0" prefWidth="412.0" style="-fx-background-color: #19558A;">
+               <children>
+                  <Text fill="WHITE" layoutX="26.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="무통장 입금">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </children>
+      </Pane>
+      <Text layoutX="28.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="무통장 입금 신청후 아래 계좌로 입금 하시면 확인 후 수동 처리해 드립니다." wrappingWidth="423.12109375" />
+      <Text layoutX="28.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="무통장 입금 처리는 업무시간에만 가능합니다." />
+      <Text layoutX="28.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="업무시간 9:00 ~ 17:30(토요일, 일요일, 공휴일 처리 불가)" />
+      <Text layoutX="27.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="우리은행 213-123-1233, 예금주:DD_Place">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="99.0" layoutY="249.0" strokeType="OUTSIDE" strokeWidth="0.0" text="입금금액" />
+      <Text layoutX="99.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="입금자명" />
+      <Text layoutX="99.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="휴대폰 번호" />
+      <JFXTextField fx:id="txt_pay" editable="false" layoutX="186.0" layoutY="233.0" />
+      <JFXTextField fx:id="txt_id" editable="false" layoutX="186.0" layoutY="266.0" />
+      <JFXTextField fx:id="txt_tel" editable="false" layoutX="186.0" layoutY="300.0" />
+      <JFXButton fx:id="btn_payment" layoutX="108.0" layoutY="362.0" style="-fx-background-color: #E5001D;" text="신청하기" />
+      <JFXButton fx:id="btn_cancel" layoutX="273.0" layoutY="362.0" style="-fx-background-color: #19558A;" text="취소하기" textFill="WHITE" />
+   </children>
+</AnchorPane>

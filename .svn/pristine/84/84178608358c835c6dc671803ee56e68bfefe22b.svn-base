@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.BoardDetail_Controller">
+   <children>
+      <VBox layoutX="30.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="900.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="450.0" prefWidth="800.0">
+               <children>
+                  <AnchorPane prefHeight="300.0" prefWidth="760.0">
+                     <children>
+                        <Label layoutX="-3.0" layoutY="6.0" text="제목 : " />
+                        <Label fx:id="title_lb" layoutX="38.0" layoutY="6.0" text="Label" />
+                        <Label layoutX="-3.0" layoutY="33.0" text="글번호 : " />
+                        <Label fx:id="no_lb" layoutX="55.0" layoutY="33.0" text="Label" />
+                        <Label layoutX="104.0" layoutY="33.0" text="날짜 : " />
+                        <Label fx:id="date_lb" layoutX="149.0" layoutY="33.0" text="Label" />
+                        <Label layoutX="295.0" layoutY="33.0" text="작성자 : " translateX="60.0" />
+                        <Label fx:id="writer_lb" layoutX="355.0" layoutY="33.0" text="Label" translateX="60.0" />
+                        <Label layoutX="663.0" layoutY="33.0" text="조회수 : " />
+                        <Label fx:id="view_lb" layoutX="723.0" layoutY="33.0" text="Label" />
+                        <Separator layoutY="50.0" prefHeight="17.0" prefWidth="760.0" />
+                        <WebView fx:id="contents" layoutX="2.0" layoutY="64.0" prefHeight="289.0" prefWidth="752.0" />
+                     </children>
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </AnchorPane>
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="TOP_RIGHT" layoutX="50.0" layoutY="27.0" prefHeight="35.0" prefWidth="800.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="list_btn" mnemonicParsing="false" style="-fx-background-color: #515663;" text="글목록 보기" textFill="WHITE" />
+                        <Button fx:id="del_btn" mnemonicParsing="false" style="-fx-background-color: #515663;" text="삭제" textFill="WHITE" />
+                        <Button fx:id="edit_btn" mnemonicParsing="false" style="-fx-background-color: #515663;" text="수정" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets right="20.0" />
+                     </padding>
+                  </HBox>
+                  <Separator layoutX="70.0" layoutY="6.0" prefHeight="17.0" prefWidth="760.0" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

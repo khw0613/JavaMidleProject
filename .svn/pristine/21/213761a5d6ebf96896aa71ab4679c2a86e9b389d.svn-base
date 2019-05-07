@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.PenManagementController">
+   <children>
+      <Label layoutX="42.0" layoutY="30.0" text="형광펜 이용내역 관리">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <TableView fx:id="manage_tableview" layoutX="35.0" layoutY="146.0" prefHeight="375.0" prefWidth="786.0">
+        <columns>
+          <TableColumn fx:id="col_manage_no" prefWidth="55.0" text="번호" />
+            <TableColumn fx:id="col_mem_id" prefWidth="110.0" text="아이디" />
+            <TableColumn fx:id="col_use_name" minWidth="1.0" prefWidth="110.0" text="활용분류" />
+            <TableColumn fx:id="col_pen_name" prefWidth="90.0" text="형광팬분류" />
+            <TableColumn fx:id="col_pen_cnt" prefWidth="95.0" text="형광팬 갯수" />
+            <TableColumn fx:id="col_receive_id" prefWidth="100.0" text="받은 아이디" />
+            <TableColumn fx:id="col_use_date" maxWidth="222.0" prefWidth="222.0" text="처리일시" />
+        </columns>
+      </TableView>
+      <Pagination fx:id="view_paging" layoutX="35.0" layoutY="146.0" pageCount="1" prefHeight="453.0" prefWidth="786.0" />
+      <JFXComboBox fx:id="select_usetype" layoutX="201.0" layoutY="100.0" prefHeight="29.0" prefWidth="128.0" />
+      <JFXButton fx:id="btn_search" layoutX="335.0" layoutY="100.0" prefHeight="30.0" prefWidth="68.0" text="조회" />
+      <JFXTextField fx:id="txt_search_id" layoutX="35.0" layoutY="100.0" />
+   </children>
+</AnchorPane>

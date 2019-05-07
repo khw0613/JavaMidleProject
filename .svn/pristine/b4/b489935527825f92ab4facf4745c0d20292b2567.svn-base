@@ -1,0 +1,187 @@
+package kr.or.ddit.basic.h_management;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXComboBox;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import kr.or.ddit.ibatis.vo.boarderVO.BoardVO;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class BoardManager_Controller implements Initializable{
+	
+	
+	@FXML JFXComboBox<String> b_degree;				// 기수 콤보박스
+	@FXML JFXComboBox<String> b_boardType;			// 보드타입 콤보박스
+	@FXML Button manager_view;						// 게시판 조회하기
+
+	
+	ObservableList<String> boardTypeCombo2;
+	List<String> boardTypeCombo;
+	@FXML TableView<BoardVO> m_tableView;
+	@FXML TableColumn<BoardVO, String> mb_no;
+	@FXML TableColumn<BoardVO, String> mb_title;
+	@FXML TableColumn<BoardVO, String> mb_author;
+	@FXML TableColumn<BoardVO, String> mb_date;
+	@FXML TableColumn<BoardVO, String> mb_view;
+	
+	ObservableList<BoardVO> boardData;
+	@FXML Button mb_del_btn;						// 삭제버튼
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		
+		// DB접속 : 데이터 셋팅 : 기수
+		HashSet<String> degreeCombo = new HashSet<>();
+		boardTypeCombo = new ArrayList<>();
+		
+		
+		
+		try {
+			Global.DbConnect();
+			List<MemberVO> list = Global.memberService.select_MemberList();
+			degreeCombo.add("공용게시판");
+			for (int i = 0; i < list.size(); i++) {
+				degreeCombo.add(list.get(i).getDegree());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		ObservableList<String> degreeCombo2 = FXCollections.observableArrayList(degreeCombo);
+		b_degree.setItems(degreeCombo2);
+
+		ObservableList<String> boardCombo2 = FXCollections.observableArrayList();
+		b_boardType.setItems(boardCombo2);
+
+		b_degree.valueProperty().addListener((observable, oldV, newV) -> {
+			String textValue = newV;
+
+			if (textValue.equals("공용게시판")) {
+				boardCombo2.clear();
+				boardCombo2.add("4.[공통]스터디 게시판");
+				boardCombo2.add("5.[공통]자유게시판");
+				boardCombo2.add("6.[공통]오픈소스 게시판");
+			} else {
+				boardCombo2.clear();
+				boardCombo2.add("1.[기수별]공지사항");
+				boardCombo2.add("2.[기수별]우리반 게시판");
+				boardCombo2.add("3.[기수별]스터디 게시판");
+			}
+				
+			});
+		
+		
+		// 조회하기 버튼 : 데이터 가져오기
+		manager_view.setOnAction(e-> {
+
+			// 데이터 조회 할 값 뽑아오기
+			String viewDegree = b_degree.getValue();
+			String viewb_boardType = b_boardType.getValue().substring(0, 1);
+
+			// 테이블 뷰 컬럼 연결
+			mb_no.setCellValueFactory(new PropertyValueFactory<>("board_no"));
+			mb_title.setCellValueFactory(new PropertyValueFactory<>("board_title"));
+			mb_author.setCellValueFactory(new PropertyValueFactory<>("mem_id"));
+			mb_date.setCellValueFactory(new PropertyValueFactory<>("board_date"));
+			mb_view.setCellValueFactory(new PropertyValueFactory<>("board_view"));
+
+			
+			// 공용 게시판 데이터 추출
+			if (viewDegree.equals("공용게시판")) {
+				try {
+					List<BoardVO> list = Global.boarderService.select_boardList(viewb_boardType);
+					boardData = FXCollections.observableArrayList(list);
+
+					m_tableView.setItems(boardData);
+					
+					mb_del_btn.setOnAction(e1 -> {
+						BoardVO vo = m_tableView.getSelectionModel().getSelectedItem();
+						String delNo = vo.getBoard_no();
+						System.out.println(delNo);
+
+						try {
+							int cnt = Global.boarderService.delete_post(delNo);
+							if (cnt != 0) {
+								boardData.remove(vo);
+								ShinYS.infoMsg("게시판 관리자 모드", "게시글이 정상적으로 삭제되었습니다.");
+								
+							}
+							
+						} catch (RemoteException e2) {
+							e2.printStackTrace();
+						}
+						m_tableView.refresh();
+					});
+					
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
+			}
+
+			// 기수별 게시판 데이터 추출
+			if(viewb_boardType.equals("1") || viewb_boardType.equals("2") || viewb_boardType.equals("3")) {
+				try {
+					List<BoardVO> list = Global.boarderService.select_boardList_degree(viewb_boardType, viewDegree);
+					boardData = FXCollections.observableArrayList(list);
+
+					m_tableView.setItems(boardData);
+					
+					mb_del_btn.setOnAction(e1 -> {
+						BoardVO vo = m_tableView.getSelectionModel().getSelectedItem();
+						String delNo = vo.getBoard_no();
+						System.out.println(delNo);
+
+						try {
+							int cnt = Global.boarderService.delete_post(delNo);
+							if (cnt != 0) {
+								boardData.remove(vo);
+								ShinYS.infoMsg("게시판 관리자 모드", "게시글이 정상적으로 삭제되었습니다.");
+							
+							}
+						} catch (RemoteException e2) {
+							e2.printStackTrace();
+						} 
+
+						
+					});
+				
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				} 
+			}
+			
+			
+		});
+	// 더블 클릭시 상세보기
+		
+		m_tableView.setOnMouseClicked(e->{
+			if(e.getClickCount() ==2) {
+				BoardVO bvo = m_tableView.getSelectionModel().getSelectedItem();
+				ShinYS.mem = bvo;
+				
+				ShinYS.ChangePage(getClass(), Global.RootDir + "/h_management/Board_Detail_admin.fxml", "#contents");
+
+				
+			}
+		});
+		
+	}
+
+}

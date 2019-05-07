@@ -1,0 +1,166 @@
+package kr.or.ddit.basic.d_member.login;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+import java.util.ResourceBundle;
+import java.util.UUID;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class Find_pw_Controller implements Initializable {
+
+	@FXML
+	JFXTextField txt_mail;
+	@FXML
+	JFXTextField txt_id;
+	@FXML
+	Button btn_pwfind;
+	@FXML
+	Button btn_cancel;
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		MemberVO mamberVO = new MemberVO();
+		
+		btn_pwfind.setOnAction(e -> {
+			List<MemberVO> member = new ArrayList<MemberVO>();
+
+			/*List<String> pw = null;
+
+			try {
+				pw = Global.memberService.select_findPwd(txt_id.getText(), txt_mail.getText());
+
+				System.out.println(pw);
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+				
+			}
+
+			if (pw.size() == 0) {
+				ShinYS.infoMsg("비밀번호 찾기", "아이디와 이메일을 다시 확인하세요");
+
+			} else if (pw.size() != 0) {
+				ShinYS.infoMsg("비밀번호 찾기 :","메일로 비밀번호를 전송하였습니다");
+			}*/
+
+			
+			
+			try {
+				member = Global.memberService.selectOne(txt_id.getText());
+			} catch (RemoteException e2) {
+				e2.printStackTrace();
+			}
+			
+			String pw = UUID.randomUUID().toString().replaceAll("-", "");
+			pw = pw.substring(0, 8);
+			System.out.println(pw);
+			
+			String encText = null;
+		 	String decText = null;
+			try {
+				encText = ShinYS.aes256.aesEncode(pw);	//암호화
+			        
+			} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
+					| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
+					| BadPaddingException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			mamberVO.setMem_pwd(encText);
+			mamberVO.setMem_id(txt_id.getText());
+			
+			
+			
+			String email = member.get(0).getEmail();
+			
+			if(!txt_mail.getText().equals(email)) {
+				ShinYS.infoMsg("비밀번호 찾기", "아이디와 이메일을 다시 확인하세요.");
+			} else if (txt_mail.getText().equals(email)) {
+				try {
+					Global.memberService.updateMemberInfoPwd(mamberVO);
+				} catch (RemoteException e1) {
+					e1.printStackTrace();
+				}
+				ShinYS.infoMsg("비밀번호 찾기", "새로운 비밀번호를 메일로 전송하였습니다.");
+			}
+
+
+
+			String host = "smtp.naver.com";
+//			final String user = "leemjw87@naver.com";
+//			final String password = "wodn03290329";
+			final String user = "goo8455@naver.com";
+			final String password = "guzzang53668455!";
+
+			String to = txt_mail.getText();
+
+			// Get the session object
+			Properties props = new Properties();
+			props.put("mail.smtp.host", host);
+			props.put("mail.smtp.auth", "true");
+
+			Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(user, password);
+				}
+			});
+
+			// Compose the message
+			try {
+				MimeMessage message = new MimeMessage(session);
+				message.setFrom(new InternetAddress(user));
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				// 메일 제목
+				message.setSubject("[-DD.PLACE- 임시 비밀번호 전송]");
+
+				// 메일 내용
+				message.setText("비밀번호는 [ " + pw.toString() + " ] 입니다");
+
+				// send the message
+				Transport.send(message);
+				System.out.println("message sent successfully...");
+
+			} catch (MessagingException e1) {
+				e1.printStackTrace();
+			}
+
+		});
+
+		btn_cancel.setOnAction(e -> {
+
+//			ShinYS.ChangeView(getClass(), "../login/login.fxml", true);
+			ShinYS.ChangeView(getClass(), "../login/login.fxml");
+		});
+
+	}
+
+}

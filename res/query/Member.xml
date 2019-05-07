@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_member">
+	 
+	 <!-- 전체 회원정보 가져오기 -->
+	 <select id="select_memberList" resultClass="memberVO">
+	 		select mem_id, right_code, mem_name, mem_pwd, email, telno, degree, mem_class, bank, acnt_owner, 
+	 		account, pen_quantity, mem_join_date, pb_post_no, pb_guestbook_no, avatar, mem_image, right_name, profile_contents
+			from member 
+			order by right_code 
+	 </select>
+	 
+<!-- 	 특정 회원정보 가져오기 -->
+	 <select id="select_memberInfo" resultClass="memberVO" parameterClass="String">
+	 		select mem_id, right_code, mem_name, mem_pwd, email, telno, degree, mem_class, bank, acnt_owner,
+	 		 account, pen_quantity, mem_join_date, pb_post_no, pb_guestbook_no, avatar, mem_image, right_name, profile_contents
+			from member
+			where mem_id = #mem_id#
+	 </select>
+	 
+	 
+	 <!-- 	 아이디 찾기 -->
+	 <select id="select_findId" resultClass="String" parameterClass="java.util.Map">
+			select
+				mem_id
+			from member
+			where mem_name = #name# 
+			and email = #email#
+	 </select>
+	 
+	  <!-- 	 비밀번호 찾기 -->
+	 <select id="select_findPwd" resultClass="String" parameterClass="java.util.Map">
+			select
+				mem_pwd
+			from member
+			where mem_id = #id# 
+			and email = #email#
+	 </select>
+	 
+	 
+	 
+	  <!-- 회원 정보 중 아이디만 가져오기 -->
+	 <select id="select_allID" resultClass="String">
+	 		select mem_id
+	 		from member
+	 </select>
+	 
+	 <!-- 	 회원 정보 중 비밀번호만 가져오기 -->
+	 <select id="select_allPwd" resultClass="String">
+	 		select mem_pwd, 
+			from member
+	 </select>
+	 
+	  <!-- 회원 정보 중 이메일만 가져오기 -->
+	 <select id="select_allEmail" resultClass="String">
+	 		select email
+	 		from member
+	 </select>
+	 
+	 
+	  <!-- 회원 가입 시 데이터베이스에 데이터 삽입하기-->
+	 <insert id="insert_memberInfo" parameterClass="memberVO">
+	 		insert into member(
+	 			mem_id, 
+		 		right_code, 
+		 		mem_name, 
+		 		mem_pwd, 
+		 		email, 
+		 		telno, 
+		 		degree,
+				mem_class, 
+				bank, 
+				acnt_owner, 
+				account, 
+				pen_quantity, 
+				mem_join_date,
+				avatar,
+				mem_image,
+				right_name,
+				profile_contents)
+			values(
+				#mem_id#, 
+				5,
+				#mem_name#,
+				#mem_pwd#, 
+				#email#, 
+				#telno#, 
+				#degree#, 
+				#mem_class#, 
+				#bank#, 
+				#acnt_owner#, 
+				#account#, 
+				0, 
+				sysdate,
+				#avatar#,
+				#mem_image#,
+				#right_name#,
+				#profile_contents#)
+	 </insert>
+	 
+<!-- 	 회원정보 수정하기(이름, 이메일, 은행명, 전화번호, 예금주, 계좌번호) -->
+	 <update id="update_memberInfo" parameterClass="memberVO">
+	 		update member
+	 		set mem_name = #mem_name#,
+	 			email = #email#,
+	 			telno = #telno#,
+	 			bank = #bank#,
+	 			acnt_owner = #acnt_owner#,
+	 			account = #account#,
+	 			mem_image = #mem_image#,
+	 			avatar = #avatar#,
+	 			profile_contents = #profile_contents#
+	 		where mem_id = #mem_id#
+	 </update>
+	 
+	 
+	 <!-- 	 회원정보 수정하기(비밀번호) -->
+	 <update id="update_memberInfoPwd" parameterClass="memberVO">
+	 		update member
+	 		set 
+	 			mem_pwd = #mem_pwd#
+	 		where mem_id = #mem_id#
+	 </update>
+
+<!-- 	 회원정보 수정하기(관리자가 수정) -->
+	 <update id="update_memberInfo_fromAdmin" parameterClass="memberVO">
+
+			update member
+			set mem_name = #mem_name#,
+			    mem_pwd = #mem_pwd#,
+			    email = #email#,
+			    telno = #telno#,
+			    degree = #degree#,
+			    mem_class = #mem_class#,
+			    bank = #bank#,
+			    acnt_owner = #acnt_owner#,
+			    account = #account#,
+			    right_name = #right_name#
+			where mem_id = #mem_id#
+	 </update>
+	 
+<!-- 	 회원탈퇴(사용불가) -->
+	 <delete id="delete_member" parameterClass="String">
+	 			delete 
+	 			from member
+	 			where mem_id = #mem_id#
+	 </delete>
+	 
+<!-- 	 회원정보 + 게시판 유형 조회 -->
+	 <select id="select_memberInfoAndboard_type" parameterClass="String" resultClass="java.util.Map">
+		 	select  a.mem_id,
+		 			a.right_code,
+		 			a.mem_name,
+		 			a.mem_pwd,
+		 			a.email,
+		 			a.telno,
+			       	a.degree,
+			       	a.mem_class,
+			       	a.bank,
+			       	a.acnt_owner,
+			       	a.account,
+			       	a.mem_join_date,
+			       	a.pen_quantity,
+			       	a.pb_post_no,
+			       	a.pb_guestbook_no,
+			       	b.board_type
+			from member a, board b
+			where a.mem_id = b.mem_id
+			and a.mem_id = #mem_id#
+	 </select>
+	 
+<!-- 	 권한(등급) 코드 + 권한명 검색 -->
+	 <select id="select_Right" resultClass="rightVO">
+			select right_code, right_name
+			from right
+			
+			
+	 </select>
+	 
+<!-- 	 개인게시판 게시글 번호 증가시키기 -->
+	 <update id="update_pb_post_no" parameterClass="String">
+	 		update member
+	 		set pb_post_no = pb_post_no + 1
+	 		where mem_id = #mem_id#
+	 </update>
+
+<!-- 	 방명록 게시글 번호 증가시키기 --> 
+	 <update id="update_pb_guestbook_no" parameterClass="String">
+	 		update member
+	 		set pb_guestbook_no = pb_guestbook_no + 1
+	 		where mem_id = #mem_id#
+	 </update>
+	 
+<!-- 	 기수별 회원 검색(공란으로 검색시 전체회원 출력) -->
+	<select id="search_member_to_degree" resultClass="memberVO" parameterClass="String">
+		select mem_id, right_code, mem_name, email, telno, degree, mem_class, 
+			   bank, acnt_owner, account, pen_quantity, mem_join_date, avatar, mem_image, right_name
+		from member
+		where degree like '%' || #degree# || '%'
+	</select>
+
+<!-- 	등급(권한)별 회원 검색 -->
+	<select id="search_member_to_rightcode" resultClass="memberVO" parameterClass="String">
+		select mem_id, right_code, mem_name, email, telno, degree, mem_class, 
+			   bank, acnt_owner, account, pen_quantity, mem_join_date, avatar, mem_image, right_name
+		from member
+		where right_code like '%' || #right_code# || '%'
+	</select>
+
+<!-- 	호수별 회원 검색(공란으로 검색시 전체회원 출력) -->
+	<select id="search_member_to_class" resultClass="memberVO" parameterClass="String">
+		select mem_id, right_code, mem_name, email, telno, degree, mem_class, 
+			   bank, acnt_owner, account, pen_quantity, mem_join_date, avatar, mem_image, right_name
+		from member
+		where mem_class like '%' || #mem_class# || '%'
+	</select>
+	
+<!-- 	회원 등급 수정(회원 등급 수정으로 회원탈퇴처리 가능) -->
+	<update id="update_member_right" parameterClass="memberVO">
+		update member
+		set right_name = #right_name#,
+		    right_code = #right_code#,
+ 			degree = #degree#, 
+ 			mem_class = #mem_class# 
+		where mem_id = #mem_id#
+	</update>
+	
+<!-- 	회원 프로필 이미지 수정 -->
+	<update id="update_membar_image" parameterClass="memberVO">
+		update member
+		set mem_image = #mem_image#
+		where mem_id = #mem_id#
+	</update>
+	 
+<!-- 	회원 아바타를 이미지로 수정 -->
+	<update id="update_member_avatar" parameterClass="memberVO">
+		update member
+		set avatar = #avatar#
+		where mem_id = #mem_id#
+	</update>
+	
+<!-- 	이름으로 회원검색(공란으로 검색시 전체회원 출력) -->
+	<select id="search_member_to_name" resultClass="memberVO" parameterClass="String">
+		select mem_id, right_code, mem_name, mem_pwd, email, telno, degree, mem_class, bank, acnt_owner, account, 
+	 			pen_quantity, mem_join_date, pb_post_no, pb_guestbook_no, avatar, mem_image, right_name, profile_contents
+		from member 
+		where a.mem_id like '%' || #mem_id# || '%'
+	</select>
+	 
+	 	 <!-- 전체 회원정보 가져오기(관리자용)-->
+	 <select id="select_adminUse_memberList" resultClass="memberVO">
+ 		select mem_id, right_code, mem_name, mem_pwd, email, telno, degree, mem_class, bank, acnt_owner, a.account, 
+ 				pen_quantity, mem_join_date, pb_post_no, pb_guestbook_no, avatar, mem_image, right_name, profile_contents
+		from member 
+		where right_code = #right_code#
+		order by right_code
+	 </select>
+	 
+	 <!-- 	회원등급으로 회원검색(관리자용)-->
+	<select id="search_adminUse_memberRight" resultClass="memberVO" parameterClass="String">
+		select mem_id, right_code, mem_name, mem_pwd, email, telno, degree, mem_class, bank, acnt_owner, account, 
+ 				pen_quantity, mem_join_date, pb_post_no, pb_guestbook_no, avatar, mem_image, right_name, profile_contents
+		from member 
+		where right_name like '%'|| #right_name# || '%'
+		order by 1
+	</select>	
+		
+
+<!-- 	회원 탈퇴(회원등급 수정으로 탈퇴 회원으로 변경) -->
+	<update id="update_member_out" parameterClass="memberVO">
+		update member
+		set right_code = #right_code#
+		where mem_id = #mem_id#
+	</update>
+	
+	
+<!-- 	회원 등급 변경(도시락 반장) -->
+	<update id="update_LunchOrderDegree" parameterClass="String">
+		update member
+		set right_code = '7',
+		    right_name = '도시락반장'
+		where mem_id = #mem_id#
+	</update>
+	
+</sqlMap>	

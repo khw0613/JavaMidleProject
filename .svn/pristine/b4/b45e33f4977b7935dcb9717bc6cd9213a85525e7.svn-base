@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.g_messenger.Receive_Controller">
+   <children>
+      <Text layoutX="7.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="쪽지 보관함">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="r_close" layoutX="504.0" layoutY="354.0" mnemonicParsing="false" prefHeight="11.0" prefWidth="93.0" text="닫기" />
+      <Button fx:id="r_back" layoutX="4.0" layoutY="354.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="102.0" text="쪽지함" />
+      <TableView fx:id="r_view" layoutX="4.0" layoutY="49.0" prefHeight="294.0" prefWidth="593.0">
+        <columns>
+          <TableColumn fx:id="r_contents" prefWidth="383.0" text="내용" />
+            <TableColumn fx:id="r_author" prefWidth="106.0" text="보낸 사람" />
+            <TableColumn fx:id="r_date" prefWidth="103.0" text="보낸 날짜" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

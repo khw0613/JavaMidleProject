@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_support_pen">
+
+<!-- 	전체 후원 정보 조회하기 -->
+	<select id="select_SupportList" resultClass="support_penVO">
+		select support_no, mem_id, support_cnt, support_date, receive_id, pen_code
+		from support_pen
+		order by 1
+	</select>
+	
+<!-- 	내가 준 후원정보 조회하기 -->
+	<select id="select_GiveInfo" resultClass="support_penVO" parameterClass="String">
+		select support_no, mem_id, support_cnt, support_date, receive_id, pen_code
+		from support_pen
+		where mem_id = #mem_id#
+		order by 1
+	</select>
+	
+<!-- 	내가 받은 후원 정보 조회하기 -->
+	<select id="select_ReceiveInfo" resultClass="support_penVO" parameterClass="String">
+		select support_no, mem_id, support_cnt, support_date, receive_id, pen_code
+		from support_pen
+		where receive_id = #receive_id#
+		order by 1
+	</select>
+	
+	<!-- 	형관펜 후원정보 가져오기(형관펜 사용내역 관리에 필요) -->
+	<select id="select_ExchangeDetailInfo" resultClass="support_penVO" parameterClass="String">
+		select support_no, mem_id, support_cnt, support_date, receive_id, pen_code
+		from support_pen
+		where support_no = #support_no#
+		order by 1
+	</select>
+	
+<!-- 	형광펜 후원하기 -->
+	<insert id="insert_SupportInfo" parameterClass="support_penVO">
+		insert into support_pen
+		values (support_no_seq.nextval, #mem_id#, #support_cnt#, sysdate, #receive_id#, #pen_code#)
+	</insert>
+	
+<!-- 	회원 형광펜 수량 업데이트 하기(후원에 의한 감소-주는 회원) -->
+	<update id="subtration_myPen_Quantity2" parameterClass="java.util.Map">
+		update 	member
+		set 	pen_quantity = #up_quan#
+		where 	mem_id = #mem_id#
+	</update>	
+
+
+<!-- 	회원 형광펜 수량 업데이트 하기(후원에 의한 증가-받는 회원) -->
+	<update id="addition_myPen_Quantity2" parameterClass="java.util.Map">
+		update 	member
+		set 	pen_quantity = #up_quan#
+		where 	mem_id = #mem_id#
+	</update>	
+	
+</sqlMap>	
+
+
+

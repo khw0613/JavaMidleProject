@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.b_board.job.Job_WriteController">
+   <children>
+      <VBox layoutX="2.0" layoutY="1.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="956.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="956.0" />
+            <HBox alignment="CENTER" prefHeight="450.0" prefWidth="800.0">
+               <children>
+                  <AnchorPane prefHeight="450.0" prefWidth="855.0">
+                     <children>
+                        <TextField fx:id="title_txt" layoutX="40.0" layoutY="14.0" prefHeight="40.0" prefWidth="815.0" styleClass="sys_text" />
+                        <Label layoutY="19.0" prefHeight="27.0" prefWidth="38.0" text="제목 : " />
+                        <HTMLEditor fx:id="content_txt" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body id=&quot;mydiv&quot; contenteditable=&quot;false&quot;&gt;&lt;/body&gt;&lt;/html&gt;" layoutY="71.0" prefHeight="460.0" prefWidth="855.0" style="-fx-background-color: #ffffff; -fx-border-color: #30333a; -fx-border-radius: 7; -fx-background-radius: 7;" AnchorPane.leftAnchor="0.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </HTMLEditor>
+                        <StackPane layoutX="56.0" layoutY="367.0" mouseTransparent="true" prefHeight="150.0" prefWidth="744.0">
+                           <children>
+                              <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="742.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </StackPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="115.0" prefWidth="956.0" spacing="10.0">
+               <children>
+                  <Button fx:id="btn_loadfile" mnemonicParsing="false" style="-fx-background-color: #eb4155;" text="파일첨부">
+                     <styleClass>
+                        <String fx:value="sys_btn" />
+                        <String fx:value="sys_opa" />
+                     </styleClass></Button>
+                  <Button fx:id="btn_image" mnemonicParsing="false" style="-fx-background-color: #4265e9;" text="이미지첨부">
+                     <styleClass>
+                        <String fx:value="sys_btn" />
+                        <String fx:value="sys_opa" />
+                     </styleClass></Button>
+                  <Button fx:id="cancel_btn" mnemonicParsing="false" styleClass="sys_btn" text="취소" />
+                  <Button fx:id="sub_btn" mnemonicParsing="false" styleClass="sys_btn" text="작성완료">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets right="50.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

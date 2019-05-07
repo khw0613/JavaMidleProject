@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1180.0" stylesheets="@../d_member/member.css" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="layout_admin_Controller">
+   <children>
+     <AnchorPane fx:id="open_chatpane" prefHeight="725.0" prefWidth="204.0" translateX="1180.0" translateY="80.0">
+         <children>
+            <ComboBox prefHeight="23.0" prefWidth="72.0" promptText="이름" />
+            <TextField layoutX="72.0" prefHeight="23.0" prefWidth="121.0" />
+            <Button layoutX="193.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="검색" />
+            <ScrollPane layoutY="23.0" prefHeight="295.0" prefWidth="248.0" />
+            <Text layoutX="1.0" layoutY="349.0" strokeType="OUTSIDE" strokeWidth="0.0" text="오픈 채팅방" textAlignment="CENTER" wrappingWidth="247.0">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Text>
+            <ScrollPane layoutY="363.0" prefHeight="322.0" prefWidth="248.0" />
+            <Button layoutX="175.0" layoutY="683.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="73.0" text="전송" />
+            <TextField layoutY="683.0" prefHeight="40.0" prefWidth="175.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="dashmain" layoutX="200.0" layoutY="78.0" prefHeight="725.0" prefWidth="984.0" styleClass="test">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </AnchorPane>
+      <AnchorPane layoutY="78.0" prefHeight="722.0" prefWidth="200.0">
+         <children>
+            <Button layoutY="162.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="202.0" text="내 정보 수정" />
+            <Button layoutY="191.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="202.0" text="관리자 페이지" />
+            <Label layoutX="1.0" layoutY="240.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_dashboard" prefHeight="58.0" prefWidth="200.0" text="대시보드">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="298.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_memManagement" prefHeight="58.0" prefWidth="200.0" text="회원관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="363.0" prefHeight="52.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_noticeManagement" prefHeight="58.0" prefWidth="200.0" text="공지사항 관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="426.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_boardManagement" prefHeight="58.0" prefWidth="200.0" text="게시글 관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="484.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_FAQManagement" prefHeight="58.0" prefWidth="200.0" text="FAQ관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="542.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_lunchManagement" prefHeight="58.0" prefWidth="200.0" text="도시락 관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="600.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_payManegement" prefHeight="58.0" prefWidth="200.0" text="매출 관리">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutY="658.0" prefHeight="58.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton fx:id="btn_logout" prefHeight="58.0" prefWidth="200.0" text="로그아웃">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="67.0" prefWidth="1180.0">
+         <children>
+            <Label prefHeight="79.0" prefWidth="200.0">
+               <graphic>
+                  <JFXButton prefHeight="79.0" prefWidth="200.0" text="DD.PLACE">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutX="200.0" layoutY="7.0" prefHeight="85.0" prefWidth="173.0">
+               <graphic>
+                  <JFXButton fx:id="btn_jobboard" prefHeight="85.0" prefWidth="200.0" text="취업게시판">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutX="400.0" layoutY="7.0" prefHeight="85.0" prefWidth="173.0">
+               <graphic>
+                  <JFXButton fx:id="btn_freeboard" layoutX="400.0" prefHeight="85.0" prefWidth="200.0" text="자유게시판">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutX="600.0" layoutY="7.0" prefHeight="85.0" prefWidth="218.0">
+               <font>
+                  <Font size="25.0" />
+               </font>
+               <graphic>
+                  <JFXButton fx:id="btn_sourceboard" prefHeight="85.0" prefWidth="227.0" text="오픈 소스게시판">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutX="812.0" layoutY="7.0" prefHeight="79.0" prefWidth="105.0">
+               <graphic>
+                  <JFXButton fx:id="btn_faqboard" prefHeight="85.0" prefWidth="105.0" text="FAQ">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </JFXButton>
+               </graphic>
+            </Label>
+            <Label layoutX="928.0" layoutY="45.0" text="형광펜 ()">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="Mail" layoutX="1005.0" layoutY="42.0">
+               <graphic>
+                  <FontAwesomeIcon iconName="ENVELOPE" size="2em" wrappingWidth="27.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </FontAwesomeIcon>
+               </graphic>
+            </Label>
+            <Label layoutX="1108.0" layoutY="32.0" prefHeight="15.0" prefWidth="60.0" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <graphic>
+                  <JFXButton fx:id="btn_openchat">
+                     <graphic>
+                        <FontAwesomeIcon iconName="USERS" size="2em" />
+                     </graphic>
+                  </JFXButton>
+               </graphic>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</fx:root>

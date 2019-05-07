@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.testapps.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.i_attendance.Attendance_Controller">
+   <children>
+      <VBox layoutX="9.0" layoutY="16.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="582.0" minWidth="-Infinity" prefWidth="931.0" style="-fx-background-image: url('image/atten.png'); -fx-background-size: 900; -fx-background-repeat: no-repeat; -fx-background-position: center top;">
+         <children>
+            <HBox fx:id="cal_top" alignment="CENTER" prefHeight="103.0" prefWidth="956.0" spacing="10.0">
+               <children>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="107.0" prefWidth="210.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="117.0" prefWidth="400.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="99.0" prefWidth="366.0" spacing="80.0">
+                           <children>
+                              <Button fx:id="c_btn_left" mnemonicParsing="false" style="-fx-background-color: #ffffff; -fx-text-fill: #000000;" text="&lt;">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <styleClass>
+                                    <String fx:value="sys_btn" />
+                                    <String fx:value="sys_opa" />
+                                 </styleClass>
+                              </Button>
+                              <Label fx:id="c_date_view" styleClass="date_ym" text="2019년 01월" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="c_btn_right" mnemonicParsing="false" style="-fx-background-color: #ffffff; -fx-text-fill: #000000;" text="&gt;">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <styleClass>
+                                    <String fx:value="sys_btn" />
+                                    <String fx:value="sys_opa" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="110.0" prefWidth="210.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="43.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="cal_middle" alignment="CENTER" minHeight="314.0" prefWidth="956.0" />
+            <HBox fx:id="cal_bottom" alignment="CENTER" prefHeight="106.0" prefWidth="931.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

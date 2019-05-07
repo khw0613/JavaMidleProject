@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import de.jensd.fx.glyphs.testapps.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="715.0" minWidth="-Infinity" prefWidth="915.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.i_attendance.Attendance_Controller">
+   <children>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="915.0">
+         <children>
+            <HBox fx:id="cal_top" alignment="CENTER" prefHeight="142.0" prefWidth="915.0" spacing="10.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="142.0" prefWidth="210.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="출석현황" translateY="22.0" wrappingWidth="169.6513671875">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Text>
+                     </children></VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="142.0" prefWidth="334.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="99.0" prefWidth="366.0" spacing="20.0">
+                           <children>
+                              <Button fx:id="c_btn_left" mnemonicParsing="false" text="&lt;">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Label fx:id="c_date_view" text="2019년 01월">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="c_btn_right" mnemonicParsing="false" text="&gt;">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="210.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </HBox>
+               </children></HBox>
+            <HBox fx:id="cal_middle" alignment="CENTER" minHeight="314.0" prefWidth="915.0" />
+            <HBox prefHeight="182.0" prefWidth="915.0" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

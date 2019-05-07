@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="114.0" layoutY="99.0" text="업체 이름" />
+      <Label layoutX="116.0" layoutY="200.0" text="전화번호" />
+      <Text layoutX="99.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="업체정보" textAlignment="CENTER" />
+      <Line endX="100.0" layoutX="188.0" layoutY="52.0" startX="-100.0">
+         <stroke>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#ab0a0a" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </stroke>
+      </Line>
+      <JFXTextField layoutX="225.0" layoutY="94.0" />
+      <JFXTextField layoutX="225.0" layoutY="195.0" />
+      <JFXButton layoutX="175.0" layoutY="317.0" prefHeight="40.0" prefWidth="80.0" text="등록" />
+      <JFXButton layoutX="325.0" layoutY="317.0" prefHeight="40.0" prefWidth="80.0" text="취소" />
+   </children>
+</AnchorPane>

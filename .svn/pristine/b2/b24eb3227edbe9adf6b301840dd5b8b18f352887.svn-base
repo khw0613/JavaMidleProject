@@ -1,0 +1,134 @@
+package kr.or.ddit.basic.h_management;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.fxml.Initializable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import kr.or.ddit.ibatis.vo.hilightVO.Pen_managementVO;
+import library.Global;
+import javafx.scene.control.TableColumn;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
+
+public class ProfitManger_Controller implements Initializable{
+
+	
+	
+	// 매출 나올 테이블뷰
+	@FXML TableView<Pen_managementVO> table_profit;
+	@FXML TableColumn<Pen_managementVO, String> tbc_profit_date;
+	@FXML TableColumn<Pen_managementVO, String> tbc_profit_exchange;
+	@FXML TableColumn<Pen_managementVO, String> tbc_profit;
+	
+	// 테이블에 담을 데이터 저장소
+	ObservableList<Pen_managementVO> tb_date;
+	List<Pen_managementVO> tb_list;
+	
+	// 바차트
+	@FXML BarChart profit_barchart;
+	@FXML CategoryAxis bar_x;
+	@FXML NumberAxis bar_y;
+	
+	List<Pen_managementVO> bar_data1; // 12월꺼
+	List<Pen_managementVO> bar_data2; // 1월꺼
+	//라인 차트
+	@FXML LineChart profit_linechart;
+	@FXML NumberAxis line_y;
+	@FXML CategoryAxis line_x;
+
+	
+	
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+	//가격 포맷	
+	DecimalFormat format = new DecimalFormat("###,###");
+	
+	
+	tbc_profit_date.setCellValueFactory(new PropertyValueFactory<>("use_date"));
+	tbc_profit_exchange.setCellValueFactory(new PropertyValueFactory<>("exchange_amount"));
+	tbc_profit.setCellValueFactory(new PropertyValueFactory<>("profit"));
+	
+	// 가져오는 로직	
+	try {
+		tb_list = Global.pen_managementService.select_Profit_Management();
+		
+	} catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	tb_date = FXCollections.observableArrayList(tb_list);
+	table_profit.setItems(tb_date);
+		
+	
+	// barchart
+	profit_barchart.setTitle("월별 순이익");
+	
+	String bf_use_date = "2018-12";
+	
+	try {
+		bar_data1 = Global.pen_managementService.select_Profit_BarGrape(bf_use_date);
+	} catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	int sum =0;
+	for(int i =0; i < bar_data1.size(); i++) {
+		sum += Integer.parseInt(bar_data1.get(i).getProfit());
+	}
+	
+	
+	
+	
+	String af_usedate = "2019-01";
+	
+	try {
+		bar_data2 = Global.pen_managementService.select_Profit_BarGrape(af_usedate);
+	} catch (RemoteException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	int sum1 =0;
+	for(int i =0; i < bar_data2.size(); i++) {
+		sum1 += Integer.parseInt(bar_data2.get(i).getProfit());
+	}
+	
+	
+	
+	
+	bar_x = new CategoryAxis();
+	bar_y = new NumberAxis();
+	
+	bar_x.setLabel("월별");
+	bar_y.setLabel("순수익");
+	
+	
+	XYChart.Series<String, Number> series = new XYChart.Series<>();
+	series.setName("Before Profit");
+	series.getData().add(new XYChart.Data<String, Number>(bf_use_date ,sum));
+	
+	XYChart.Series<String, Number> series1 = new XYChart.Series<>();
+	series1.setName("After Profit");
+	series1.getData().add(new XYChart.Data<String, Number>(af_usedate ,sum1));
+	
+	profit_barchart.getData().addAll(series,series1);
+	
+	
+	}
+
+}

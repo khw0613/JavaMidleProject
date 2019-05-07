@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane minHeight="690.0" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.BoardManager_Controller">
+   <children>
+      <VBox alignment="CENTER" layoutX="36.0" layoutY="77.0" prefHeight="537.0" prefWidth="884.0" style="-fx-background-radius: 7; -fx-background-color: #fff;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="게시글 관리" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="92.0" prefWidth="884.0">
+               <children>
+                  <Label disable="true" text="기수">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="b_degree" prefHeight="27.0" prefWidth="110.0" styleClass="sys_combo">
+                     <HBox.margin>
+                        <Insets right="25.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <Label disable="true" text="게시판 유형">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <JFXComboBox fx:id="b_boardType" prefHeight="27.0" prefWidth="214.0" styleClass="sys_combo">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </JFXComboBox>
+                  <Button fx:id="manager_view" mnemonicParsing="false" prefHeight="36.0" prefWidth="92.0" styleClass="sys_btn" text="조회하기">
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="369.0" prefWidth="884.0">
+               <children>
+                  <AnchorPane prefHeight="452.0" prefWidth="757.0" styleClass="tableview_tt">
+                     <children>
+                        <Pagination layoutY="-6.0" pageCount="1" prefHeight="418.0" prefWidth="757.0">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                        </Pagination>
+                        <TableView fx:id="m_tableView" minHeight="200.0" prefHeight="359.0" prefWidth="755.0">
+                          <columns>
+                            <TableColumn fx:id="mb_no" prefWidth="54.0" text="번호" />
+                            <TableColumn fx:id="mb_title" prefWidth="381.0" text="제목" />
+                              <TableColumn fx:id="mb_author" prefWidth="112.0" text="작성자" />
+                              <TableColumn fx:id="mb_date" prefWidth="145.0" text="날짜" />
+                              <TableColumn fx:id="mb_view" prefWidth="63.0" text="조회수" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <HBox alignment="BOTTOM_RIGHT" layoutX="14.0" layoutY="640.0" prefHeight="36.0" prefWidth="905.0">
+         <children>
+            <Button fx:id="mb_del_btn" mnemonicParsing="false" styleClass="sys_btn" text="삭제" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

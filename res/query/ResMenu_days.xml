@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_resmenu_days">
+	 
+<!-- 	 식단표 정보 가져오기 -->
+	<select id="select_menuList" resultClass="resmenu_daysVO" >
+		select 
+			menu_no,
+			res_order_date, 
+			res_no, 
+			menu_soup, 
+			menu_1, 
+			menu_2, 
+			menu_3, 
+			menu_4, 
+			menu_5, 
+			order_check, 
+			res_price
+		from resmenu_days
+		order by 1
+    </select>
+    
+    
+    <!--  월별 식단표 정보 가져오기 -->
+	<select id="select_menuList_month" resultClass="resmenu_daysVO" parameterClass="String">
+		select
+			menu_no,
+			res_order_date,
+			res_no,
+			menu_soup,
+			menu_1,
+			menu_2,
+			menu_3,
+			menu_4,
+			menu_5,
+			order_check,
+			res_price
+		from resmenu_days
+		where res_order_date like #res_order_date# || '%'
+		order by 1
+    </select>
+    
+    
+        <!--  일별 식단표 정보 가져오기 -->
+	<select id="select_menuList_day" resultClass="resmenu_daysVO" parameterClass="String">
+		select
+			menu_no,
+			res_order_date,
+			res_no,
+			menu_soup,
+			menu_1,
+			menu_2,
+			menu_3,
+			menu_4,
+			menu_5,
+			order_check,
+			res_price
+		from resmenu_days
+		where res_order_date = #res_order_date#
+		order by 1
+    </select>
+    
+    
+	 
+<!-- 	식단표 작성시 데이터베이스에 데이터 삽입하기  -->
+ 	<insert id="insert_MenuList" parameterClass="resmenu_daysVO">
+		insert into resmenu_days
+		values (#res_order_date#, 
+		        #res_no#, 
+		        #menu_soup#, 
+		        #menu_1#, 
+		        #menu_2#, 
+		        #menu_3#, 
+		        #menu_4#, 
+		        #menu_5#, 
+		        #order_check#, 
+		        #res_price#,
+		        menu_no_seq.nextval)
+	</insert>
+	
+	<!-- 	업체별 식단표 정보 가져오기 -->
+	<select id="select_RestaurantMenuList" resultClass="resmenu_daysVO" parameterClass="String">
+		select
+			menu_no, 
+			res_order_date, 
+			res_no, 
+			menu_soup, 
+			menu_1, 
+			menu_2, 
+			menu_3, 
+			menu_4, 
+			menu_5, 
+			order_check, 
+			res_price
+		from resmenu_days
+		where res_no = #res_no#
+		order by 1
+    </select>
+	
+	    <!--  업체별 월 식단표 정보 가져오기 -->
+	<select id="select_RestaurantmenuList_month" resultClass="resmenu_daysVO" parameterClass="resmenu_daysVO">
+		select
+			menu_no,
+			res_order_date,
+			res_no,
+			menu_soup,
+			menu_1,
+			menu_2,
+			menu_3,
+			menu_4,
+			menu_5,
+			order_check,
+			res_price
+		from resmenu_days
+		where res_order_date like #res_order_date# || '%'
+		and res_no = #res_no#
+		order by 1
+    </select>
+    
+            <!--  업체별 일 식단표 정보 가져오기 -->
+	<select id="select_RestaurantmenuList_day" resultClass="resmenu_daysVO" parameterClass="resmenu_daysVO">
+		select
+			menu_no,
+			res_order_date,
+			res_no,
+			menu_soup,
+			menu_1,
+			menu_2,
+			menu_3,
+			menu_4,
+			menu_5,
+			order_check,
+			res_price
+		from resmenu_days
+		where res_order_date = #res_order_date#
+		and res_no = #res_no#
+		order by 1
+    </select>
+    
+<!-- 	업체별 식단표 정보 수정하기 -->
+	<update id="update_RestaurantMenuInfo" parameterClass="resmenu_daysVO">
+		update resmenu_days
+		set menu_soup = #menu_soup#,
+		    menu_1 = #menu_1#,
+		    menu_2 = #menu_2#,
+		    menu_3 = #menu_3#,
+		    menu_4 = #menu_4#,
+		    menu_5 = #menu_5#,
+		    res_price = #res_price#
+		where menu_no = #menu_no#
+	</update>
+	
+<!-- 	업체별 식단표 정보 삭제하기 -->
+	<delete id="delete_RestaurantMenuInfo" parameterClass="String">
+		delete from resmenu_days
+		where menu_no = #menu_no#
+	</delete>
+	
+</sqlMap>	
+
+
+

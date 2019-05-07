@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.i_attendance.AttendanceList_Controller">
+   <children>
+      <VBox layoutX="171.0" layoutY="65.0" minHeight="434.0" prefHeight="561.0" prefWidth="614.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="503.0" style="-fx-background-color: #000000; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="일일 출석 순위" textFill="WHITE" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" minHeight="422.0" prefWidth="799.0">
+               <children>
+                  <TableView fx:id="list_view" prefHeight="440.0" prefWidth="483.0">
+                    <columns>
+                      <TableColumn fx:id="col_user" prefWidth="135.0" style="-fx-alignment: center;" text="사용자" />
+                      <TableColumn fx:id="col_day_check" prefWidth="97.0" style="-fx-alignment: center;" text="출석 순위" />
+                        <TableColumn fx:id="col_date" prefWidth="249.0" style="-fx-alignment: center;" text="날짜" />
+                    </columns>
+                  </TableView>
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

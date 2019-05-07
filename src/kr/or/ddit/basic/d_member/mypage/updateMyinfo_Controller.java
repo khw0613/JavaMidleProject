@@ -1,0 +1,349 @@
+package kr.or.ddit.basic.d_member.mypage;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXRadioButton;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+import javafx.scene.layout.StackPane;
+
+public class updateMyinfo_Controller implements Initializable{
+	// 수정하기 fxml id 값들
+	
+		@FXML JFXTextField txt_upname;
+		@FXML JFXTextField txt_uptelno;
+		@FXML JFXTextField txt_upemail;
+		@FXML JFXTextField txt_upbank;
+		@FXML JFXTextField txt_upacnt_owner;
+		@FXML JFXTextField txt_upaccount;
+		@FXML TextArea txt_upprofile_contents;
+		@FXML Button btn_updatecomplete;   // 수정완료 버튼
+		
+		
+		MemberVO vo = new MemberVO();
+		List<MemberVO> list = null;
+		
+		
+		@FXML ImageView image_view;
+	    @FXML Button btn_image;
+	    @FXML Button btn_image_delete;
+	   
+	    
+	    Image fximage;
+	    
+		
+		File file_out;
+		
+		int flag = 0;
+		
+		// 프로필 색상
+
+		
+		@FXML JFXRadioButton rbt_col1;
+		@FXML JFXRadioButton rbt_col2;
+		@FXML JFXRadioButton rbt_col3;
+		@FXML JFXRadioButton rbt_col4;
+		
+		@FXML Circle color1; @FXML Circle color2; @FXML Circle color3; @FXML Circle color4; 
+		
+
+		
+		ToggleGroup group = new ToggleGroup();
+		@FXML StackPane avator_color;
+
+		
+		
+		
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		ShinYS.visBack(true).setOnMouseClicked(e->{
+			ShinYS.visBack(false);
+			ShinYS.<AnchorPane>ChangePage(getClass(), "showMyinfo.fxml", "#contents");
+		});
+		
+		
+		//프로필 색상변경
+		
+		rbt_col1.setToggleGroup(group);
+		rbt_col1.setUserData("1");
+		rbt_col2.setToggleGroup(group);
+		rbt_col2.setUserData("2");
+		rbt_col3.setToggleGroup(group);
+		rbt_col3.setUserData("3");
+		rbt_col4.setToggleGroup(group);
+		rbt_col4.setUserData("4");
+		
+		List<JFXRadioButton> jfxlist = new ArrayList<>();
+		jfxlist.add(rbt_col1);
+		jfxlist.add(rbt_col2);
+		jfxlist.add(rbt_col3);
+		jfxlist.add(rbt_col4);
+		
+		color1.setFill(Color.web("0x"+ShinYS.avator_map.get("1").replace("#", ""),1.0));
+		color2.setFill(Color.web("0x"+ShinYS.avator_map.get("2").replace("#", ""),1.0));
+		color3.setFill(Color.web("0x"+ShinYS.avator_map.get("3").replace("#", ""),1.0));
+		color4.setFill(Color.web("0x"+ShinYS.avator_map.get("4").replace("#", ""),1.0));
+		
+		for(JFXRadioButton dd : jfxlist) {
+			if(dd.getUserData().equals(ShinYS.login_memVO.getAvatar())) {
+				dd.setSelected(true);
+			}
+		}
+		
+		
+		
+		// 아바타 배경색 지정
+		avator_color.setStyle(avator_color.getStyle());
+		avator_color.setStyle("-fx-background-color:" + ShinYS.avator_map.get(ShinYS.login_memVO.getAvatar())
+					+ "; -fx-background-radius:50;");
+		
+		
+		
+		//사진삭제
+		
+		btn_image_delete.setOnMouseClicked(e ->{
+			
+			
+			image_view.setImage(null);
+			vo.setMem_image(null);
+			
+			
+
+			flag = 2;
+			
+			
+	
+		});
+		
+		
+		
+		
+		
+		//사진첨부
+		
+		btn_image.setOnMouseClicked(e ->{
+			
+			FileChooser fileChooser = new FileChooser();
+			
+			//확장자별로 파일 구분하는 필터 등록하기
+			fileChooser.getExtensionFilters().addAll(
+					new ExtensionFilter("Text Files","*.txt"),
+					new ExtensionFilter("Image Files", "*.png","*.jpg","*.gif"),
+					new ExtensionFilter("Audio Files", "*.wave","*.mp3"),
+					new ExtensionFilter("All Files", "*.*")
+					);
+			
+			
+			
+			
+			try {
+				File selectFile = fileChooser.showOpenDialog(Main.StageHome);
+				FileInputStream fin = new FileInputStream(selectFile);
+				BufferedInputStream bin = new BufferedInputStream(fin);
+				
+				System.out.println("경로테스트 : " + selectFile.getPath());
+				
+				Date today = new Date();
+			    System.out.println(today);        
+			    SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+			    SimpleDateFormat time = new SimpleDateFormat("hhmmss");
+			        
+			    System.out.println("Date: "+date.format(today));
+			    System.out.println("Time: "+time.format(today));
+
+			    String nowDates = date.format(today);
+			    String nowTimes = time.format(today);
+				
+				
+				file_out = new File("lib/photo/" +(nowDates+nowTimes)+".jpg");
+				FileOutputStream fout = new FileOutputStream(file_out);
+				BufferedOutputStream bout = new BufferedOutputStream(fout);
+				
+				int c;
+				
+				while((c = bin.read()) != -1) {
+					bout.write(c);
+				}
+				
+				bout.close();
+				bin.close();
+				
+				
+				fximage = new Image(selectFile.toURL().toString());
+				image_view.setImage(fximage);
+				
+				
+				if(selectFile!=null) {
+					//이 영역에서 파일내용을 읽어오는 작업을 수행한다.
+					System.out.println("OPEN : "+selectFile.getPath());
+				}
+				
+			} catch (FileNotFoundException gg) {
+				gg.printStackTrace();
+			} catch (IOException gg) {
+				gg.printStackTrace();
+			}
+			
+			flag = 1;
+			
+			
+		});
+		
+		
+		
+		
+		
+		
+	
+		
+		try {
+			list = Global.memberService.selectOne(ShinYS.query_id);
+			
+			
+			
+			if(list.get(0).getMem_image() != null) {
+				
+				Image value = new Image(list.get(0).getMem_image());
+				image_view.setImage(value);
+				}
+			
+			if(ShinYS.query_id.equals(list.get(0).getMem_id())) {
+				
+				
+				
+				txt_upname.setText(list.get(0).getMem_name());
+				txt_upemail.setText(list.get(0).getEmail());
+				txt_uptelno.setText(list.get(0).getTelno());
+				txt_upbank.setText(list.get(0).getBank());
+				txt_upacnt_owner.setText(list.get(0).getAcnt_owner());
+				txt_upaccount.setText(list.get(0).getAccount());
+				txt_upprofile_contents.setText(list.get(0).getProfile_contents());
+				
+			}
+		} catch (RemoteException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
+		
+		btn_updatecomplete.setOnAction(e1->{
+
+
+			MemberVO vo = new MemberVO();
+			
+			vo.setEmail(txt_upemail.getText());
+			vo.setMem_id(ShinYS.query_id);
+			vo.setAccount(txt_upaccount.getText());
+			vo.setBank(txt_upbank.getText());
+			vo.setTelno(txt_uptelno.getText());
+			vo.setAcnt_owner(txt_upacnt_owner.getText());
+			vo.setMem_name(txt_upname.getText());
+			vo.setProfile_contents(txt_upprofile_contents.getText());
+			
+			//sys0130
+			
+			ShinYS.login_memVO.setAvatar(group.getSelectedToggle().getUserData()+"");
+			
+			vo.setAvatar(ShinYS.login_memVO.getAvatar().toString());
+			System.out.println("아바타 색상 vo에 저장" + ShinYS.login_memVO.getAvatar().toString());
+			
+			//이미지 추가시
+			
+			if(flag==1) {
+				
+			vo.setMem_image(file_out.toURI().toString());
+			ShinYS.login_memVO.setMem_image(file_out.toURI().toString());
+			image_view.setImage(fximage);// 첨부파일 (NULL 허용)
+			
+			
+			//이미지 삭제시
+			}else if(flag == 2) {
+				vo.setMem_image(null);
+				ShinYS.login_memVO.setMem_image(null);
+			}else{
+				vo.setMem_image(ShinYS.login_memVO.getMem_image());
+			}
+			
+			
+			
+		
+			
+				
+			
+			
+			
+			// db 업데이트
+			try {
+				Global.memberService.updateMemberInfo(vo);
+			} catch (RemoteException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			
+			System.out.println("asdasdsadsadasdadadasdasdassad==========");
+			//프로필 아바타 사진 변경
+			if(vo.getMem_image()!=null) {
+				ImageView avator_set = (ImageView) Main.StageHome.getScene().getRoot().lookup("#avator_img");
+				
+				Image user_image = new Image(vo.getMem_image(), 100, 100 ,false, false);
+		
+				avator_set.setImage(user_image);
+				//avator_img.setPreserveRatio(true);
+				
+			}else {
+				ImageView avator_set = (ImageView) Main.StageHome.getScene().getRoot().lookup("#avator_img");
+				AnchorPane avator_back_set = (AnchorPane) Main.StageHome.getScene().getRoot().lookup("#main_avator");
+				avator_back_set.setStyle("-fx-background-color:"+ShinYS.avator_map.get(ShinYS.login_memVO.getAvatar())+"; -fx-background-radius:50;");
+		
+				Image user_image = new Image("image/avator.png");		
+				avator_set.setImage(user_image);
+				
+			}
+			
+			
+			
+			// 수정되면서 다시 정보창으로 가기
+			ShinYS.<AnchorPane>ChangePage(getClass(), "showMyinfo.fxml", "#contents");
+			
+		
+			
+			
+			
+		});
+		
+
+		
+	}
+
+}

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.mypage.change_pwd_Controller">
+   <children>
+      <VBox layoutX="262.0" layoutY="107.0" prefHeight="420.0" prefWidth="437.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="391.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label alignment="CENTER" prefHeight="43.0" prefWidth="381.0" text="비밀번호 변경" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="94.0" prefWidth="437.0" spacing="10.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="현재 비밀번호   :" textAlignment="RIGHT" wrappingWidth="161.12109375">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXPasswordField fx:id="txt_currentpwd" prefWidth="190.0" />
+               </children>
+               <padding>
+                  <Insets right="40.0" top="50.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="391.0" spacing="10.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="변경 비밀번호   :" textAlignment="RIGHT" wrappingWidth="156.12109375">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXPasswordField fx:id="txt_changepwd" prefWidth="190.0" />
+               </children>
+               <padding>
+                  <Insets right="40.0" />
+               </padding>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" prefHeight="92.0" prefWidth="437.0" spacing="10.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="변경 비밀번호 확인   :" textAlignment="RIGHT" wrappingWidth="186.0">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Text>
+                  <JFXPasswordField fx:id="txt_checkchangepwd" prefWidth="190.0" />
+               </children>
+               <padding>
+                  <Insets bottom="50.0" right="40.0" />
+               </padding>
+            </HBox>
+            <StackPane prefHeight="84.0" prefWidth="437.0" style="-fx-background-color: #fff; -fx-background-radius: 0 0 7 7;">
+               <children>
+                  <Button fx:id="btn_changepwd" mnemonicParsing="false" styleClass="sys_btn" text="변경하기">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

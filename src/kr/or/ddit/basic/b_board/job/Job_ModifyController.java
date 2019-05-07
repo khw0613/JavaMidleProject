@@ -1,0 +1,177 @@
+package kr.or.ddit.basic.b_board.job;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.HTMLEditor;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.ibatis.vo.boarderVO.BoardVO;
+import library.Global;
+import library.ShinYS;
+import javafx.scene.image.ImageView;
+
+public class Job_ModifyController implements Initializable {
+
+	@FXML
+	TextField title_txt;
+	@FXML
+	Button cancel_btn;
+	@FXML
+	Button sub_btn;
+	@FXML
+	HTMLEditor content_txt;
+
+	List<BoardVO> list = null;
+	@FXML Button fileup_btn;
+	@FXML Button imageview_btn;
+	
+	 Image fximage;
+	    
+	File file_out;
+	int flag = 0;
+	@FXML ImageView imageview;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		BoardVO vo = new BoardVO();
+		System.out.println("게시물번호 :" + ShinYS.query_Number);
+		vo.setBoard_no(ShinYS.query_Number);
+
+		try {
+			list = Global.boarderService.select_degree_post(vo);
+				 	title_txt.setText(list.get(0).getBoard_title());
+					content_txt.setHtmlText(list.get(0).getBoard_contents());
+		
+					if (list.get(0).getBoard_image() != null) {
+						Image value = new Image(list.get(0).getBoard_image());
+						imageview.setImage(value);
+					}
+		
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		
+		
+
+		cancel_btn.setOnMouseClicked(e -> {
+
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "b_board/Board.fxml", "#contents");
+
+		});
+
+		sub_btn.setOnMouseClicked(e -> {
+
+			BoardVO vo1 = new BoardVO();
+
+			
+			vo1.setBoard_title(title_txt.getText());
+			vo1.setBoard_contents(content_txt.getHtmlText());
+			vo1.setBoard_no(ShinYS.query_Number);
+		
+			try {
+				Global.boarderService.update_post(vo1);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "b_board/Board.fxml", "#contents");
+		});
+		
+		imageview_btn.setOnMouseClicked(e->{
+			FileChooser fileChooser = new FileChooser();
+			
+			//확장자별로 파일 구분하는 필터 등록하기
+			fileChooser.getExtensionFilters().addAll(
+					new ExtensionFilter("Text Files","*.txt"),
+					new ExtensionFilter("Image Files", "*.png","*.jpg","*.gif"),
+					new ExtensionFilter("Audio Files", "*.wave","*.mp3"),
+					new ExtensionFilter("All Files", "*.*")
+					);
+			
+			
+			
+			
+			try {
+				File selectFile = fileChooser.showOpenDialog(Main.StageHome);
+				FileInputStream fin = new FileInputStream(selectFile);
+				BufferedInputStream bin = new BufferedInputStream(fin);
+				
+				System.out.println("경로테스트 : " + selectFile.getPath());
+				
+				Date today = new Date();
+			    System.out.println(today);        
+			    SimpleDateFormat date = new SimpleDateFormat("yyyyMMdd");
+			    SimpleDateFormat time = new SimpleDateFormat("hhmmss");
+			        
+			    System.out.println("Date: "+date.format(today));
+			    System.out.println("Time: "+time.format(today));
+
+			    String nowDates = date.format(today);
+			    String nowTimes = time.format(today);
+				
+				
+				file_out = new File("lib/photo/" +(nowDates+nowTimes)+".jpg");
+				FileOutputStream fout = new FileOutputStream(file_out);
+				BufferedOutputStream bout = new BufferedOutputStream(fout);
+				
+				int c;
+				
+				while((c = bin.read()) != -1) {
+					bout.write(c);
+				}
+				
+				bout.close();
+				bin.close();
+				
+				
+				fximage = new Image(selectFile.toURL().toString());
+				imageview.setImage(fximage);
+				
+				
+				if(selectFile!=null) {
+					//이 영역에서 파일내용을 읽어오는 작업을 수행한다.
+					System.out.println("OPEN : "+selectFile.getPath());
+				}
+				
+			} catch (FileNotFoundException gg) {
+				gg.printStackTrace();
+			} catch (IOException gg) {
+				gg.printStackTrace();
+			}
+			
+			flag = 1;
+			
+		
+		});
+		
+		
+		
+		
+		
+		
+	}
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->
+<sqlMap namespace="qr_faq">
+
+	<!-- FAQ 정보 가져오기 -->
+	<select id="faqList" resultClass="faqVO">
+		select faq_no, mem_id,
+		faq_question, faq_answer, faq_date
+		from faq
+		order by 1
+	</select>
+
+	<!-- FAQ 정보 가져오기 -->
+	<select id="sel_box" resultClass="faqVO">
+		select faq_no, mem_id,
+		faq_question, faq_answer, faq_date
+		from faq
+		where faq_question like '%'
+		|| #faq_question# || '%'
+		order by 1
+	</select>
+
+	<!-- FAQ 정보 가져오기 -->
+	<select id="sel_answer" resultClass="faqVO">
+		select faq_no, mem_id,
+		faq_question, faq_answer, faq_date
+		from faq
+		where faq_question = #faq_question#
+		order by 1
+	</select>
+
+	<!-- FAQ 등록시 데이터베이스에 데이터 삽입하기 -->
+	<insert id="insertFAQData" parameterClass="java.util.Map">
+		insert into faq
+		(
+		faq_no, mem_id, faq_question, faq_answer, faq_date
+		)
+		values
+		(
+		faq_no_seq.nextval, 'admin', #faq_question#, #faq_answer#, sysdate
+		)
+	</insert>
+
+	<!-- FAQ 수정하기 -->
+	<update id="updateFAQData" parameterClass="java.util.Map">
+		update faq
+		set 
+		faq_answer = #faq_answer#
+		where faq_question = #faq_question#
+	</update>
+
+	<!--  FAQ 삭제하기 -->
+	<delete id="deleteFAQdata" parameterClass="String">
+		delete
+		from faq
+		where faq_question = #faq_question#
+	</delete>
+
+
+
+
+</sqlMap>			
+
+
+
+
+

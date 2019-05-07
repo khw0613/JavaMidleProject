@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="450.0" style="-fx-background-color: #EBEBEB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.highlighterPaytype_Controller">
+   <children>
+      <AnchorPane layoutX="13.0" layoutY="13.0" prefHeight="436.0" prefWidth="418.0" style="-fx-background-color: #FFFFFF;">
+         <children>
+            <VBox alignment="CENTER" layoutY="107.0" prefHeight="326.0" prefWidth="426.0" style="-fx-background-color: \\;">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="신용 카드">
+                     <VBox.margin>
+                        <Insets bottom="50.0" right="280.0" top="30.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Separator prefWidth="200.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌 이체">
+                     <VBox.margin>
+                        <Insets bottom="50.0" right="280.0" top="30.0" />
+                     </VBox.margin>
+                  </Text>
+                  <Separator prefWidth="200.0" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="기타">
+                     <VBox.margin>
+                        <Insets bottom="50.0" right="280.0" top="30.0" />
+                     </VBox.margin>
+                  </Text>
+               </children>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </VBox>
+            <Pane prefHeight="46.0" prefWidth="418.0" style="-fx-background-color: #3A5BD5;">
+               <children>
+                  <Label focusTraversable="false" layoutX="22.0" layoutY="9.0" text="결제 방법" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Separator layoutY="31.0" prefHeight="1.0" prefWidth="418.0">
+                     <padding>
+                        <Insets top="5.0" />
+                     </padding>
+                  </Separator>
+               </children>
+            </Pane>
+            <JFXButton fx:id="btn_transfer" focusTraversable="false" layoutX="202.0" layoutY="239.0" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: #000000;" text="계좌이체" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="btn_bank_payment" focusTraversable="false" layoutX="215.0" layoutY="307.0" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: #000000;" text="무통장 입금" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_mobilepay" focusTraversable="false" layoutX="215.0" layoutY="371.0" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: #000000;" text="휴대폰 결제" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_cardpay" focusTraversable="false" layoutX="215.0" layoutY="190.0" prefHeight="35.0" prefWidth="125.0" style="-fx-background-color: #000000;" text="카드 결제" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="565.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlighterExchange_Controller">
+   <children>
+      <Pane layoutY="-1.0" prefHeight="53.0" prefWidth="565.0" style="-fx-background-color: #115193;">
+         <children>
+            <Text fill="WHITE" layoutX="135.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="환전 ( 형광펜 -&gt; 현금 입금)">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Pane layoutX="13.0" layoutY="52.0" prefHeight="411.0" prefWidth="541.0" style="-fx-background-color: #C2C2C2;" />
+      <Text layoutX="115.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="환전할 형광펜 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_ex_pen_cnt" layoutX="320.0" layoutY="90.0" prefHeight="23.0" prefWidth="109.0" />
+      <Text layoutX="115.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="보유중인 형광펜 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_total_pen_cnt" editable="false" layoutX="320.0" layoutY="130.0" prefHeight="23.0" prefWidth="109.0" />
+      <Text layoutX="115.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="사용 후 잔여 개수 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_after_total" layoutX="320.0" layoutY="170.0" prefHeight="23.0" prefWidth="109.0" />
+      <Text layoutX="115.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="환전 금액 :">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_ex_money" layoutX="320.0" layoutY="210.0" prefHeight="23.0" prefWidth="109.0" />
+      <Text layoutX="115.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="예금주 :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_acnt_owner" layoutX="199.0" layoutY="302.0" prefHeight="23.0" prefWidth="230.0" />
+      <Text layoutX="115.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="계좌은행 :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_bank" layoutX="198.0" layoutY="332.0" prefHeight="23.0" prefWidth="230.0" />
+      <Text layoutX="115.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="계좌번호 :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <JFXTextField fx:id="txt_account" layoutX="198.0" layoutY="362.0" prefHeight="23.0" prefWidth="230.0" />
+      <JFXButton fx:id="btn_exchange" layoutX="115.0" layoutY="415.0" prefHeight="23.0" prefWidth="313.0" text="현금으로 환전하기">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="115.0" layoutY="253.0" text="계좌 정보">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="qty_check" layoutX="439.0" layoutY="91.0" text="확인하기" />
+   </children>
+</AnchorPane>

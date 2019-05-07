@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_exchange">
+
+<!-- 	전체 환정정보 조회 -->
+	<select id="select_ExchangeList" resultClass="exchangeVO">
+		select exchange_no, exchange_cnt, exchange_date, mem_id, pen_code
+		from exchange
+		order by 1
+	</select>
+
+<!-- 	회원별 환불정보 조회(내 환불정보 보기) -->
+	<select id="select_ExchangeInfo" resultClass="exchangeVO" parameterClass="String">
+		select exchange_no, exchange_cnt, exchange_date, mem_id, pen_code
+		from exchange
+		where mem_id = #mem_id#
+		order by 1
+	</select>
+	
+	<!-- 	형광펜 환전정보 가져오기(형관펜 사용내역 관리에 필요) -->
+	<select id="select_ExchangeDetailInfo" resultClass="exchangeVO" parameterClass="String">
+		select exchange_no, exchange_cnt, exchange_date, mem_id, pen_code
+		from exchange
+		where exchange_no = #exchange_no#
+		order by 1
+	</select>
+	
+<!-- 	환전정보 삽입 -->
+	<insert id="insert_ExchangeInfo" parameterClass="exchangeVO">
+		insert into exchange
+		values (exchange_no_seq.nextval, #exchange_cnt#, sysdate, #mem_id#, #pen_code#)
+	</insert>
+	
+<!-- 	회원 형광펜 수량 업데이트 하기(환전에 의한 감소-주는 회원) -->
+	<update id="subtration_myPen_Quantity3" parameterClass="java.util.Map">
+		update 	member
+		set 	pen_quantity = #down_quan#
+		where 	mem_id = #mem_id#
+	</update>	
+
+
+
+</sqlMap>	
+
+
+

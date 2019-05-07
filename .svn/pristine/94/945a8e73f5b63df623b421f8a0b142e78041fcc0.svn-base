@@ -1,0 +1,76 @@
+package kr.or.ddit.basic.e_cash;
+
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import kr.or.ddit.basic.Main;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+import com.jfoenix.controls.JFXButton;
+
+public class Highlight_Controller implements Initializable{
+
+	@FXML Label h_qty;				// 형광펜 수량
+	@FXML JFXButton h_gift;			// 형광펜 선물하기 버튼
+	@FXML JFXButton btn_list;		// 형광펜 이용내역 확인
+	@FXML JFXButton btn_exchange;	// 현금으로 환전 하기
+	@FXML JFXButton btn_pay;		// 형광펜 충전하기
+
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		
+		try {
+			List<MemberVO> list = Global.memberService.selectOne(ShinYS.query_id);
+			String qt = list.get(0).getPen_quantity();
+			
+			h_qty.setText(qt);
+			
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
+		
+		Platform.runLater(new Runnable() {
+			
+			HBox getCateMenus = (HBox) Main.StageHome.getScene().getRoot().lookup("#dash_cate_item");
+			
+			@Override
+			public void run() {
+				// 충전하기
+				getCateMenus.getChildren().get(0).setOnMouseClicked(e-> {
+					ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir+ "e_cash/highligter_buy_pen.fxml", "#contents");
+				});
+				
+				// 환전하기
+				getCateMenus.getChildren().get(1).setOnMouseClicked(e-> {
+					ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir+ "e_cash/highlighter_exchange.fxml", "#contents");
+				});
+				
+				// 선물하기
+				getCateMenus.getChildren().get(2).setOnMouseClicked(e-> {
+					ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir + "e_cash/highlighter_gift.fxml", "#contents");
+				});
+				
+				// 이용내역
+				getCateMenus.getChildren().get(3).setOnMouseClicked(e-> {
+					ShinYS.<AnchorPane>ChangePage(getClass(), Global.RootDir+ "e_cash/highlighter_uselist.fxml", "#contents");
+				});
+				
+				
+			}
+		});
+		
+		
+	}
+	
+
+}

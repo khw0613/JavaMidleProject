@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="690.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.d_member.mypage.showMyinfo_Controller">
+   <children>
+      <VBox minHeight="690.0" prefWidth="956.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="956.0" />
+            <HBox prefHeight="459.0" prefWidth="956.0" spacing="40.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <StackPane prefHeight="40.0" prefWidth="486.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+                           <children>
+                              <Label text="프로필 사진" textFill="WHITE" />
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="350.0" prefWidth="350.0" style="-fx-background-color: #fff; -fx-background-radius: 0 0 7 7;">
+                           <children>
+                              <StackPane fx:id="avator_color" prefHeight="262.0" prefWidth="270.0" style="-fx-background-radius: 7; -fx-background-color: #85a4af;">
+                                 <StackPane.margin>
+                                    <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                                 </StackPane.margin>
+                                 <children>
+                                    <ImageView fx:id="photo_view" fitHeight="270.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../lib/image/avator.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </StackPane>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" prefHeight="432.0" prefWidth="641.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+                     <children>
+                        <StackPane prefHeight="40.0" prefWidth="486.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+                           <children>
+                              <Label text="내 정보" textFill="WHITE" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="30.0" />
+                           </VBox.margin>
+                        </StackPane>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="423.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="아이디   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_id" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이   름   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_name" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="전화번호   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_telno" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="이메일   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_mail" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="기   수   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_degree" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="호   수   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_class" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌은행   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_bank" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="예금주   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_acnt_owner" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="계좌번호   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_account" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="292.0" spacing="15.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="형광펜 보유현황   :">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="txt_havehighlighter" prefHeight="23.0" prefWidth="258.0" />
+                           </children>
+                           <padding>
+                              <Insets right="60.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="40.0" right="40.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="191.0" prefWidth="956.0">
+               <children>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="117.0" prefWidth="470.0" spacing="20.0">
+                     <children>
+                        <Button fx:id="btn_updateinfo" mnemonicParsing="false" prefHeight="37.0" prefWidth="100.0" styleClass="sys_btn" text="정보 수정">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_changepassword" mnemonicParsing="false" prefHeight="37.0" prefWidth="130.0" styleClass="sys_btn" text="비밀번호 변경">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="btn_outjoin" mnemonicParsing="false" prefHeight="37.0" prefWidth="78.0" styleClass="sys_btn" text="탈퇴">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="40.0" left="40.0" />
+                     </padding>
+                  </HBox>
+                  <StackPane prefHeight="159.0" prefWidth="648.0">
+                     <children>
+                        <HBox prefHeight="104.0" prefWidth="487.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+                           <children>
+                              <Label alignment="TOP_LEFT" prefHeight="133.0" prefWidth="155.0" style="-fx-background-color: #515663; -fx-background-radius: 7 0 0 7;" text="내 프로필&#10;    메세지 " textFill="WHITE">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="txt_profile_contents" alignment="TOP_LEFT" prefHeight="152.0" prefWidth="455.0" text="프로필 메세지가 없습니다.">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </HBox>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+                     </padding>
+                  </StackPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="538.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.Order_manage">
+   <children>
+      <Pagination layoutX="21.0" layoutY="55.0" prefHeight="425.0" prefWidth="757.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Pagination>
+      <TableView fx:id="order_tableView" layoutX="22.0" layoutY="57.0" minHeight="200.0" prefHeight="360.0" prefWidth="755.0">
+        <columns>
+          <TableColumn fx:id="order_no" prefWidth="140.0" text="주문날짜" />
+          <TableColumn fx:id="order_name" prefWidth="151.0" text="주문자" />
+            <TableColumn fx:id="order_degree" prefWidth="148.0" text="기수" />
+            <TableColumn fx:id="order_class" prefWidth="154.0" text="호수" />
+            <TableColumn fx:id="order_res" prefWidth="162.0" text="업체" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

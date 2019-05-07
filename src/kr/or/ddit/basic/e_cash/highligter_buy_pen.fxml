@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="-Infinity" prefWidth="956.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.e_cash.HighlightBuy_Controller">
+   <children>
+      <VBox layoutX="272.0" layoutY="79.0" prefHeight="505.0" prefWidth="413.0" style="-fx-background-color: #fff; -fx-background-radius: 7;">
+         <children>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #515663; -fx-background-radius: 7 7 0 0;">
+               <children>
+                  <Label text="형광펜 충전" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="413.0">
+               <children>
+                  <ImageView fitHeight="41.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../../../lib/image/pen2.png" />
+                     </image>
+                  </ImageView>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="구매하실 형광펜 개수를 선택하세요." textAlignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="413.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="- 결제시 10%의 부가세가 발생합니다." />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4366ea; -fx-background-radius: 7;">
+                     <children>
+                        <JFXRadioButton fx:id="radio_btn30" prefHeight="40.0" prefWidth="200.0" text="30개    - &gt;   3,300원" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4366ea; -fx-background-radius: 7;">
+                     <children>
+                        <JFXRadioButton fx:id="radio_btn50" prefHeight="40.0" prefWidth="200.0" text="50개    - &gt;   5,500원" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4366ea; -fx-background-radius: 7;">
+                     <children>
+                        <JFXRadioButton fx:id="radio_btn100" prefHeight="40.0" prefWidth="200.0" text="100개  - &gt;   11,000원" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4366ea; -fx-background-radius: 7;">
+                     <children>
+                        <JFXRadioButton fx:id="radio_btn150" prefHeight="40.0" prefWidth="200.0" text="150개  - &gt;   16,500원" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #4366ea; -fx-background-radius: 7;">
+                     <children>
+                        <JFXRadioButton fx:id="radio_btn200" prefHeight="40.0" prefWidth="200.0" text="200개  - &gt;   22,000원" textFill="WHITE">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXRadioButton>
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
+               <children>
+                  <JFXTextField fx:id="txt_etc" prefHeight="40.0" prefWidth="195.0" promptText="충전하실 갯수를 입력해주세요." />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="81.0" prefWidth="413.0">
+               <children>
+                  <Button fx:id="btn_h_pay" mnemonicParsing="false" styleClass="sys_btn" text="결제하기" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

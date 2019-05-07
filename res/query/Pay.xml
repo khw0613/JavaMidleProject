@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_pay">
+	
+<!-- 	모든 형광펜 결제정보 조회하기  -->
+	<select id="select_PayList" resultClass="payVO">
+		select pay_no, pen_code, pay_type_no, mem_id, pay_date, pay_cnt
+		from pay
+		order by 1
+	</select>
+	
+<!-- 	회원별 형광펜 결제정보 조회하기 -->
+	<select id="select_myPayInfo" resultClass="payVO" parameterClass="String">
+		select pay_no, pen_code, pay_type_no, mem_id, pay_date, pay_cnt
+		from pay
+		where mem_id = #mem_id#
+		order by 1
+	</select>
+	
+<!-- 	형광펜 결제정보 가져오기(형관펜 사용내역 관리에 필요) -->
+	<select id="select_PayDetailInfo" resultClass="payVO" parameterClass="String">
+		select pay_no, pen_code, pay_type_no, mem_id, pay_date, pay_cnt
+		from pay
+		where pay_no = #pay_no#
+		order by 1
+	</select>
+	
+<!-- 	형광펜 결제하기 -->
+	<insert id="insert_PayInfo" parameterClass="payVO">
+		insert into pay
+		values(pay_no_seq.nextval, #pen_code#, #pay_type_no#, #mem_id#, sysdate, #pay_cnt#)
+	</insert>
+	
+<!-- 	회원 형광펜 수량 업데이트 하기(결제에 의한 증가) -->
+	<update id="addition_myPen_Quantity" parameterClass="java.util.Map">
+		update member
+		set pen_quantity = #up_pen_quan#
+		where mem_id = #mem_id#
+	</update>
+	
+	
+	
+</sqlMap>	
+
+
+

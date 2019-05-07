@@ -1,0 +1,285 @@
+package kr.or.ddit.basic.d_member.signup;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.rmi.RemoteException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import kr.or.ddit.ibatis.vo.memberVO.MemberVO;
+import library.Global;
+import library.ShinYS;
+
+public class join_Controller implements Initializable {
+
+	ObservableList<MemberVO> data;
+	@FXML
+	JFXTextField txt_id;
+	@FXML
+	JFXTextField txt_name;
+	@FXML
+	JFXPasswordField txt_pwd;
+	@FXML
+	JFXPasswordField txt_pwd2;
+	@FXML
+	JFXTextField txt_email;
+	@FXML
+	JFXTextField txt_mem_class;
+	@FXML
+	JFXTextField txt_degree;
+
+	@FXML
+	JFXTextField txt_tel;
+	@FXML
+	JFXTextField txt_bank;
+	@FXML
+	JFXTextField txt_acnt_owner;
+	@FXML
+	JFXTextField txt_account;
+
+	@FXML
+	Button btn_joincomplete;
+	@FXML
+	Button btn_id_check;
+	@FXML
+	Button btn_mail_check;
+	@FXML
+	Button btn_joincancle;
+	@FXML
+	Button btn_pw_check;
+
+	// 중복 체크 변수
+
+	boolean id_overlap = false;
+	boolean pw_overlap = false;
+	boolean email_overlap = false;
+
+	// 빈 항목 확인 변수
+	boolean id_check = false;
+	boolean name_check = false;
+	boolean pwd_check = false;
+	boolean email_check = false;
+	boolean phone_check = false;
+	boolean degree_check = false;
+	boolean mem_class_check = false;
+	boolean bank_check = false;
+	boolean acnt_owner_check = false;
+	boolean account_check = false;
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+
+		// 회원가입
+		btn_joincomplete.setOnAction(e -> {
+
+			// 빈 항목란 확인
+
+			// 아이디
+			if (txt_id.getText().length() > 0) {
+				id_check = true;
+			}
+			// 이름
+			if (txt_name.getText().length() > 0) {
+				name_check = true;
+			}
+			// 패스워드
+			if (txt_pwd2.getText().length() > 0) {
+				pwd_check = true;
+			}
+			// 이메일
+			if (txt_email.getText().length() > 0) {
+				email_check = true;
+			}
+
+			// 전화번호
+			if (txt_tel.getText().length() > 0) {
+				phone_check = true;
+			}
+			// 기수
+			if (txt_degree.getText().length() > 0) {
+				degree_check = true;
+			}
+			// 방번호
+			if (txt_mem_class.getText().length() > 0) {
+				mem_class_check = true;
+			}
+			// 은행
+			if (txt_bank.getText().length() > 0) {
+				bank_check = true;
+			}
+
+			// 예금주
+			if (txt_acnt_owner.getText().length() > 0) {
+				acnt_owner_check = true;
+			}
+			// 계좌번호
+			if (txt_account.getText().length() > 0) {
+				account_check = true;
+			}
+
+			if (id_check == true && name_check == true && pwd_check == true && email_check == true
+					&& phone_check == true && degree_check == true && mem_class_check == true && bank_check == true
+					&& acnt_owner_check == true && account_check && id_overlap == true && pw_overlap == true
+					&& email_overlap) {
+				MemberVO vo = new MemberVO();
+
+				
+				//암호화, 복호화 API사용
+				 	String encText = null;
+				 	String decText = null;
+					try {
+						encText = ShinYS.aes256.aesEncode(txt_pwd.getText());	//암호화
+						//decText = ShinYS.aes256.aesDecode(encText);	//복호화
+					        
+					} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException
+							| NoSuchPaddingException | InvalidAlgorithmParameterException | IllegalBlockSizeException
+							| BadPaddingException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				//======================
+			      
+				vo.setMem_id(txt_id.getText());
+				vo.setMem_name(txt_name.getText());
+				vo.setMem_pwd(encText);
+				vo.setEmail(txt_email.getText());
+				vo.setTelno(txt_tel.getText());
+				vo.setDegree(txt_degree.getText());
+				vo.setMem_class(txt_mem_class.getText());
+				vo.setBank(txt_bank.getText());
+				vo.setAcnt_owner(txt_acnt_owner.getText());
+				vo.setAccount(txt_account.getText());
+
+				try {
+					Global.memberService.insertMemberInfo(vo);
+				} catch (RemoteException e1) {
+
+					e1.printStackTrace();
+				}
+
+				ShinYS.infoMsg("회원가입 완료", "회원가입을 완료하였습니다. 로그인 해주세요.");
+
+				//ShinYS.ChangeView(getClass(), "../login/login.fxml", false);
+				ShinYS.ChangeView(getClass(), "../login/login.fxml");
+			} else if (id_check == false || name_check == false || pwd_check == false || email_check == false
+					|| phone_check == false || degree_check == false || mem_class_check == false || bank_check == false
+					|| acnt_owner_check == false || account_check == false) {
+				ShinYS.infoMsg("Info", "빈 항목이 있습니다");
+			} else if (id_overlap == false || pw_overlap == false || email_overlap == false) {
+				ShinYS.infoMsg("Info", "중복체크는 필수사항 입니다");
+			} 
+			
+
+		});
+
+		// 회원가입 취소
+		btn_joincancle.setOnAction(e -> {
+			//ShinYS.ChangeView(getClass(), "../login/login.fxml", false);
+			ShinYS.ChangeView(getClass(), "../login/login.fxml");
+		});
+
+		// 아이디 중복체크
+
+		btn_id_check.setOnAction(e -> {
+			int check = 0;
+			try {
+
+				if (!Pattern.matches("^[A-za-z0-9]{5,12}$", txt_id.getText())) {
+					check = Global.memberService.idCheck(txt_id.getText());
+					ShinYS.errMsg("데이터 오류", " 5자이상 12자 이하로 입력하세요.");
+					txt_id.requestFocus();
+				} else {
+					if (check == 1) {
+
+						ShinYS.infoMsg("Info", txt_id.getText() + "중복된 ID가 있습니다");
+						// infoMsg("Info", txt_id.getText() + "중복된 ID가 있습니다");
+					} else if (check == 0) {
+
+						ShinYS.infoMsg("Info", txt_id.getText() + "사용 가능한 ID 입니다");
+						// infoMsg("Info", txt_id.getText() + "사용 가능한 ID 입니다");
+					}
+				}
+
+			} catch (RemoteException e1) {
+
+				e1.printStackTrace();
+			}
+			id_overlap = true;
+		});
+
+		// 이메일 중복체크
+
+		btn_mail_check.setOnAction(e -> {
+
+			try {
+				int check = Global.memberService.emailCheck(txt_email.getText());
+
+				if (!Pattern.matches("^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$", txt_email.getText())) {
+
+					ShinYS.errMsg("데이터 오류", " 이메일 형식에 맞게 입력하세요 예)abc1234@naver.com");
+					// errMsg("데이터 오류", " 8자이상 20자 이하로 입력하세요.");
+					txt_pwd.requestFocus();
+				} else {
+
+					if (check == 1) {
+
+						ShinYS.infoMsg("Info", txt_email.getText() + "중복된 email이 있습니다");
+						// infoMsg("Info", txt_email.getText() + "중복된 email이 있습니다");
+					} else if (check == 0) {
+
+						ShinYS.infoMsg("Info", txt_email.getText() + "사용 가능한 email 입니다");
+						// infoMsg("Info", txt_email.getText() + "사용 가능한 email 입니다");
+					}
+				}
+
+			} catch (RemoteException e1) {
+
+				e1.printStackTrace();
+			}
+
+			email_overlap = true;
+
+		});
+
+		// 패스워드 확인
+		btn_pw_check.setOnAction(e -> {
+
+			if (!Pattern.matches("^[A-za-z0-9]{8,20}$", txt_pwd.getText())) {
+
+				ShinYS.errMsg("데이터 오류", " 8자이상 20자 이하로 입력하세요.");
+				// errMsg("데이터 오류", " 8자이상 20자 이하로 입력하세요.");
+				txt_pwd.requestFocus();
+			} else {
+				if (txt_pwd.getText().equals(txt_pwd2.getText())) {
+
+					ShinYS.infoMsg("Info", "비밀번호가 일치합니다");
+					// infoMsg("Info", "비밀번호가 일치합니다");
+				} else {
+					ShinYS.infoMsg("Info", "비밀번호를 확인해주세요");
+					// infoMsg("Info", "비밀번호를 확인해주세요");
+				}
+			}
+			pw_overlap = true;
+
+		});
+
+	}
+
+}

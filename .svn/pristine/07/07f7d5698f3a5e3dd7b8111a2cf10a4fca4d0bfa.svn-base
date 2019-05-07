@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+			PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+			"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- namespace속성 : 아래에서 작성한 SQL을 호출할 때 같이 사용된다. -->			
+<sqlMap namespace="qr_messagebox">
+
+<!-- 	쪽지 정보 데이터베이스에 삽입 -->
+	<insert id="insert_MessageInfo" parameterClass="messageboxVO">
+		insert into messagebox
+		values (#mem_id#, msg_no_seq.nextval, #msg_contents#, sysdate, #receive_id#, 0)
+	</insert>
+	
+<!-- 	전체쪽지 조회 -->
+	<select id="select_MessageList" resultClass="messageboxVO">
+		select msg_no, mem_id, msg_contents, msg_date, receive_id
+		from messagebox
+		order by 1 desc
+	</select>
+	
+<!-- 	내가 보낸 쪽지 조회 -->
+	<select id="select_sendMessageInfo" resultClass="messageboxVO" parameterClass="String">
+		select msg_no, msg_contents, msg_date, receive_id
+		from messagebox
+		where mem_id = #mem_id#
+		order by 1 desc
+	</select>
+	
+<!-- 	내가 받은 쪽지 조회 -->
+	<select id="select_receiveMessageInfo" resultClass="messageboxVO" parameterClass="String">
+		select mem_id, msg_no, msg_contents, msg_date
+		from messagebox
+		where receive_id = #receive_id#
+		order by 1 desc
+	</select>
+	
+<!-- 	쪽지정보 데이터베이스에서 삭제 -->
+	<delete id="delete_MessageInfo" parameterClass="String">
+		delete from messagebox
+		where msg_no = #msg_no#
+	</delete>
+	
+<!-- 	읽지않은 쪽지 전체를 조회 -->
+	<select id="select_allUnreadMessage" resultClass="messageboxVO" parameterClass="String">
+		select msg_no, msg_contents, msg_date, mem_id
+		from messagebox
+		where read = '0'
+		and receive_id = #receive_id#
+		order by 1 desc
+	</select>
+	
+<!-- 	읽은 쪽지 전체를 조회 -->
+	<select id="select_allReadMessage" resultClass="messageboxVO" parameterClass="String">
+		select msg_no, msg_contents, msg_date, mem_id
+		from messagebox
+		where read = '1'
+		and receive_id = #receive_id#
+		order by 1 desc
+	</select>
+	
+	
+<!-- 	쪽지 상세 조회 -->
+	<select id="select_ReadMessage" resultClass="messageboxVO" parameterClass="String">
+		select msg_no, msg_contents, msg_date, mem_id
+		from messagebox
+		where msg_no = #msg_no#
+		order by 1 desc
+	</select>
+	
+<!-- 	쪽지 조회에 따른 read 상태 수정 -->
+	<update id="updae_ReadMessage" parameterClass="String">
+		update messagebox
+		set read = '1'
+		where msg_no = #msg_no#
+	</update>
+	
+
+</sqlMap>			
+
+
+
+
+

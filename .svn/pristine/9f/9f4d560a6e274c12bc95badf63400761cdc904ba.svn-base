@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.g_messenger.Message_Controller">
+
+   <children>
+      <Label layoutX="14.0" layoutY="22.0" prefHeight="29.0" prefWidth="146.0" text="새로운 쪽지" textFill="#545454">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="btn_Mreceive" layoutX="394.0" layoutY="23.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="94.0" text="받은쪽지함" />
+      <Button fx:id="btn_Msend" layoutX="12.0" layoutY="359.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="94.0" text="쪽지보내기" />
+      <TableView fx:id="m_view" layoutX="12.0" layoutY="74.0" prefHeight="276.0" prefWidth="576.0">
+        <columns>
+          <TableColumn fx:id="m_contents" prefWidth="374.0" text="내용" />
+            <TableColumn fx:id="m_author" prefWidth="97.0" text="보낸사람" />
+            <TableColumn fx:id="m_time" prefWidth="104.0" text="작성시간" />
+        </columns>
+      </TableView>
+      <Button fx:id="m_close" layoutX="533.0" layoutY="359.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" text="닫기" />
+      <Button fx:id="btn_send_save" layoutX="488.0" layoutY="23.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="94.0" text="보낸쪽지함" />
+   </children>
+</AnchorPane>

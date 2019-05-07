@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="538.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="kr.or.ddit.basic.h_management.BoardManager_Controller">
+   <children>
+      <Button fx:id="mb_del_btn" layoutX="721.0" layoutY="495.0" mnemonicParsing="false" text="삭제" />
+      <Pagination layoutX="21.0" layoutY="55.0" prefHeight="425.0" prefWidth="757.0">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets></Pagination>
+      <TableView fx:id="m_tableView" layoutX="22.0" layoutY="57.0" minHeight="200.0" prefHeight="360.0" prefWidth="755.0">
+        <columns>
+          <TableColumn fx:id="mb_no" prefWidth="54.0" text="번호" />
+          <TableColumn fx:id="mb_title" prefWidth="381.0" text="제목" />
+            <TableColumn fx:id="mb_author" prefWidth="112.0" text="작성자" />
+            <TableColumn fx:id="mb_date" prefWidth="145.0" text="날짜" />
+            <TableColumn fx:id="mb_view" prefWidth="63.0" text="조회수" />
+        </columns>
+      </TableView>
+      <JFXComboBox fx:id="b_degree" layoutX="78.0" layoutY="14.0" prefHeight="27.0" prefWidth="140.0" />
+      <JFXComboBox fx:id="b_boardType" layoutX="376.0" layoutY="14.0" prefHeight="27.0" prefWidth="140.0" />
+      <Label layoutX="48.0" layoutY="18.0" text="기수">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="297.0" layoutY="18.0" text="게시판 유형">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Button fx:id="manager_view" layoutX="707.0" layoutY="14.0" mnemonicParsing="false" text="조회하기" />
+   </children>
+</AnchorPane>

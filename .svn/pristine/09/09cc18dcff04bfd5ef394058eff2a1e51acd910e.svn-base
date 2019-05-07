@@ -1,0 +1,128 @@
+package kr.or.ddit.ibatis;
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+
+import kr.or.ddit.ibatis.service.AttendanceService;
+import kr.or.ddit.ibatis.service.AttendanceServiceImpl;
+import kr.or.ddit.ibatis.service.BoardCommentService;
+import kr.or.ddit.ibatis.service.BoardCommentServiceImpl;
+import kr.or.ddit.ibatis.service.BoarderService;
+import kr.or.ddit.ibatis.service.BoarderServiceImpl;
+import kr.or.ddit.ibatis.service.ExchangeService;
+import kr.or.ddit.ibatis.service.ExchangeServiceImpl;
+import kr.or.ddit.ibatis.service.FaqService;
+import kr.or.ddit.ibatis.service.FaqServiceImpl;
+import kr.or.ddit.ibatis.service.LogWindowService;
+import kr.or.ddit.ibatis.service.LogWindowServiceImpl;
+import kr.or.ddit.ibatis.service.MemberService;
+import kr.or.ddit.ibatis.service.MemberServiceImpl;
+import kr.or.ddit.ibatis.service.MessageBoxService;
+import kr.or.ddit.ibatis.service.MessageBoxServiceImpl;
+import kr.or.ddit.ibatis.service.OpenChatServer;
+import kr.or.ddit.ibatis.service.OrderService;
+import kr.or.ddit.ibatis.service.OrderServiceImpl;
+import kr.or.ddit.ibatis.service.PayService;
+import kr.or.ddit.ibatis.service.PayServiceImpl;
+import kr.or.ddit.ibatis.service.PbBoardCommentService;
+import kr.or.ddit.ibatis.service.PbBoardCommentServiceImpl;
+import kr.or.ddit.ibatis.service.Pen_managementService;
+import kr.or.ddit.ibatis.service.Pen_managementServiceImpl;
+import kr.or.ddit.ibatis.service.PersnalBoardServiceImpl;
+import kr.or.ddit.ibatis.service.PersnalBoarderService;
+import kr.or.ddit.ibatis.service.RefundService;
+import kr.or.ddit.ibatis.service.RefundServiceImpl;
+import kr.or.ddit.ibatis.service.ResMenuService;
+import kr.or.ddit.ibatis.service.ResMenuServiceImpl;
+import kr.or.ddit.ibatis.service.RestaurantService;
+import kr.or.ddit.ibatis.service.RestaurantServiceImpl;
+import kr.or.ddit.ibatis.service.SupportPenService;
+import kr.or.ddit.ibatis.service.SupportPenServiceImpl;
+import library.Global;
+
+public class ServerOn {
+	
+	public static MemberService memberService;
+	public static ResMenuService resMenuService;
+	public static BoarderService boarderService;
+	public static PersnalBoarderService persnalBoardService;
+	public static PayService payService;
+	public static SupportPenService supportPenService;
+	public static LogWindowService logWindowService;
+	public static RefundService refundService;
+	public static BoardCommentService boardCommentService;
+	public static AttendanceService attendanceService;
+	public static PbBoardCommentService pbBoardCommentService;
+	public static ExchangeService exchangeService;
+	public static MessageBoxService	messageBoxService;
+	public static OrderService orderService;
+	public static RestaurantService restaurantService;
+	public static FaqService faqService;
+	public static Pen_managementService pen_managementService;
+	
+	
+	public static void main(String[] args) {
+		try {
+			
+			memberService 			= MemberServiceImpl.getInstance();
+			resMenuService 			= ResMenuServiceImpl.getInstance();
+			boarderService 			= BoarderServiceImpl.getInstance();
+			persnalBoardService 	= PersnalBoardServiceImpl.getInstance();
+			payService				= PayServiceImpl.getInstance();
+			supportPenService		= SupportPenServiceImpl.getInstance();
+			logWindowService		= LogWindowServiceImpl.getInstance();
+			refundService			= RefundServiceImpl.getInstance();
+			boardCommentService		= BoardCommentServiceImpl.getInstance();
+			attendanceService		= AttendanceServiceImpl.getInstance();
+			pbBoardCommentService	= PbBoardCommentServiceImpl.getInstance();
+			exchangeService			= ExchangeServiceImpl.getInstance();
+			messageBoxService		= MessageBoxServiceImpl.getInstance();
+			orderService			= OrderServiceImpl.getInstance();
+			restaurantService		= RestaurantServiceImpl.getInstance();
+			faqService				= FaqServiceImpl.getInstance();
+			pen_managementService 	= Pen_managementServiceImpl.getInstance();
+			
+			if(Global.RMI) {
+			Registry reg = LocateRegistry.createRegistry(10005);
+			reg.rebind("memberService", memberService);
+			reg.rebind("resMenuService", resMenuService);
+			reg.rebind("boarderService", boarderService);
+			reg.rebind("payService", payService);
+			reg.rebind("supportPenService", supportPenService);
+			reg.rebind("logWindowService",  logWindowService);
+			reg.rebind("refundService", refundService);
+			reg.rebind("boardCommentService", boardCommentService);
+			reg.rebind("attendanceService", attendanceService);
+			reg.rebind("pbBoardCommentService", pbBoardCommentService);
+			reg.rebind("exchangeService", exchangeService);
+			reg.rebind("messageBoxService", messageBoxService);
+			reg.rebind("orderService", orderService);
+			reg.rebind("restaurantService", restaurantService);
+			reg.rebind("faqService", faqService);
+			reg.rebind("pen_managementService", pen_managementService);
+			
+			}
+
+			
+		} catch (RemoteException e) {
+			System.out.println("Fail to Accept RMI Server");
+			e.printStackTrace();
+		}
+
+		
+		
+//		Thread th1 = new Thread(
+//				new Runnable() {
+//					@Override
+//					public void run() {
+//						//채팅서버 온
+//						OpenChatServer openChat = new OpenChatServer();
+//						openChat.serverStart();
+//					}
+//				});
+//		
+//		th1.start();
+		
+	}
+}
